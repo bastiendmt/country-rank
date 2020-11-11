@@ -52,7 +52,7 @@ const Layout = ({ children, title = "Country rank" }) => {
         <main className={styles.main}>{children}</main>
 
         <footer className={styles.footer}>
-            Bastien Dumont - Dev challenge by Thu Ngiem
+            <a href="https://github.com/Bastiendmt">Bastien Dumont</a> - Dev challenge by Thu Ngiem
     </footer>
     </div >
 }
