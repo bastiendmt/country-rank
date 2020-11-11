@@ -13,7 +13,6 @@ const orderBy = (countries, value, direction) => {
     }
 
     return countries
-
 }
 
 const SortArrow = ({ direction }) => {
@@ -29,8 +28,6 @@ const SortArrow = ({ direction }) => {
         </div>
     }
 }
-
-
 
 const CountriesTables = ({ countries }) => {
     const [direction, setDirection] = useState()
@@ -86,7 +83,7 @@ const CountriesTables = ({ countries }) => {
                     </div>
                     <div className={styles.name}>{country.name}</div>
 
-                    <div className={styles.population}>{new Intl.NumberFormat().format(country.population)}</div>
+                    <div className={styles.population}>{new Intl.NumberFormat("en-US").format(country.population)}</div>
 
                     <div className={styles.area}>{country.area || 0}</div>
 
