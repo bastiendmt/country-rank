@@ -1,7 +1,8 @@
 import { KeyboardArrowDownRounded, KeyboardArrowUpRounded } from '@material-ui/icons'
 import styles from './CountriesTable.module.css'
-import { useState } from "react";
+import { useState } from "react"
 import Link from 'next/link'
+import formatNumber from '../../functions/formatNumber'
 
 const orderBy = (countries, value, direction) => {
     if (direction === 'asc') {
@@ -83,9 +84,9 @@ const CountriesTables = ({ countries }) => {
                     </div>
                     <div className={styles.name}>{country.name}</div>
 
-                    <div className={styles.population}>{new Intl.NumberFormat("en-US").format(country.population)}</div>
+                    <div className={styles.population}>{formatNumber(country.population)}</div>
 
-                    <div className={styles.area}>{country.area || 0}</div>
+                    <div className={styles.area}>{formatNumber(country.area) || 0}</div>
 
                     <div className={styles.gini}>{country.gini || 0} %</div>
                 </div>

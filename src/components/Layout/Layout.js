@@ -44,7 +44,7 @@ const Layout = ({ children, title = "Country rank" }) => {
                 </svg>
             </Link>
 
-            <button className={styles.theme_switcher} onClick={switchTheme}>
+            <button className={styles.theme_switcher} onClick={switchTheme} title="Change theme">
                 <Brightness6Rounded />
             </button>
         </header>

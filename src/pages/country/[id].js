@@ -1,6 +1,7 @@
 import Layout from '../../components/Layout/Layout'
 import styles from './Country.module.css'
 import { useEffect, useState } from 'react'
+import formatNumber from '../../functions/formatNumber'
 
 const getCountry = async (id) => {
     const res = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`)
@@ -34,12 +35,12 @@ const Country = ({ country }) => {
 
                     <div className={styles.overview_numbers}>
                         <div className={styles.overview_population}>
-                            <div className={styles.overview_value}>{country.population}</div>
+                            <div className={styles.overview_value}>{formatNumber(country.population)}</div>
                             <div className={styles.overview_label}>Population</div>
                         </div>
 
                         <div className={styles.overview_area}>
-                            <div className={styles.overview_value}>{country.area}</div>
+                            <div className={styles.overview_value}>{formatNumber(country.area)} (km<sup style={{ fontSize: "0.5rem" }}> 2</sup>)</div>
                             <div className={styles.overview_label}>Area</div>
                         </div>
                     </div>
@@ -89,7 +90,7 @@ const Country = ({ country }) => {
 
                         <div className={styles.details_panel_borders_container}>
                             {borders.map(({ flag, name }) =>
-                                <div className={styles.details_panel_borders_country}>
+                                <div className={styles.details_panel_borders_country} key={name}>
                                     <img src={flag} alt={name} />
                                     <div className={styles.details_panel_name}>{name}</div>
                                 </div>
@@ -99,9 +100,6 @@ const Country = ({ country }) => {
                 </div>
             </div>
         </div>
-
-
-
     </Layout>
 }
 
