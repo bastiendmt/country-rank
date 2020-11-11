@@ -78,7 +78,10 @@
 
 .details_panel_borders_country {
     text-align: center;
+}
 
+.details_panel_borders_country:hover {
+    cursor: pointer;
 }
 
 .details_panel_borders_label {
