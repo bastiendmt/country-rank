@@ -1,8 +1,22 @@
+# Project
+Running demo [here](https://country-rank.bastiendmt.vercel.app/)
+
+Features : 
+- getting countries from an API
+- responsive layout
+- search information
+- filter by country, region
+- dark mode
+- more incoming.
+
+## About
+This project was made with of tutorial made by [Thu Nghiem](https://github.com/nghiemthu)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-First, run the development server:
+To run the project locally, run the development server as following:
 
 ```bash
 npm run dev
