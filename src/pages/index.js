@@ -42,16 +42,3 @@ export const getStaticProps = async () => {
     }
   }
 }
-
-
-/*
-IDEAS
-- format detail poolation
-- onclick neighbouring countries
-- switch language
-- dark mode
-- random country
-- map
-
-
-*/
