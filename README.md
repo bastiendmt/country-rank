@@ -7,6 +7,7 @@ Features :
 - search information
 - filter by country, region
 - dark mode
+- random country
 - more incoming.
 
 ## About
