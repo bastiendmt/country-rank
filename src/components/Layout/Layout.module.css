@@ -32,6 +32,7 @@
 
     color : var(--text-color-secondary);
     margin-left: 8px;
+    outline:0;
 
     display: flex;
     justify-content: center;
