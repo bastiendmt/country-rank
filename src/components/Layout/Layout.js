@@ -1,15 +1,18 @@
+import React, { useContext, useState, useEffect, useCallback } from 'react'
 import Head from "next/head"
 import styles from "./Layout.module.css"
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
-import { Brightness6Rounded } from "@material-ui/icons"
+import { Brightness6Rounded, LanguageRounded } from "@material-ui/icons"
+
+import l10n from '../../../public/locales/translation.json'
+import { LangContext } from '../../pages/_app'
 
 const Layout = ({ children, title = "Country rank" }) => {
     const [theme, setTheme] = useState('light')
+    const { lang, switchLanguage } = useContext(LangContext)
 
-    useEffect (() => {
+    useEffect(() => {
         document.documentElement.setAttribute('data-theme', localStorage.getItem('theme'))
-
         setTheme(localStorage.getItem('theme'))
     }, [])
 
@@ -45,8 +48,12 @@ const Layout = ({ children, title = "Country rank" }) => {
                 </svg>
             </Link>
 
-            <button className={styles.theme_switcher} onClick={switchTheme} title="Change theme">
+            <button className={styles.theme_switcher} onClick={switchTheme} title={l10n['switch_theme'][lang]}>
                 <Brightness6Rounded />
+            </button>
+
+            <button className={styles.language_switcher} onClick={switchLanguage} title={l10n['switch_language'][lang]}>
+                <LanguageRounded />
             </button>
         </header>
 
@@ -56,6 +63,7 @@ const Layout = ({ children, title = "Country rank" }) => {
             <a href="https://github.com/Bastiendmt">Bastien Dumont</a> - Dev challenge by Thu Ngiem
     </footer>
     </div >
+
 }
 
 export default Layout

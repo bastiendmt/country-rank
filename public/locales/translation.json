@@ -1,0 +1,10 @@
+{
+  "title": { "en": "title", "fr": "titre" },
+  "found_countries": {
+    "1": { "en": "Found", "fr": "" },
+    "2": { "en": "countries", "fr": "Pays trouvés" }
+  },
+  "random_country": { "en": "Random country", "fr": "Pays aléatoire" },
+  "switch_theme": { "en": "Change theme", "fr": "Changer de thème" },
+  "switch_language": { "en": "Switch language", "fr": "Changer de langue" }
+}
