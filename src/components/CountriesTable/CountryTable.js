@@ -86,7 +86,7 @@ const CountriesTables = ({ countries }) => {
                     <div className={styles.flag}>
                         <img src={country.flag} alt={country.name} />
                     </div>
-                    <div className={styles.name}>{country.name}</div>
+                    <div className={styles.name}>{country.translations[lang] || country.name }</div>
 
                     <div className={styles.population}>{formatNumber(country.population)}</div>
 
