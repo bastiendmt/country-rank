@@ -1,8 +1,11 @@
-import { KeyboardArrowDownRounded, KeyboardArrowUpRounded } from '@material-ui/icons'
-import styles from './CountriesTable.module.css'
-import { useState } from "react"
+import { useState, useContext } from "react"
 import Link from 'next/link'
+import styles from './CountriesTable.module.css'
 import formatNumber from '../../functions/formatNumber'
+import { KeyboardArrowDownRounded, KeyboardArrowUpRounded } from '@material-ui/icons'
+
+import l10n from '../../../public/locales/translation.json'
+import { LangContext } from '../../pages/_app'
 
 const orderBy = (countries, value, direction) => {
     if (direction === 'asc') {
@@ -33,6 +36,7 @@ const SortArrow = ({ direction }) => {
 const CountriesTables = ({ countries }) => {
     const [direction, setDirection] = useState()
     const [value, setValue] = useState()
+    const { lang } = useContext(LangContext)
 
     const orderedCountry = orderBy(countries, value, direction)
 
@@ -56,22 +60,22 @@ const CountriesTables = ({ countries }) => {
 
             <div className={styles.heading_flag}></div>
             <button className={styles.heading_name} onClick={() => setValueAndDirection('name')}>
-                <div>Name</div>
+                <div>{l10n['sort']['name'][lang]}</div>
                 {value === 'name' && <SortArrow direction={direction} />}
             </button>
 
             <button className={styles.heading_population} onClick={() => setValueAndDirection('population')}>
-                <div>Population</div>
+                <div>{l10n['sort']['population'][lang]}</div>
                 {value === 'population' && <SortArrow direction={direction} />}
             </button>
 
             <button className={styles.heading_area} onClick={() => setValueAndDirection('area')}>
-                <div>Area (km<sup style={{ fontSize: "0.5rem" }}> 2</sup>)</div>
+                <div>{l10n['sort']['area'][lang]} (km<sup style={{ fontSize: "0.5rem" }}> 2</sup>)</div>
                 {value === 'area' && <SortArrow direction={direction} />}
             </button>
 
             <button className={styles.heading_gini} onClick={() => setValueAndDirection('gini')}>
-                <div>Gini</div>
+                <div>{l10n['sort']['gini'][lang]}</div>
                 {value === 'gini' && <SortArrow direction={direction} />}
             </button>
         </div>

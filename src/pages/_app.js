@@ -1,5 +1,5 @@
-import '../styles/globals.css'
 import React, {useState, useCallback, useMemo} from 'react'
+import '../styles/globals.css'
 
 export const LangContext = React.createContext({
   lang : 'en',

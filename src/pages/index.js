@@ -5,16 +5,14 @@ import SearchInput from '../components/SearchInput/SearchInput'
 import CountriesTables from '../components/CountriesTable/CountryTable'
 import styles from '../styles/Home.module.css'
 import { ShuffleRounded } from '@material-ui/icons'
-import l10n from '../../public/locales/translation.json'
 
+import l10n from '../../public/locales/translation.json'
 import { LangContext } from './_app'
 
 export default function Home({ countries }) {
     const [keyword, setKeyword] = useState("")
     const router = useRouter()
     const { lang } = useContext(LangContext)
-
-    console.log(lang)
 
     const filteredCountry = countries.filter(country =>
         country.name.toLowerCase().includes(keyword) ||
@@ -38,13 +36,13 @@ export default function Home({ countries }) {
             <div className={styles.counts}>
                 <div>{l10n['found_countries']['1'][lang]} {countries.length} {l10n['found_countries']['2'][lang]}</div>
 
-                <button className={styles.shufflebutton} title={l10n['random_country']['en']} onClick={randomCountry}>
+                <button className={styles.shufflebutton} title={l10n['random_country'][lang]} onClick={randomCountry}>
                     <ShuffleRounded color='inherit' />
                 </button>
             </div>
 
             <div className={styles.input}>
-                <SearchInput placeholder="Filter by name, Region or SubRegion" onChange={onInputChange} />
+                <SearchInput placeholder={l10n['filter'][lang]} onChange={onInputChange} />
             </div>
         </div>
 
