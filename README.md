@@ -1,7 +1,8 @@
 # Project
 Running demo [here](https://country-rank.bastiendmt.vercel.app/)
 
-Features : 
+This website is displaying countries in list and details about a country such as its population, languages, neighboors...
+## Features : 
 - getting countries from an API
 - responsive layout
 - search information
