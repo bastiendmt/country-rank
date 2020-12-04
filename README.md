@@ -9,7 +9,8 @@ This website is displaying countries in list and details about a country such as
 - filter by country, region
 - dark mode
 - random country
-- more incoming.
+- language switch (en & fr)
+- select a random country
 
 ## About
 This project was made with of tutorial made by [Thu Nghiem](https://github.com/nghiemthu)
