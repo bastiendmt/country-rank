@@ -1,14 +1,16 @@
 # Project
 Running demo [here](https://country-rank.bastiendmt.vercel.app/)
 
-Features : 
+This website is displaying countries in list and details about a country such as its population, languages, neighboors...
+## Features : 
 - getting countries from an API
 - responsive layout
 - search information
 - filter by country, region
 - dark mode
 - random country
-- more incoming.
+- language switch (en & fr)
+- select a random country
 
 ## About
 This project was made with of tutorial made by [Thu Nghiem](https://github.com/nghiemthu)
