@@ -35,7 +35,9 @@ const Country = ({ country }) => {
                 <div className={styles.overview_panel}>
                     <img src={country.flag} alt={country.name}></img>
 
-                    <h1 className={styles.overview_name}>{country.translations[lang]}</h1>
+                    <h1 className={styles.overview_name}>
+                        {country.translations[lang] || country.name}
+                    </h1>
                     <div className={styles.overview_region}>{country.region}</div>
 
                     <div className={styles.overview_numbers}>
@@ -98,7 +100,7 @@ const Country = ({ country }) => {
                                 <Link href={`/country/${alpha3Code}`} key={name}>
                                     <div className={styles.details_panel_borders_country}>
                                         <img src={flag} alt={name} />
-                                        <div className={styles.details_panel_name}>{translations[lang]}</div>
+                                        <div className={styles.details_panel_name}>{translations[lang] || name}</div>
                                     </div>
                                 </Link>
                             )}
