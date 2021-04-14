@@ -84,7 +84,7 @@ const CountriesTables = ({ countries }) => {
             <Link href={`/country/${country.alpha3Code}`} key={country.name}>
                 <div className={styles.row}>
                     <div className={styles.flag}>
-                        <img src={country.flag} alt={country.name} />
+                        <img src={country.flag} alt={country.name} width={60}/>
                     </div>
                     <div className={styles.name}>{country.translations[lang] || country.name }</div>
 
