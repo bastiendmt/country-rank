@@ -6,24 +6,30 @@
   "random_country": { "en": "Random country", "fr": "Pays aléatoire" },
   "switch_theme": { "en": "Change theme", "fr": "Changer de thème" },
   "switch_language": { "en": "Switch language", "fr": "Changer de langue" },
-  "filter": { "en": "Filter by name, Region or SubRegion", "fr": "Filtrer par nom ou par continent" },
-  "sort" : {
-    "name" : {"en" : "Name", "fr": "Nom"},
-    "population" : {"en" : "Population", "fr": "Population"},
-    "area" : {"en" : "Area", "fr": "Superficie"},
-    "gini" : {"en" : "Gini", "fr": "Gini"}
+  "filter": {
+    "en": "Filter by name, Region or SubRegion",
+    "fr": "Filtrer par nom ou par continent"
   },
-  "country" : {
-    "details" : {"en" : "Details", "fr":"Détails"},
-    "capital" : {"en" : "Capital", "fr":"Capitale"},
-    "subregion" : {"en" : "Subregion", "fr":"Continent"},
-    "languages" : {"en" : "Languages", "fr":"Languages"},
-    "currencies" : {"en" : "Currencies", "fr":"Devises"},
-    "native_name" : {"en" : "Native nom", "fr":"Nom natif"},
-    "gini" : {"en" : "Gini", "fr":"Gini"},
-    "neighbouring_countries" : {"en" : "Neihbouring Countries", "fr":"Pays voisins"},
-    "population" : {"en" : "Population", "fr":"Population"},
-    "area" : {"en" : "Area", "fr":"Superficie"}
+  "sort": {
+    "name": { "en": "Name", "fr": "Nom" },
+    "population": { "en": "Population", "fr": "Population" },
+    "area": { "en": "Area", "fr": "Superficie" },
+    "gini": { "en": "Gini", "fr": "Gini" }
+  },
+  "country": {
+    "details": { "en": "Details", "fr": "Détails" },
+    "capital": { "en": "Capital", "fr": "Capitale" },
+    "subregion": { "en": "Subregion", "fr": "Continent" },
+    "languages": { "en": "Languages", "fr": "Languages" },
+    "currencies": { "en": "Currencies", "fr": "Devises" },
+    "native_name": { "en": "Native nom", "fr": "Nom natif" },
+    "gini": { "en": "Gini", "fr": "Gini" },
+    "neighbouring_countries": {
+      "en": "Neihbouring Countries",
+      "fr": "Pays voisins"
+    },
+    "no_neighbors": { "en": "No neighbors", "fr": "Aucun voisin" },
+    "population": { "en": "Population", "fr": "Population" },
+    "area": { "en": "Area", "fr": "Superficie" }
   }
-  
 }
