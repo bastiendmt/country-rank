@@ -19,6 +19,9 @@ This website is displaying countries in list and details about a country such as
 **Country details**
 ![Country detail](/preview/country-info.png)
 
+**Performance**
+![Performance](/preview/performances.png)
+
 ## About
 This project was made with of tutorial made by [Thu Nghiem](https://github.com/nghiemthu)
 
