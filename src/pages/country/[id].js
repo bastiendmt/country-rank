@@ -20,14 +20,11 @@ const Country = ({ country }) => {
     const { lang } = useContext(LangContext)
 
     const getBorders = async () => {
+        console.log('GETTING NEIGHBORS')
         const borders = await Promise.all(country.borders.map(border => getCountry(border)))
 
         setBorders(borders)
     }
-
-    useEffect(() => {
-        getBorders()
-    }, [country])
 
     useEffect(() => {
         getBorders()
