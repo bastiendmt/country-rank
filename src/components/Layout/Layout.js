@@ -13,7 +13,11 @@ const Layout = ({ children, title = "Country rank" }) => {
 
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', localStorage.getItem('theme'))
-        setTheme(localStorage.getItem('theme'))
+        if (localStorage.getItem('theme')) {
+            setTheme(localStorage.getItem('theme'))
+        } else {
+            localStorage.setItem('theme', theme)
+        }
     }, [])
 
     const switchTheme = () => {
