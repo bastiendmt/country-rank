@@ -34,6 +34,7 @@ const Layout = ({ children, title = "Country rank" }) => {
         <Head>
             <title>{title}</title>
             <link rel="icon" href="/favicon.ico" />
+            <meta charset="UTF-8"/>
             <meta name="theme-color" content="#252329" />
             <meta name="description" content="Country ranking"/>
             <meta name="keywords" content="rank, country, infos, stats"/>
