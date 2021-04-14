@@ -38,7 +38,11 @@ const Layout = ({ children, title = "Country rank" }) => {
         <Head>
             <title>{title}</title>
             <link rel="icon" href="/favicon.ico" />
+            <meta charset="UTF-8"/>
             <meta name="theme-color" content="#252329" />
+            <meta name="description" content="Country ranking"/>
+            <meta name="keywords" content="rank, country, infos, stats"/>
+            <meta name="author" content="Bastien Dumont"/>
         </Head>
 
         <header className={styles.header}>
@@ -53,11 +57,11 @@ const Layout = ({ children, title = "Country rank" }) => {
             </Link>
 
             <button className={styles.theme_switcher} onClick={switchTheme} title={l10n['switch_theme'][lang]}>
-                <Brightness6Rounded />
+                <Brightness6Rounded style={{ fontSize: '1.5rem' }}/>
             </button>
 
             <button className={styles.language_switcher} onClick={switchLanguage} title={l10n['switch_language'][lang]}>
-                <LanguageRounded />
+                <LanguageRounded style={{ fontSize: '1.5rem' }}/>
             </button>
         </header>
 

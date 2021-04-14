@@ -1,29 +1,37 @@
-import React, { useState, useCallback, useMemo } from 'react'
-import '../styles/globals.css'
+import React, { useState, useCallback, useMemo, useEffect } from "react";
+import "../styles/globals.css";
 
 export const LangContext = React.createContext({
-  lang: 'en',
-  switchLanguage: () => { }
-})
+  lang: "en",
+  switchLanguage: () => {},
+});
 
 function MyApp({ Component, pageProps }) {
-  const [lang, setLang] = useState('en')
+  const [lang, setLang] = useState("en");
 
   const switchLanguage = useCallback(function () {
-    setLang(l => l === 'en' ? 'fr' : 'en')
-  }, [])
+    setLang((l) => (l === "en" ? "fr" : "en"));
+  }, []);
 
-  const value = useMemo(function () {
-    return {
-      lang,
-      switchLanguage
-    }
-  }, [lang, switchLanguage])
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
 
+  const value = useMemo(
+    function () {
+      return {
+        lang,
+        switchLanguage,
+      };
+    },
+    [lang, switchLanguage]
+  );
 
-  return <LangContext.Provider value={value}>
-    <Component {...pageProps} />
-  </LangContext.Provider>
+  return (
+    <LangContext.Provider value={value}>
+      <Component {...pageProps} />
+    </LangContext.Provider>
+  );
 }
 
-export default MyApp
+export default MyApp;
