@@ -27,7 +27,11 @@ const Country = ({ country }) => {
 
     useEffect(() => {
         getBorders()
-    }, [])
+    }, [country])
+
+    useEffect(() => {
+        getBorders()
+    }, [country])
 
     return <Layout title={country.name}>
         <div className={styles.container}>
