@@ -49,11 +49,11 @@ const Layout = ({ children, title = "Country rank" }) => {
             </Link>
 
             <button className={styles.theme_switcher} onClick={switchTheme} title={l10n['switch_theme'][lang]}>
-                <Brightness6Rounded />
+                <Brightness6Rounded style={{ fontSize: '1.5rem' }}/>
             </button>
 
             <button className={styles.language_switcher} onClick={switchLanguage} title={l10n['switch_language'][lang]}>
-                <LanguageRounded />
+                <LanguageRounded style={{ fontSize: '1.5rem' }}/>
             </button>
         </header>
 

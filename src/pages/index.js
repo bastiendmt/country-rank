@@ -37,7 +37,7 @@ export default function Home({ countries }) {
                 <div>{l10n['found_countries']['1'][lang]} {countries.length} {l10n['found_countries']['2'][lang]}</div>
 
                 <button className={styles.shufflebutton} title={l10n['random_country'][lang]} onClick={randomCountry}>
-                    <ShuffleRounded color='inherit' />
+                    <ShuffleRounded color='inherit' style={{ fontSize: '1.5rem' }}/>
                 </button>
             </div>
 
