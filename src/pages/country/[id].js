@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Layout from "../../components/Layout/Layout";
 import styles from "./Country.module.css";
 import formatNumber from "../../functions/formatNumber";
@@ -36,7 +37,7 @@ const Country = ({ country }) => {
       <div className={styles.container}>
         <div className={styles.container_left}>
           <div className={styles.overview_panel}>
-            <img src={country.flag} alt={country.name}></img>
+            <Image src={country.flag} alt={country.name} width={700} height={500}/>
 
             <h1 className={styles.overview_name}>
               {country.translations[lang] || country.name}
@@ -143,7 +144,7 @@ const Country = ({ country }) => {
                   {borders.map(({ flag, name, alpha3Code, translations }) => (
                     <Link href={`/country/${alpha3Code}`} key={name}>
                       <div className={styles.details_panel_borders_country}>
-                        <img src={flag} alt={name} />
+                        <Image src={flag} alt={name} width={200} height={150} />
                         <div className={styles.details_panel_name}>
                           {translations[lang] || name}
                         </div>

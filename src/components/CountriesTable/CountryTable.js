@@ -1,5 +1,6 @@
-import { useState, useContext } from "react"
+import React, { useState, useContext } from "react"
 import Link from 'next/link'
+import Image from 'next/image'
 import styles from './CountriesTable.module.css'
 import formatNumber from '../../functions/formatNumber'
 import { KeyboardArrowDownRounded, KeyboardArrowUpRounded } from '@material-ui/icons'
@@ -84,7 +85,7 @@ const CountriesTables = ({ countries }) => {
             <Link href={`/country/${country.alpha3Code}`} key={country.name}>
                 <div className={styles.row}>
                     <div className={styles.flag}>
-                        <img src={country.flag} alt={country.name} width={60} height={40}/>
+                        <Image src={country.flag} alt={country.name} width={60} height={40}/>
                     </div>
                     <div className={styles.name}>{country.translations[lang] || country.name }</div>
 
