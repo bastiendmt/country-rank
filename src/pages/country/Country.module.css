@@ -61,12 +61,19 @@
     color : var(--text-color-secondary)
 }
 
-.details_panel_borders {
+.details_panel_borders,
+.details_panel_no_borders {
     padding: 24px;
+}
+
+.details_panel_no_borders {
+    display: flex;
+    justify-content: space-between;
 }
 
 .details_panel_borders_container {
     display: grid;
+    margin-top: 20px;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: 24px;
 }
@@ -86,7 +93,7 @@
 
 .details_panel_borders_label {
     color : var(--text-color-secondary);
-    margin-bottom: 20px;
+    
 }
 
 .container {

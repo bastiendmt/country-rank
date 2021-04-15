@@ -126,7 +126,7 @@ const Country = ({ country }) => {
             </div>
 
             {!borders.length ? (
-              <div className={styles.details_panel_row}>
+              <div className={styles.details_panel_no_borders}>
                 <div className={styles.details_panel_borders_label}>
                   {l10n["country"]["neighbouring_countries"][lang]}
                 </div>
