@@ -16,7 +16,7 @@
   border: none;
   display: flex;
   align-items: center;
-  outline:0;
+  outline: 0;
 }
 
 .shufflebutton:hover {

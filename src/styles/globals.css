@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap");
 
 :root {
   --text-color: #124a63;
@@ -13,14 +13,14 @@
   --box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-[data-theme='dark'] {
-  --text-color: #F0F0F0;
+[data-theme="dark"] {
+  --text-color: #f0f0f0;
   --text-color-secondary: #b3c5cd;
   --primary-color: #21b6b7;
 
   --background-color: #252329;
-  --background-color-dark: #3C393F;
-  --background-color-light: #120F13;
+  --background-color-dark: #3c393f;
+  --background-color-light: #120f13;
 }
 
 html,
@@ -29,7 +29,7 @@ body {
   margin: 0;
   font-family: var(--font-family);
   background-color: var(--background-color);
-  color : var(--text-color);
+  color: var(--text-color);
 }
 
 a {
@@ -40,5 +40,5 @@ a {
 * {
   color: inherit;
   box-sizing: border-box;
-  font : inherit;
+  font: inherit;
 }

@@ -37,7 +37,12 @@ const Country = ({ country }) => {
       <div className={styles.container}>
         <div className={styles.container_left}>
           <div className={styles.overview_panel}>
-            <Image src={country.flag} alt={country.name} width={700} height={500}/>
+            <Image
+              src={country.flag}
+              alt={country.name}
+              width={700}
+              height={500}
+            />
 
             <h1 className={styles.overview_name}>
               {country.translations[lang] || country.name}

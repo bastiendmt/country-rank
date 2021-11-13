@@ -102,22 +102,19 @@
   border-radius: 2px;
 }
 
-@media screen and (max-width : 720px) {
-  
-  
+@media screen and (max-width: 720px) {
   .area,
   .heading_area {
     display: none;
   }
-  
+
   .gini,
   .heading_gini {
     display: none;
   }
-  
+
   .flag,
   .heading_flag {
     display: none;
   }
-
 }
