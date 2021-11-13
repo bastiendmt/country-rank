@@ -3,7 +3,7 @@ module.exports = {
     webpack5: true,
   },
   images: {
-    domains: ["restcountries.eu"],
+    domains: ["restcountries.com"],
   },
   swcMinify: true,
 };

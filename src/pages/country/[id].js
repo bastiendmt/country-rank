@@ -9,7 +9,7 @@ import l10n from "../../../public/locales/translation.json";
 import { LangContext } from "../../pages/_app";
 
 const getCountry = async (id) => {
-  const res = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
+  const res = await fetch(`${process.env.API_URL}/alpha/${id}`);
 
   const country = await res.json();
 
@@ -169,7 +169,7 @@ const Country = ({ country }) => {
 export default Country;
 
 export const getStaticPaths = async () => {
-  const res = await fetch("https://restcountries.eu/rest/v2/all");
+  const res = await fetch(`${process.env.API_URL}/all`);
   const countries = await res.json();
 
   const paths = countries.map((country) => ({
