@@ -5,4 +5,5 @@ module.exports = {
   images: {
     domains: ["restcountries.eu"],
   },
+  swcMinify: true,
 };
