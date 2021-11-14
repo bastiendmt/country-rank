@@ -38,7 +38,7 @@ const Country = ({ country }) => {
         <div className={styles.container_left}>
           <div className={styles.overview_panel}>
             <Image
-              src={country.flag}
+              src={country.flags.svg}
               alt={country.name}
               width={700}
               height={500}
@@ -146,10 +146,15 @@ const Country = ({ country }) => {
                 </div>
 
                 <div className={styles.details_panel_borders_container}>
-                  {borders.map(({ flag, name, alpha3Code, translations }) => (
+                  {borders.map(({ flags, name, alpha3Code, translations }) => (
                     <Link href={`/country/${alpha3Code}`} key={name}>
                       <div className={styles.details_panel_borders_country}>
-                        <Image src={flag} alt={name} width={200} height={150} />
+                        <Image
+                          src={flags.svg}
+                          alt={name}
+                          width={200}
+                          height={150}
+                        />
                         <div className={styles.details_panel_name}>
                           {translations[lang] || name}
                         </div>
