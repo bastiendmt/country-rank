@@ -10,7 +10,7 @@ import { LangContext } from "../../pages/_app";
 import getGini from "../../functions/getGini";
 
 const getCountry = async (id) => {
-  const res = await fetch(`${process.env.API_URL}/alpha/${id}`);
+  const res = await fetch(`https://restcountries.com/v3.1/alpha/${id}`);
 
   const country = await res.json();
 
@@ -76,9 +76,9 @@ const Country = ({ country }) => {
 
           <div className={styles.container_right}>
             <div className={styles.details_panel}>
-              <h4 className={styles.details_panel_heading}>
+              <h2 className={styles.details_panel_heading}>
                 {l10n["country"]["details"][lang]}
-              </h4>
+              </h2>
 
               <div className={styles.details_panel_row}>
                 <div className={styles.details_panel_label}>
@@ -141,7 +141,7 @@ const Country = ({ country }) => {
                 </div>
               </div>
 
-              {/* {!borders.length ? (
+              {!borders.length ? (
                 <div className={styles.details_panel_no_borders}>
                   <div className={styles.details_panel_borders_label}>
                     {l10n["country"]["neighbouring_countries"][lang]}
@@ -157,26 +157,24 @@ const Country = ({ country }) => {
                   </div>
 
                   <div className={styles.details_panel_borders_container}>
-                    {borders.map(
-                      ({ flags, name, alpha3Code, translations }) => (
-                        <Link href={`/country/${alpha3Code}`} key={name}>
-                          <div className={styles.details_panel_borders_country}>
-                            <Image
-                              src={flags.svg}
-                              alt={name}
-                              width={200}
-                              height={150}
-                            />
-                            <div className={styles.details_panel_name}>
-                              {translations[lang] || name}
-                            </div>
+                    {borders.map(({ flags, name, cca3, translations }) => (
+                      <Link href={`/country/${cca3}`} key={name.common}>
+                        <div className={styles.details_panel_borders_country}>
+                          <Image
+                            src={flags.svg}
+                            alt={name}
+                            width={200}
+                            height={150}
+                          />
+                          <div className={styles.details_panel_name}>
+                            {translations[lang] || name.common}
                           </div>
-                        </Link>
-                      )
-                    )}
+                        </div>
+                      </Link>
+                    ))}
                   </div>
                 </div>
-              )} */}
+              )}
             </div>
           </div>
         </div>
