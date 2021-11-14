@@ -43,6 +43,14 @@ const Country = ({ country }) => {
       .join(", ");
   };
 
+  const getLanguages = () => {
+    if (!country.languages) return "-";
+
+    return Object.keys(country.languages)
+      .map((lang) => country.languages[lang])
+      .join(", ");
+  };
+
   return (
     country && (
       <Layout title={country.name.common}>
@@ -113,9 +121,7 @@ const Country = ({ country }) => {
                   {l10n["country"]["languages"][lang]}
                 </div>
                 <div className={styles.details_panel_value}>
-                  {Object.keys(country.languages)
-                    .map((lang) => country.languages[lang])
-                    .join(", ")}
+                  {getLanguages()}
                 </div>
               </div>
 
