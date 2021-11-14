@@ -41,6 +41,9 @@ const SortArrow = ({ direction }) => {
   }
 };
 
+// Returns gini from lastest year value
+// "gini" : { "20XX" : YY }
+// returns YY
 const getGini = (object) => {
   if (!object.gini) return "-";
 
@@ -110,7 +113,7 @@ const CountriesTables = ({ countries }) => {
       </div>
 
       {orderedCountry.map((country) => (
-        <Link href={`/country/${country.alpha3Code}`} key={country.name}>
+        <Link href={`/country/${country.alpha3Code}`} key={country.name.common}>
           <div className={styles.row}>
             <div className={styles.flag}>
               <Image
