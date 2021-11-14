@@ -21,7 +21,7 @@ const Layout = ({ children, title = "Country rank" }) => {
     } else {
       localStorage.setItem("theme", theme);
     }
-  }, []);
+  }, [theme]);
 
   const switchTheme = () => {
     if (theme === "light") {
@@ -50,7 +50,7 @@ const Layout = ({ children, title = "Country rank" }) => {
       </Head>
 
       <header className={styles.header}>
-        <Link href="/">
+        <Link href="/" passHref>
           <svg
             width="175"
             height="24"

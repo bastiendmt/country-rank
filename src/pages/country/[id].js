@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Layout from "../../components/Layout/Layout";
@@ -21,19 +21,19 @@ const Country = ({ country }) => {
   const [borders, setBorders] = useState([]);
   const { lang } = useContext(LangContext);
 
-  const getBorders = async () => {
-    if (!country.border) return;
+  const getBorders = useCallback(async () => {
+    if (!country.borders) return;
 
     const borders = await Promise.all(
       country.borders.map((border) => getCountry(border))
     );
 
     setBorders(borders);
-  };
+  }, [country.borders]);
 
   useEffect(() => {
     getBorders();
-  }, [country]);
+  }, [country, getBorders]);
 
   const getCurrencies = () => {
     if (!country.currencies) return "-";
@@ -180,7 +180,7 @@ const Country = ({ country }) => {
 
                   <div className={styles.details_panel_borders_container}>
                     {borders.map(({ flags, name, cca3, translations }) => (
-                      <Link href={`/country/${cca3}`} key={name.common}>
+                      <Link href={`/country/${cca3}`} key={name.common} passHref>
                         <div className={styles.details_panel_borders_country}>
                           <Image
                             src={flags.svg}
