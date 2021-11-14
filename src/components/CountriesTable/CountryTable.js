@@ -41,6 +41,12 @@ const SortArrow = ({ direction }) => {
   }
 };
 
+const getGini = (object) => {
+  if (!object.gini) return "-";
+
+  return object.gini[Object.keys(object.gini)[0]] + " %";
+};
+
 const CountriesTables = ({ countries }) => {
   const [direction, setDirection] = useState();
   const [value, setValue] = useState();
@@ -108,14 +114,14 @@ const CountriesTables = ({ countries }) => {
           <div className={styles.row}>
             <div className={styles.flag}>
               <Image
-                src={country.flag}
+                src={country.flags.svg}
                 alt={country.name}
                 width={60}
                 height={40}
               />
             </div>
             <div className={styles.name}>
-              {country.translations[lang] || country.name}
+              {country.translations[lang] || country.name.common}
             </div>
 
             <div className={styles.population}>
@@ -124,9 +130,7 @@ const CountriesTables = ({ countries }) => {
 
             <div className={styles.area}>{formatNumber(country.area) || 0}</div>
 
-            <div className={styles.gini}>
-              {country.gini ? country.gini + " %" : "-"}
-            </div>
+            <div className={styles.gini}>{getGini(country)}</div>
           </div>
         </Link>
       ))}
