@@ -22,6 +22,8 @@ const Country = ({ country }) => {
   const { lang } = useContext(LangContext);
 
   const getBorders = async () => {
+    if (!country.border) return;
+
     const borders = await Promise.all(
       country.borders.map((border) => getCountry(border))
     );
@@ -32,6 +34,14 @@ const Country = ({ country }) => {
   useEffect(() => {
     getBorders();
   }, [country]);
+
+  const getCurrencies = () => {
+    if (!country.currencies) return "-";
+
+    return Object.keys(country.currencies)
+      .map((curr) => country.currencies[curr].name)
+      .join(", ");
+  };
 
   return (
     country && (
@@ -85,7 +95,7 @@ const Country = ({ country }) => {
                   {l10n["country"]["capital"][lang]}
                 </div>
                 <div className={styles.details_panel_value}>
-                  {country.capital[0]}
+                  {country.capital ? country.capital[0] : "-"}
                 </div>
               </div>
 
@@ -114,9 +124,7 @@ const Country = ({ country }) => {
                   {l10n["country"]["currencies"][lang]}
                 </div>
                 <div className={styles.details_panel_value}>
-                  {Object.keys(country.currencies)
-                    .map((curr) => country.currencies[curr].name)
-                    .join(", ")}
+                  {getCurrencies()}
                 </div>
               </div>
 
