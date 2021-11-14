@@ -22,7 +22,7 @@
     "subregion": { "en": "Subregion", "fr": "Continent" },
     "languages": { "en": "Languages", "fr": "Languages" },
     "currencies": { "en": "Currencies", "fr": "Devises" },
-    "native_name": { "en": "Native nom", "fr": "Nom natif" },
+    "native_name": { "en": "Native name", "fr": "Nom natif" },
     "gini": { "en": "Gini", "fr": "Gini" },
     "neighbouring_countries": {
       "en": "Neihbouring Countries",
