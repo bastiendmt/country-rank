@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./CountriesTable.module.css";
 import formatNumber from "../../functions/formatNumber";
+import getGini from "../../functions/getGini";
 import {
   KeyboardArrowDownRounded,
   KeyboardArrowUpRounded,
@@ -39,15 +40,6 @@ const SortArrow = ({ direction }) => {
       </div>
     );
   }
-};
-
-// Returns gini from lastest year value
-// "gini" : { "20XX" : YY }
-// returns YY
-const getGini = (object) => {
-  if (!object.gini) return "-";
-
-  return object.gini[Object.keys(object.gini)[0]] + " %";
 };
 
 const CountriesTables = ({ countries }) => {
@@ -113,7 +105,7 @@ const CountriesTables = ({ countries }) => {
       </div>
 
       {orderedCountry.map((country) => (
-        <Link href={`/country/${country.alpha3Code}`} key={country.name.common}>
+        <Link href={`/country/${country.cca3}`} key={country.name.common}>
           <div className={styles.row}>
             <div className={styles.flag}>
               <Image
