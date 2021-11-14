@@ -13,6 +13,22 @@ import l10n from "../../../public/locales/translation.json";
 import { LangContext } from "../../pages/_app";
 
 const orderBy = (countries, value, direction) => {
+  //Sort nested name
+  if (value === "name") {
+    if (direction === "asc") {
+      return [...countries].sort((a, b) =>
+        a[value].common > b[value].common ? 1 : -1
+      );
+    }
+
+    if (direction === "desc") {
+      return [...countries].sort((a, b) =>
+        a[value].common > b[value].common ? -1 : 1
+      );
+    }
+  }
+
+  // Sort with non nested population & area
   if (direction === "asc") {
     return [...countries].sort((a, b) => (a[value] > b[value] ? 1 : -1));
   }
