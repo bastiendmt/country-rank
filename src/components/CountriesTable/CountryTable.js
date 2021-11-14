@@ -124,7 +124,9 @@ const CountriesTables = ({ countries }) => {
 
             <div className={styles.area}>{formatNumber(country.area) || 0}</div>
 
-            <div className={styles.gini}>{country.gini || 0} %</div>
+            <div className={styles.gini}>
+              {country.gini ? country.gini + " %" : "-"}
+            </div>
           </div>
         </Link>
       ))}
