@@ -51,6 +51,17 @@ const Country = ({ country }) => {
       .join(", ");
   };
 
+  const getNativeName = () => {
+    if (!country.name.nativeName) return "-";
+
+    return (
+      Object.keys(country.name.nativeName)
+        // first common native name
+        .map((native) => country.name.nativeName[native].common)
+        .join(", ")
+    );
+  };
+
   return (
     country && (
       <Layout title={country.name.common}>
@@ -139,10 +150,7 @@ const Country = ({ country }) => {
                   {l10n["country"]["native_name"][lang]}
                 </div>
                 <div className={styles.details_panel_value}>
-                  {Object.keys(country.name.nativeName)
-                    // first common native name
-                    .map((native) => country.name.nativeName[native].common)
-                    .join(", ")}
+                  {getNativeName()}
                 </div>
               </div>
 
