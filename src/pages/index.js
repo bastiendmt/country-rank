@@ -8,6 +8,7 @@ import { ShuffleRounded } from "@material-ui/icons";
 
 import l10n from "../../public/locales/translation.json";
 import { LangContext } from "./_app";
+import { API_URL } from "../config";
 
 export default function Home({ countries }) {
   const [keyword, setKeyword] = useState("");
@@ -64,7 +65,7 @@ export default function Home({ countries }) {
 }
 
 export const getStaticProps = async () => {
-  const res = await fetch(`${process.env.API_URL}/all`);
+  const res = await fetch(`${API_URL}/all`);
   const countries = await res.json();
 
   return {

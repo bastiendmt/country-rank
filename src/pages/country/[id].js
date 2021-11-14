@@ -8,9 +8,10 @@ import formatNumber from "../../functions/formatNumber";
 import l10n from "../../../public/locales/translation.json";
 import { LangContext } from "../../pages/_app";
 import getGini from "../../functions/getGini";
+import { API_URL } from "../../config";
 
 const getCountry = async (id) => {
-  const res = await fetch(`https://restcountries.com/v3.1/alpha/${id}`);
+  const res = await fetch(`${API_URL}/alpha/${id}`);
 
   const country = await res.json();
 
@@ -180,7 +181,11 @@ const Country = ({ country }) => {
 
                   <div className={styles.details_panel_borders_container}>
                     {borders.map(({ flags, name, cca3, translations }) => (
-                      <Link href={`/country/${cca3}`} key={name.common} passHref>
+                      <Link
+                        href={`/country/${cca3}`}
+                        key={name.common}
+                        passHref
+                      >
                         <div className={styles.details_panel_borders_country}>
                           <Image
                             src={flags.svg}
@@ -208,7 +213,7 @@ const Country = ({ country }) => {
 export default Country;
 
 export const getStaticPaths = async () => {
-  const res = await fetch(`${process.env.API_URL}/all`);
+  const res = await fetch(`${API_URL}/all`);
   const countries = await res.json();
 
   const paths = countries.map((country) => ({
