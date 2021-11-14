@@ -27,9 +27,9 @@ export default function Home({ countries }) {
   };
 
   const randomCountry = () => {
-    const random = Math.floor(Math.random() * filteredCountry.length) + 1;
+    const random = Math.floor(Math.random() * filteredCountry.length);
 
-    return router.push(`/country/${countries[random].alpha3Code}`);
+    return router.push(`/country/${countries[random].cca3}`);
   };
 
   return (
