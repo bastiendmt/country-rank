@@ -6,19 +6,28 @@ import styles from "./Country.module.css";
 import formatNumber from "../../functions/formatNumber";
 
 import l10n from "../../../public/locales/translation.json";
+import translationsContent from "../../translations/content";
 import { LangContext } from "../_app";
 import getGini from "../../functions/getGini";
 import { API_URL } from "../../config";
-import { Countries, Country as CountryType } from "../../types/types";
+import {
+  Countries,
+  Country as CountryType,
+  TranslationType,
+} from "../../types/types";
+import { useRouter } from "next/router";
 
 const getCountry = async (id: String): Promise<CountryType> => {
   const res = await fetch(`${API_URL}/alpha/${id}`);
-  const country = await res.json();
+  const data = await res.json();
+  const country = data[0];
   return country;
 };
 
 const Country = ({ country }: { country: CountryType }) => {
-  console.log(country);
+  const { locale } = useRouter();
+  const translate: TranslationType = translationsContent[locale];
+
   const [borders, setBorders] = useState<CountryType[]>([]);
   const { lang } = useContext(LangContext);
 
@@ -77,7 +86,7 @@ const Country = ({ country }: { country: CountryType }) => {
               />
 
               <h1 className={styles.overview_name}>
-                {country.translations[lang].common || country.name.common}
+                {country.translations[lang] || country.name.common}
               </h1>
               <div className={styles.overview_region}>{country.region}</div>
 
@@ -87,7 +96,7 @@ const Country = ({ country }: { country: CountryType }) => {
                     {formatNumber(country.population)}
                   </div>
                   <div className={styles.overview_label}>
-                    {l10n["country"]["population"][lang]}
+                    {translate.country.population}
                   </div>
                 </div>
 
@@ -97,7 +106,7 @@ const Country = ({ country }: { country: CountryType }) => {
                     <sup style={{ fontSize: "0.5rem" }}> 2</sup>)
                   </div>
                   <div className={styles.overview_label}>
-                    {l10n["country"]["area"][lang]}
+                    {translate.country.area}
                   </div>
                 </div>
               </div>
@@ -107,12 +116,12 @@ const Country = ({ country }: { country: CountryType }) => {
           <div className={styles.container_right}>
             <div className={styles.details_panel}>
               <h2 className={styles.details_panel_heading}>
-                {l10n["country"]["details"][lang]}
+                {translate.country.details}
               </h2>
 
               <div className={styles.details_panel_row}>
                 <div className={styles.details_panel_label}>
-                  {l10n["country"]["capital"][lang]}
+                  {translate.country.capital}
                 </div>
                 <div className={styles.details_panel_value}>
                   {country.capital ? country.capital[0] : "-"}
@@ -121,7 +130,7 @@ const Country = ({ country }: { country: CountryType }) => {
 
               <div className={styles.details_panel_row}>
                 <div className={styles.details_panel_label}>
-                  {l10n["country"]["subregion"][lang]}
+                  {translate.country.subregion}
                 </div>
                 <div className={styles.details_panel_value}>
                   {country.subregion}
@@ -130,7 +139,7 @@ const Country = ({ country }: { country: CountryType }) => {
 
               <div className={styles.details_panel_row}>
                 <div className={styles.details_panel_label}>
-                  {l10n["country"]["languages"][lang]}
+                  {translate.country.languages}
                 </div>
                 <div className={styles.details_panel_value}>
                   {getLanguages()}
@@ -139,7 +148,7 @@ const Country = ({ country }: { country: CountryType }) => {
 
               <div className={styles.details_panel_row}>
                 <div className={styles.details_panel_label}>
-                  {l10n["country"]["currencies"][lang]}
+                  {translate.country.currencies}
                 </div>
                 <div className={styles.details_panel_value}>
                   {getCurrencies()}
@@ -148,7 +157,7 @@ const Country = ({ country }: { country: CountryType }) => {
 
               <div className={styles.details_panel_row}>
                 <div className={styles.details_panel_label}>
-                  {l10n["country"]["native_name"][lang]}
+                  {translate.country.nativeName}
                 </div>
                 <div className={styles.details_panel_value}>
                   {getNativeName()}
@@ -157,7 +166,7 @@ const Country = ({ country }: { country: CountryType }) => {
 
               <div className={styles.details_panel_row}>
                 <div className={styles.details_panel_label}>
-                  {l10n["country"]["gini"][lang]}
+                  {translate.country.gini}
                 </div>
                 <div className={styles.details_panel_value}>
                   {getGini(country)}
@@ -167,16 +176,16 @@ const Country = ({ country }: { country: CountryType }) => {
               {!borders.length ? (
                 <div className={styles.details_panel_no_borders}>
                   <div className={styles.details_panel_borders_label}>
-                    {l10n["country"]["neighbouring_countries"][lang]}
+                    {translate.country.neighbouringCountries}
                   </div>
                   <div className={styles.details_panel_value}>
-                    {l10n["country"]["no_neighbors"][lang]}
+                    {translate.country.noNeighbors}
                   </div>
                 </div>
               ) : (
                 <div className={styles.details_panel_borders}>
                   <div className={styles.details_panel_borders_label}>
-                    {l10n["country"]["neighbouring_countries"][lang]}
+                    {translate.country.neighbouringCountries}
                   </div>
 
                   <div className={styles.details_panel_borders_container}>

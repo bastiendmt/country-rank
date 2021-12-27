@@ -115,3 +115,29 @@ enum translationsLanguages {
   urd,
   zho,
 }
+
+export type TranslationType = {
+  randomCountry: string;
+  switchTheme: string;
+  filter: string;
+  foundCountries: string;
+  sort: {
+    name: string;
+    population: string;
+    area: string;
+    gini: string;
+  };
+  country: {
+    details: string;
+    capital: string;
+    subregion: string;
+    languages: string;
+    currencies: string;
+    nativeName: string;
+    gini: string;
+    neighbouringCountries: string;
+    noNeighbors: string;
+    population: string;
+    area: string;
+  };
+};
