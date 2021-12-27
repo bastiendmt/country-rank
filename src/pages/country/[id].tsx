@@ -6,20 +6,20 @@ import styles from "./Country.module.css";
 import formatNumber from "../../functions/formatNumber";
 
 import l10n from "../../../public/locales/translation.json";
-import { LangContext } from "../../pages/_app";
+import { LangContext } from "../_app";
 import getGini from "../../functions/getGini";
 import { API_URL } from "../../config";
+import { Countries, Country as CountryType } from "../../types/types";
 
-const getCountry = async (id) => {
+const getCountry = async (id: String): Promise<CountryType> => {
   const res = await fetch(`${API_URL}/alpha/${id}`);
-
   const country = await res.json();
-
-  return country[0];
+  return country;
 };
 
-const Country = ({ country }) => {
-  const [borders, setBorders] = useState([]);
+const Country = ({ country }: { country: CountryType }) => {
+  console.log(country);
+  const [borders, setBorders] = useState<CountryType[]>([]);
   const { lang } = useContext(LangContext);
 
   const getBorders = useCallback(async () => {
@@ -71,13 +71,13 @@ const Country = ({ country }) => {
             <div className={styles.overview_panel}>
               <Image
                 src={country.flags.svg}
-                alt={country.name}
+                alt={country.name.common}
                 width={700}
                 height={500}
               />
 
               <h1 className={styles.overview_name}>
-                {country.translations[lang] || country.name.common}
+                {country.translations[lang].common || country.name.common}
               </h1>
               <div className={styles.overview_region}>{country.region}</div>
 
@@ -189,7 +189,7 @@ const Country = ({ country }) => {
                         <div className={styles.details_panel_borders_country}>
                           <Image
                             src={flags.svg}
-                            alt={name}
+                            alt={name.common}
                             width={200}
                             height={150}
                           />
@@ -214,7 +214,7 @@ export default Country;
 
 export const getStaticPaths = async () => {
   const res = await fetch(`${API_URL}/all`);
-  const countries = await res.json();
+  const countries: Countries = await res.json();
 
   const paths = countries.map((country) => ({
     params: { id: country.cca3 },
@@ -226,7 +226,11 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({
+  params,
+}: {
+  params: { id: string };
+}) => {
   const country = await getCountry(params.id);
 
   return {

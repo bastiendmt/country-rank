@@ -2,91 +2,92 @@ export type Countries = Country[];
 
 export type Country = {
   name: {
-    common: String;
-    official: String;
+    common: string;
+    official: string;
     nativeName: {
       [key: string]: {
-        official: String;
-        common: String;
+        official: string;
+        common: string;
       };
     };
   };
-  tld: String[];
-  cca2: String;
-  ccn3: Number;
-  cca3: String;
-  cioc: String;
+  tld: string[];
+  cca2: string;
+  ccn3: number;
+  cca3: string;
+  cioc: string;
   independent: Boolean;
-  status: String;
+  status: string;
   unMember: Boolean;
   currencies: {
     [key: string]: {
-      name: String;
-      symbol: String;
+      name: string;
+      symbol: string;
     };
   };
   idd: {
-    root: String;
-    suffixes: String[];
+    root: string;
+    suffixes: string[];
   };
-  capital: String[];
-  altSpellings: String[];
-  region: String;
-  subregion: String;
+  capital: string[];
+  altSpellings: string[];
+  region: string;
+  subregion: string;
   languages: {
     //Varying
-    [key: string]: String;
+    [key: string]: string;
   };
   translations: {
     [key in keyof typeof translationsLanguages]: {
-      official: String;
-      common: String;
+      official: string;
+      common: string;
     };
   };
-  latlng: [Number, Number];
+  latlng: [number, number];
   landlocked: Boolean;
-  area: Number;
+  borders: string[];
+  area: number;
   demonyms: {
     eng: {
-      f: String;
-      m: String;
+      f: string;
+      m: string;
     };
     fra: {
-      f: String;
-      m: String;
+      f: string;
+      m: string;
     };
   };
-  flag: String;
+  flag: string;
   maps: {
-    googleMaps: String;
-    openStreetMaps: String;
+    googleMaps: string;
+    openStreetMaps: string;
   };
-  population: Number;
+  population: number;
   gini?: {
-    [key: string]: Number;
+    [key: string]: number;
   };
-  fifa: String;
+  fifa: string;
   car: {
-    signs: String[];
-    side: String;
+    signs: string[];
+    side: string;
   };
-  timezones: String[];
-  continents: String[];
+  timezones: string[];
+  continents: string[];
   flags: {
-    png: String;
-    svg: String;
+    png: string;
+    svg: string;
   };
   coatOfArms: {
-    png: String;
-    svg: String;
+    png: string;
+    svg: string;
   };
-  startOfWeek: String;
+  startOfWeek: string;
   capitalInfo: {
-    latlng: [Number, Number];
+    latlng: [number, number];
   };
   postalCode: {
-    format: String;
-    regex: String;
+    format: string;
+    regex: string;
   };
 };
 
