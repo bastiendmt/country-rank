@@ -9,10 +9,15 @@ import {
   KeyboardArrowUpRounded,
 } from "@material-ui/icons";
 
-import l10n from "../../../public/locales/translation.json";
+import translationsContent from "../../translations/content";
 import { LangContext } from "../../pages/_app";
+import { Countries, TranslationType } from "../../types/types";
 
-const orderBy = (countries, value, direction) => {
+const orderBy = (
+  countries: Countries,
+  value: string,
+  direction: string | null
+) => {
   //Sort nested name
   if (value === "name") {
     if (direction === "asc") {
@@ -40,7 +45,7 @@ const orderBy = (countries, value, direction) => {
   return countries;
 };
 
-const SortArrow = ({ direction }) => {
+const SortArrow = ({ direction }: { direction: string }) => {
   if (!direction) return <></>;
 
   if (direction === "desc") {
@@ -58,10 +63,11 @@ const SortArrow = ({ direction }) => {
   }
 };
 
-const CountriesTables = ({ countries }) => {
-  const [direction, setDirection] = useState();
-  const [value, setValue] = useState();
+const CountriesTables = ({ countries }: { countries: Countries }) => {
+  const [direction, setDirection] = useState<string | null | undefined>("");
+  const [value, setValue] = useState("");
   const { lang } = useContext(LangContext);
+  const translate: TranslationType = translationsContent[lang];
 
   const orderedCountry = orderBy(countries, value, direction);
 
@@ -75,7 +81,7 @@ const CountriesTables = ({ countries }) => {
     }
   };
 
-  const setValueAndDirection = (value) => {
+  const setValueAndDirection = (value : string) => {
     switchDirection();
     setValue(value);
   };
@@ -88,7 +94,7 @@ const CountriesTables = ({ countries }) => {
           className={styles.heading_name}
           onClick={() => setValueAndDirection("name")}
         >
-          <div>{l10n["sort"]["name"][lang]}</div>
+          <div>{translate.sort.name}</div>
           {value === "name" && <SortArrow direction={direction} />}
         </button>
 
@@ -96,7 +102,7 @@ const CountriesTables = ({ countries }) => {
           className={styles.heading_population}
           onClick={() => setValueAndDirection("population")}
         >
-          <div>{l10n["sort"]["population"][lang]}</div>
+          <div>{translate.sort.population}</div>
           {value === "population" && <SortArrow direction={direction} />}
         </button>
 
@@ -105,7 +111,7 @@ const CountriesTables = ({ countries }) => {
           onClick={() => setValueAndDirection("area")}
         >
           <div>
-            {l10n["sort"]["area"][lang]} (km
+            {translate.sort.area} (km
             <sup style={{ fontSize: "0.5rem" }}> 2</sup>)
           </div>
           {value === "area" && <SortArrow direction={direction} />}
@@ -115,18 +121,22 @@ const CountriesTables = ({ countries }) => {
           className={styles.heading_gini}
           onClick={() => setValueAndDirection("gini")}
         >
-          <div>{l10n["sort"]["gini"][lang]}</div>
+          <div>{translate.sort.gini}</div>
           {value === "gini" && <SortArrow direction={direction} />}
         </button>
       </div>
 
       {orderedCountry.map((country) => (
-        <Link href={`/country/${country.cca3}`} key={country.name.common} passHref>
+        <Link
+          href={`/country/${country.cca3}`}
+          key={country.name.common}
+          passHref
+        >
           <div className={styles.row}>
             <div className={styles.flag}>
               <Image
                 src={country.flags.svg}
-                alt={country.name}
+                alt={country.name.common}
                 width={60}
                 height={40}
               />

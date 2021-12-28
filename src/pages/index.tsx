@@ -1,7 +1,7 @@
 import { ShuffleRounded } from "@material-ui/icons";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
-import CountriesTables from "../components/CountriesTable/CountryTable";
+import CountriesTables from "../components/CountriesTable/CountryTable.tsx";
 import Layout from "../components/Layout/Layout";
 import SearchInput from "../components/SearchInput/SearchInput";
 import { API_URL } from "../config";
