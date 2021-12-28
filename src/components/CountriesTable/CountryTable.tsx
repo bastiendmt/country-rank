@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./CountriesTable.module.css";
 import formatNumber from "../../functions/formatNumber";
-import getGini, { formatGini } from "../../functions/getGini";
+import giniToString, { formatGini } from "../../functions/getGini";
 import {
   KeyboardArrowDownRounded,
   KeyboardArrowUpRounded,
@@ -177,7 +177,7 @@ const CountriesTables = ({ countries }: { countries: Countries }) => {
 
             <div className={styles.area}>{formatNumber(country.area) || 0}</div>
 
-            <div className={styles.gini}>{getGini(country)}</div>
+            <div className={styles.gini}>{giniToString(country)}</div>
           </div>
         </Link>
       ))}

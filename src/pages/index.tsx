@@ -1,7 +1,7 @@
 import { ShuffleRounded } from "@material-ui/icons";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
-import CountriesTables from "../components/CountriesTable/CountryTable.tsx";
+import CountriesTables from "../components/CountriesTable/CountryTable";
 import Layout from "../components/Layout/Layout";
 import SearchInput from "../components/SearchInput/SearchInput";
 import { API_URL } from "../config";
@@ -10,7 +10,7 @@ import translationsContent from "../translations/content";
 import { Countries, TranslationType } from "../types/types";
 import { LangContext } from "./_app";
 
-export default function Home({ countries }: { countries: Countries }) {
+const Index = ({ countries }: { countries: Countries }) => {
   const [keyword, setKeyword] = useState("");
   const router = useRouter();
   const { lang } = useContext(LangContext);
@@ -62,7 +62,7 @@ export default function Home({ countries }: { countries: Countries }) {
       <CountriesTables countries={filteredCountry} />
     </Layout>
   );
-}
+};
 
 export const getStaticProps = async () => {
   const res = await fetch(`${API_URL}/all`);
@@ -74,3 +74,5 @@ export const getStaticProps = async () => {
     },
   };
 };
+
+export default Index;

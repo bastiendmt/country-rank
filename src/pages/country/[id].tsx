@@ -7,7 +7,7 @@ import formatNumber from "../../functions/formatNumber";
 
 import translationsContent from "../../translations/content";
 import { LangContext } from "../_app";
-import getGini from "../../functions/getGini";
+import giniToString from "../../functions/getGini";
 import { API_URL } from "../../config";
 import {
   Countries,
@@ -165,7 +165,7 @@ const Country = ({ country }: { country: CountryType }) => {
                   {translate.country.gini}
                 </div>
                 <div className={styles.details_panel_value}>
-                  {getGini(country)}
+                  {giniToString(country)}
                 </div>
               </div>
 
