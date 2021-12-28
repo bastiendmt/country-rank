@@ -1,19 +1,20 @@
-import React, { useState, useContext } from "react";
+import { ShuffleRounded } from "@material-ui/icons";
 import { useRouter } from "next/router";
+import { useContext, useState } from "react";
+import CountriesTables from "../components/CountriesTable/CountryTable";
 import Layout from "../components/Layout/Layout";
 import SearchInput from "../components/SearchInput/SearchInput";
-import CountriesTables from "../components/CountriesTable/CountryTable";
-import styles from "../styles/Home.module.css";
-import { ShuffleRounded } from "@material-ui/icons";
-
-import l10n from "../../public/locales/translation.json";
-import { LangContext } from "./_app";
 import { API_URL } from "../config";
+import styles from "../styles/Home.module.css";
+import translationsContent from "../translations/content";
+import { Countries, TranslationType } from "../types/types";
+import { LangContext } from "./_app";
 
-export default function Home({ countries }) {
+export default function Home({ countries }: { countries: Countries }) {
   const [keyword, setKeyword] = useState("");
   const router = useRouter();
   const { lang } = useContext(LangContext);
+  const translate: TranslationType = translationsContent[lang];
 
   const filteredCountry = countries.filter(
     (country) =>
@@ -22,7 +23,7 @@ export default function Home({ countries }) {
       country.subregion?.toLowerCase().includes(keyword)
   );
 
-  const onInputChange = (e) => {
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setKeyword(e.target.value.toLowerCase());
   };
@@ -34,17 +35,16 @@ export default function Home({ countries }) {
   };
 
   return (
-    <Layout>
+    <Layout title="Country rank">
       <div className={styles.input_container}>
         <div className={styles.counts}>
           <div>
-            {l10n["found_countries"]["1"][lang]} {countries.length}{" "}
-            {l10n["found_countries"]["2"][lang]}
+            {countries.length} {translate.foundCountries}
           </div>
 
           <button
             className={styles.shufflebutton}
-            title={l10n["random_country"][lang]}
+            title={translate.randomCountry}
             onClick={randomCountry}
           >
             <ShuffleRounded color="inherit" style={{ fontSize: "1.5rem" }} />
@@ -53,7 +53,7 @@ export default function Home({ countries }) {
 
         <div className={styles.input}>
           <SearchInput
-            placeholder={l10n["filter"][lang]}
+            placeholder={translate.filter}
             onChange={onInputChange}
           />
         </div>
@@ -66,7 +66,7 @@ export default function Home({ countries }) {
 
 export const getStaticProps = async () => {
   const res = await fetch(`${API_URL}/all`);
-  const countries = await res.json();
+  const countries: Countries = await res.json();
 
   return {
     props: {
