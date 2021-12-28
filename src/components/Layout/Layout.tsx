@@ -1,27 +1,37 @@
-import React, { useContext, useState, useEffect, useCallback } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Head from "next/head";
 import styles from "./Layout.module.css";
 import Link from "next/link";
 import { Brightness6Rounded, LanguageRounded } from "@material-ui/icons";
 
-import l10n from "../../../public/locales/translation.json";
 import { LangContext } from "../../pages/_app";
+import translationsContent from "../../translations/content";
+import { TranslationType } from "../../types/types";
 
-const Layout = ({ children, title = "Country rank" }) => {
+interface Props {
+  title: string;
+}
+
+const Layout: React.FC<Props> = ({ children, title = "Country rank" }) => {
   const [theme, setTheme] = useState("light");
   const { lang, switchLanguage } = useContext(LangContext);
+  const translate: TranslationType = translationsContent[lang];
 
   useEffect(() => {
-    document.documentElement.setAttribute(
-      "data-theme",
-      localStorage.getItem("theme")
-    );
-    if (localStorage.getItem("theme")) {
-      setTheme(localStorage.getItem("theme"));
+    const currentTheme = localStorage.getItem("theme") as string;
+    document.documentElement.setAttribute("data-theme", currentTheme);
+    if (theme) {
+      setTheme(currentTheme);
     } else {
       localStorage.setItem("theme", theme);
     }
   }, [theme]);
+
+  const saveTheme = (theme: string) => {
+    setTheme(theme);
+    localStorage.setItem("theme", theme);
+    document.documentElement.setAttribute("data-theme", theme);
+  };
 
   const switchTheme = () => {
     if (theme === "light") {
@@ -29,12 +39,6 @@ const Layout = ({ children, title = "Country rank" }) => {
     } else {
       saveTheme("light");
     }
-  };
-
-  const saveTheme = (theme) => {
-    setTheme(theme);
-    localStorage.setItem("theme", theme);
-    document.documentElement.setAttribute("data-theme", theme);
   };
 
   return (
@@ -81,7 +85,7 @@ const Layout = ({ children, title = "Country rank" }) => {
         <button
           className={styles.theme_switcher}
           onClick={switchTheme}
-          title={l10n["switch_theme"][lang]}
+          title={translate.switchTheme}
         >
           <Brightness6Rounded style={{ fontSize: "1.5rem" }} />
         </button>
@@ -89,7 +93,7 @@ const Layout = ({ children, title = "Country rank" }) => {
         <button
           className={styles.language_switcher}
           onClick={switchLanguage}
-          title={l10n["switch_language"][lang]}
+          title={translate.switchLanguage}
         >
           <LanguageRounded style={{ fontSize: "1.5rem" }} />
         </button>

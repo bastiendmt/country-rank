@@ -1,12 +1,22 @@
 import React, { useState, useCallback, useMemo, useEffect } from "react";
 import "../styles/globals.css";
 
-export const LangContext = React.createContext({
+interface ContextInterface {
+  lang: "en" | "fr" | string;
+  switchLanguage: () => void;
+}
+
+export const LangContext = React.createContext<ContextInterface>({
   lang: "en",
   switchLanguage: () => {},
 });
 
-function MyApp({ Component, pageProps }) {
+interface Props {
+  Component: React.FC;
+  pageProps: any;
+}
+
+const MyApp = ({ Component, pageProps }: Props) => {
   const [lang, setLang] = useState("en");
 
   const switchLanguage = useCallback(function () {
@@ -32,6 +42,6 @@ function MyApp({ Component, pageProps }) {
       <Component {...pageProps} />
     </LangContext.Provider>
   );
-}
+};
 
 export default MyApp;

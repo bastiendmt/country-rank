@@ -1,12 +1,14 @@
 import { TranslationType } from "../types/types";
 
 const translations: {
-  "en-US": TranslationType;
-  "fr-FR": TranslationType;
+  "en": TranslationType;
+  "fr": TranslationType;
+  [key : string] : TranslationType;
 } = {
-  "en-US": {
+  "en": {
     randomCountry: "Random country",
     switchTheme: "Change theme",
+    switchLanguage : "Switch language",
     filter: "Filter by name, Region or SubRegion",
     foundCountries: "Found",
     sort: {
@@ -29,9 +31,10 @@ const translations: {
       area: "Area",
     },
   },
-  "fr-FR": {
+  "fr": {
     randomCountry: "Pays aléatoire",
     switchTheme: "Changer de thème",
+    switchLanguage : "Changer de langue",
     filter: "Filtrer par nom ou par continent",
     foundCountries: "Trouvés",
     sort: {
@@ -45,7 +48,7 @@ const translations: {
       capital: "Capitale",
       subregion: "Continent",
       languages: "Languages",
-      currencies: "Devices",
+      currencies: "Devises",
       nativeName: "Nom natif",
       gini: "Gini",
       neighbouringCountries: "Pays voisins",

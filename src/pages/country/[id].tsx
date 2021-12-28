@@ -5,7 +5,6 @@ import Layout from "../../components/Layout/Layout";
 import styles from "./Country.module.css";
 import formatNumber from "../../functions/formatNumber";
 
-import l10n from "../../../public/locales/translation.json";
 import translationsContent from "../../translations/content";
 import { LangContext } from "../_app";
 import getGini from "../../functions/getGini";
@@ -15,7 +14,6 @@ import {
   Country as CountryType,
   TranslationType,
 } from "../../types/types";
-import { useRouter } from "next/router";
 
 const getCountry = async (id: String): Promise<CountryType> => {
   const res = await fetch(`${API_URL}/alpha/${id}`);
@@ -25,11 +23,9 @@ const getCountry = async (id: String): Promise<CountryType> => {
 };
 
 const Country = ({ country }: { country: CountryType }) => {
-  const { locale } = useRouter();
-  const translate: TranslationType = translationsContent[locale];
-
   const [borders, setBorders] = useState<CountryType[]>([]);
   const { lang } = useContext(LangContext);
+  const translate: TranslationType = translationsContent[lang];
 
   const getBorders = useCallback(async () => {
     if (!country.borders) return;
@@ -86,7 +82,7 @@ const Country = ({ country }: { country: CountryType }) => {
               />
 
               <h1 className={styles.overview_name}>
-                {country.translations[lang] || country.name.common}
+                {country.translations.lang || country.name.common}
               </h1>
               <div className={styles.overview_region}>{country.region}</div>
 

@@ -38,7 +38,7 @@ export type Country = {
     [key: string]: string;
   };
   translations: {
-    [key in keyof typeof translationsLanguages]: {
+    [key: string]: {
       official: string;
       common: string;
     };
@@ -119,6 +119,7 @@ enum translationsLanguages {
 export type TranslationType = {
   randomCountry: string;
   switchTheme: string;
+  switchLanguage: string;
   filter: string;
   foundCountries: string;
   sort: {
