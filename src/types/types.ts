@@ -13,7 +13,7 @@ export type Country = {
   };
   tld: string[];
   cca2: string;
-  ccn3: number;
+  ccn3: string;
   cca3: string;
   cioc: string;
   independent: Boolean;
@@ -45,7 +45,7 @@ export type Country = {
   };
   latlng: [number, number];
   landlocked: Boolean;
-  borders: string[];
+  borders?: string[];
   area: number;
   demonyms: {
     eng: {
@@ -97,7 +97,7 @@ export type TranslationType = {
   switchLanguage: string;
   filter: string;
   foundCountries: string;
-  giniDefinition : string;
+  giniDefinition: string;
   sort: {
     name: string;
     population: string;
