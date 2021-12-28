@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./CountriesTable.module.css";
 import formatNumber from "../../functions/formatNumber";
-import getGini from "../../functions/getGini";
+import getGini, { formatGini } from "../../functions/getGini";
 import {
   KeyboardArrowDownRounded,
   KeyboardArrowUpRounded,
@@ -19,28 +19,54 @@ const orderBy = (
   direction: string | null
 ) => {
   //Sort nested name
-  if (value === "name") {
-    if (direction === "asc") {
-      return [...countries].sort((a, b) =>
-        a[value].common > b[value].common ? 1 : -1
-      );
-    }
-
-    if (direction === "desc") {
-      return [...countries].sort((a, b) =>
-        a[value].common > b[value].common ? -1 : 1
-      );
-    }
+  let sortDirection = 1;
+  if (direction === "desc") {
+    sortDirection = -1;
   }
+
+  switch (value) {
+    case "name":
+      return [...countries].sort((a, b) =>
+        a.name.common > b.name.common ? sortDirection : -sortDirection
+      );
+    case "population":
+      return [...countries].sort((a, b) =>
+        a.population > b.population ? sortDirection : -sortDirection
+      );
+    case "gini":
+      return [...countries].sort((a, b) =>
+        formatGini(a.gini) > formatGini(b.gini) ? sortDirection : -sortDirection
+      );
+    case "area":
+      return [...countries].sort((a, b) =>
+        a.area > b.area ? sortDirection : -sortDirection
+      );
+    default:
+      return countries;
+  }
+
+  // if (value === "name") {
+  //   if (direction === "asc") {
+  //     return [...countries].sort((a, b) =>
+  //       a[value].common > b[value].common ? 1 : -1
+  //     );
+  //   }
+
+  //   if (direction === "desc") {
+  //     return [...countries].sort((a, b) =>
+  //       a[value].common > b[value].common ? -1 : 1
+  //     );
+  //   }
+  // }
 
   // Sort with non nested population & area
-  if (direction === "asc") {
-    return [...countries].sort((a, b) => (a[value] > b[value] ? 1 : -1));
-  }
+  // if (direction === "asc") {
+  //   return [...countries].sort((a, b) => (a[value] > b[value] ? 1 : -1));
+  // }
 
-  if (direction === "desc") {
-    return [...countries].sort((a, b) => (a[value] > b[value] ? -1 : 1));
-  }
+  // if (direction === "desc") {
+  //   return [...countries].sort((a, b) => (a[value] > b[value] ? -1 : 1));
+  // }
 
   return countries;
 };
@@ -81,7 +107,7 @@ const CountriesTables = ({ countries }: { countries: Countries }) => {
     }
   };
 
-  const setValueAndDirection = (value : string) => {
+  const setValueAndDirection = (value: string) => {
     switchDirection();
     setValue(value);
   };
