@@ -64,7 +64,7 @@ const SortArrow = ({ direction }: { direction: string }) => {
 };
 
 const CountriesTables = ({ countries }: { countries: Countries }) => {
-  const [direction, setDirection] = useState<string | null | undefined>("");
+  const [direction, setDirection] = useState<string>("");
   const [value, setValue] = useState("");
   const { lang } = useContext(LangContext);
   const translate: TranslationType = translationsContent[lang];
@@ -77,7 +77,7 @@ const CountriesTables = ({ countries }: { countries: Countries }) => {
     } else if (direction === "desc") {
       setDirection("asc");
     } else {
-      setDirection(null);
+      setDirection("");
     }
   };
 
