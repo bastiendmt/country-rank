@@ -122,6 +122,7 @@ export type TranslationType = {
   switchLanguage: string;
   filter: string;
   foundCountries: string;
+  giniDefinition : string;
   sort: {
     name: string;
     population: string;

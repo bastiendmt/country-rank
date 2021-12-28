@@ -1,16 +1,18 @@
 import { TranslationType } from "../types/types";
 
 const translations: {
-  "en": TranslationType;
-  "fr": TranslationType;
-  [key : string] : TranslationType;
+  en: TranslationType;
+  fr: TranslationType;
+  [key: string]: TranslationType;
 } = {
-  "en": {
+  en: {
     randomCountry: "Random country",
     switchTheme: "Change theme",
-    switchLanguage : "Switch language",
+    switchLanguage: "Switch language",
     filter: "Filter by name, Region or SubRegion",
-    foundCountries: "Found",
+    foundCountries: "countries found",
+    giniDefinition:
+      "The Gini coefficient measures the inequality among values of a frequency distribution (for example, levels of income). A Gini coefficient of zero expresses perfect equality, where all values.",
     sort: {
       name: "Name",
       population: "Population",
@@ -31,12 +33,14 @@ const translations: {
       area: "Area",
     },
   },
-  "fr": {
+  fr: {
     randomCountry: "Pays aléatoire",
     switchTheme: "Changer de thème",
-    switchLanguage : "Changer de langue",
+    switchLanguage: "Changer de langue",
     filter: "Filtrer par nom ou par continent",
-    foundCountries: "Trouvés",
+    foundCountries: "pays trouvés",
+    giniDefinition:
+      "Le coefficient de Gini, ou indice de Gini, est une mesure statistique permettant de rendre compte de la répartition d'une variable (salaire, revenus, patrimoine) au sein d'une population. Autrement dit, il mesure le niveau d'inégalité de la répartition d'une variable dans la population.",
     sort: {
       name: "Nom",
       population: "Population",

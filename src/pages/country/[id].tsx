@@ -161,7 +161,7 @@ const Country = ({ country }: { country: CountryType }) => {
               </div>
 
               <div className={styles.details_panel_row}>
-                <div className={styles.details_panel_label}>
+                <div className={styles.details_panel_label} title={translate.giniDefinition}>
                   {translate.country.gini}
                 </div>
                 <div className={styles.details_panel_value}>
