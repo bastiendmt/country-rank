@@ -1,3 +1,4 @@
+import { AppProps } from "next/app";
 import React, { useState, useCallback, useMemo, useEffect } from "react";
 import "../styles/globals.css";
 
@@ -11,12 +12,7 @@ export const LangContext = React.createContext<ContextInterface>({
   switchLanguage: () => {},
 });
 
-interface Props {
-  Component: React.FC;
-  pageProps: any;
-}
-
-const MyApp = ({ Component, pageProps }: Props) => {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   const [lang, setLang] = useState("en");
 
   const switchLanguage = useCallback(function () {
