@@ -91,31 +91,6 @@ export type Country = {
   };
 };
 
-enum translationsLanguages {
-  ara,
-  ces,
-  cym,
-  deu,
-  est,
-  fin,
-  fra,
-  hrv,
-  hun,
-  ita,
-  jpn,
-  kor,
-  nld,
-  per,
-  pol,
-  por,
-  rus,
-  slk,
-  spa,
-  swe,
-  urd,
-  zho,
-}
-
 export type TranslationType = {
   randomCountry: string;
   switchTheme: string;
