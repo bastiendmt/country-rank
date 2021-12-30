@@ -110,6 +110,13 @@ const Country = ({ country }: { country: CountryType }) => {
             </div>
           </div>
 
+          <div className={styles.container_botton}>
+            <div className={styles.details_map}>
+              <h2 className={styles.details_panel_heading}>Map</h2>
+              <Map coordinates={country.latlng} />
+            </div>
+          </div>
+
           <div className={styles.container_right}>
             <div className={styles.details_panel}>
               <h2 className={styles.details_panel_heading}>
@@ -212,11 +219,6 @@ const Country = ({ country }: { country: CountryType }) => {
                 </div>
               )}
             </div>
-          </div>
-
-          <div className={styles.container_botton}>
-            <h2 className={styles.details_panel_heading}>Map</h2>
-            <Map coordinates={country.latlng}/>
           </div>
         </div>
       </Layout>

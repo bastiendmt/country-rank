@@ -108,6 +108,11 @@
   border-radius: 8px;
 }
 
+.details_map {
+  padding: 0 20px 0 20px;
+  font-size: 20px;
+}
+
 @media screen and (min-width: 720px) {
   .container {
     display: grid;
@@ -121,5 +126,10 @@
 
   .container_right {
     grid-column: 5 / span 8;
+    grid-row: 1 / span 4;
+  }
+
+  .container_botton {
+    grid-column: 1 / span 4;
   }
 }
