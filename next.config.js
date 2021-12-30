@@ -7,7 +7,7 @@ const nextConfig = {
   images: {
     domains: ["restcountries.com", "upload.wikimedia.org", "flagcdn.com"],
   },
-  swcMinify: true,
+  swcMinify: false,
 };
 
 module.exports = nextConfig;
