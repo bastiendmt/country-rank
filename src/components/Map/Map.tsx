@@ -1,5 +1,7 @@
 import { useRef, useEffect } from "react";
 import mapboxgl from "mapbox-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
+import styles from "./Map.module.css";
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoic3RhcnJ4cyIsImEiOiJjam9lZGppdGsxaDgxM2ttcmpncXNtMnpoIn0.7SJLcJzoWrgNDktWnAmTbQ";
@@ -7,23 +9,25 @@ mapboxgl.accessToken =
 const Map = ({ coordinates }: { coordinates: [number, number] }) => {
   const mapContainer = useRef<any>(null);
   const map = useRef<any>(null);
-  const [lat, lng] = [coordinates[0], coordinates[1]];
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v11",
-      center: [lng, lat],
+      center: [coordinates[1], coordinates[0]],
       zoom: 3,
     });
   });
 
-  return (
-    <div>
-      <div ref={mapContainer} className="map-container" />
-    </div>
-  );
+  useEffect(() => {
+    map.current.flyTo({
+      center: [coordinates[1], coordinates[0]],
+      essential: true,
+    });
+  }, [coordinates]);
+
+  return <div ref={mapContainer} className={styles.map_container} />;
 };
 
 export default Map;
