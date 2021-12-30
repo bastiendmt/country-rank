@@ -102,6 +102,12 @@
   gap: 24px;
 }
 
+.container_botton {
+  background-color: var(--background-color-light);
+  box-shadow: var(--box-shadow);
+  border-radius: 8px;
+}
+
 @media screen and (min-width: 720px) {
   .container {
     display: grid;

@@ -14,6 +14,7 @@ import {
   Country as CountryType,
   TranslationType,
 } from "../../types/types";
+import Map from "../../components/Map/Map";
 
 const getCountry = async (id: String): Promise<CountryType> => {
   const res = await fetch(`${API_URL}/alpha/${id}`);
@@ -161,7 +162,10 @@ const Country = ({ country }: { country: CountryType }) => {
               </div>
 
               <div className={styles.details_panel_row}>
-                <div className={styles.details_panel_label} title={translate.giniDefinition}>
+                <div
+                  className={styles.details_panel_label}
+                  title={translate.giniDefinition}
+                >
                   {translate.country.gini}
                 </div>
                 <div className={styles.details_panel_value}>
@@ -208,6 +212,11 @@ const Country = ({ country }: { country: CountryType }) => {
                 </div>
               )}
             </div>
+          </div>
+
+          <div className={styles.container_botton}>
+            <h2 className={styles.details_panel_heading}>Map</h2>
+            <Map coordinates={country.latlng}/>
           </div>
         </div>
       </Layout>
