@@ -12,22 +12,24 @@ interface Props {
   title: string;
 }
 
+type Theme = "light" | "dark";
+
 const Layout: React.FC<Props> = ({ children, title = "Country rank" }) => {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState<Theme>("light");
   const { lang, switchLanguage } = useContext(LangContext);
   const translate: TranslationType = translationsContent[lang];
 
   useEffect(() => {
-    const currentTheme = localStorage.getItem("theme") as string;
+    const currentTheme = localStorage.getItem("theme") as Theme;
     document.documentElement.setAttribute("data-theme", currentTheme);
-    if (theme) {
+    if (currentTheme) {
       setTheme(currentTheme);
     } else {
       localStorage.setItem("theme", theme);
     }
   }, [theme]);
 
-  const saveTheme = (theme: string) => {
+  const saveTheme = (theme: Theme) => {
     setTheme(theme);
     localStorage.setItem("theme", theme);
     document.documentElement.setAttribute("data-theme", theme);
