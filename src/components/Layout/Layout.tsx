@@ -53,6 +53,8 @@ const Layout: React.FC<Props> = ({ children, title = "Country rank" }) => {
         <meta name="description" content="Country ranking" />
         <meta name="keywords" content="rank, country, infos, stats" />
         <meta name="author" content="Bastien Dumont" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/apple-icon.png"></link>
       </Head>
 
       <header className={styles.header}>

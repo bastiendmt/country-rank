@@ -1,0 +1,20 @@
+{
+  "short_name": "Country rank",
+  "description": "Country rank displays countries in list and details about a country such as its population, languages, neighboors...",
+  "theme_color": "#21b6b7",
+  "background_color": "#252329",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/favicon.ico"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "List",
+      "url": "/"
+    },
+    { "name": "Random country", "url": "/country/random" }
+  ]
+}
