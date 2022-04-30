@@ -3,13 +3,13 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./CountriesTable.module.css";
 import formatNumber from "../../functions/formatNumber";
-import giniToString, { formatGini } from "../../functions/getGini";
+import { giniToString, formatGini } from "../../functions/getGini";
 import {
   KeyboardArrowDownRounded,
   KeyboardArrowUpRounded,
 } from "@material-ui/icons";
 
-import translationsContent from "../../translations/content";
+import translationsContent from "../../translations/translations";
 import { LangContext } from "../../pages/_app";
 import { Countries, TranslationType } from "../../types/types";
 
@@ -44,31 +44,6 @@ const orderBy = (
     default:
       return countries;
   }
-
-  // if (value === "name") {
-  //   if (direction === "asc") {
-  //     return [...countries].sort((a, b) =>
-  //       a[value].common > b[value].common ? 1 : -1
-  //     );
-  //   }
-
-  //   if (direction === "desc") {
-  //     return [...countries].sort((a, b) =>
-  //       a[value].common > b[value].common ? -1 : 1
-  //     );
-  //   }
-  // }
-
-  // Sort with non nested population & area
-  // if (direction === "asc") {
-  //   return [...countries].sort((a, b) => (a[value] > b[value] ? 1 : -1));
-  // }
-
-  // if (direction === "desc") {
-  //   return [...countries].sort((a, b) => (a[value] > b[value] ? -1 : 1));
-  // }
-
-  return countries;
 };
 
 const SortArrow = ({ direction }: { direction: string }) => {
@@ -89,11 +64,11 @@ const SortArrow = ({ direction }: { direction: string }) => {
   }
 };
 
-const CountriesTables = ({ countries }: { countries: Countries }) => {
+const CountriesTable = ({ countries }: { countries: Countries }) => {
   const [direction, setDirection] = useState<string>("");
   const [value, setValue] = useState("");
-  const { lang } = useContext(LangContext);
-  const translate: TranslationType = translationsContent[lang];
+  const { language } = useContext(LangContext);
+  const translate: TranslationType = translationsContent[language];
 
   const orderedCountry = orderBy(countries, value, direction);
 
@@ -107,9 +82,9 @@ const CountriesTables = ({ countries }: { countries: Countries }) => {
     }
   };
 
-  const setValueAndDirection = (value: string) => {
+  const setValueAndDirection = (sortKey: string) => {
     switchDirection();
-    setValue(value);
+    setValue(sortKey);
   };
 
   return (
@@ -168,7 +143,7 @@ const CountriesTables = ({ countries }: { countries: Countries }) => {
               />
             </div>
             <div className={styles.name}>
-              {country.translations[lang] || country.name.common}
+              {country.translations[language] || country.name.common}
             </div>
 
             <div className={styles.population}>
@@ -185,4 +160,4 @@ const CountriesTables = ({ countries }: { countries: Countries }) => {
   );
 };
 
-export default CountriesTables;
+export default CountriesTable;

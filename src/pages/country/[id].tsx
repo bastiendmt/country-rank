@@ -5,9 +5,9 @@ import Layout from "../../components/Layout/Layout";
 import styles from "./Country.module.css";
 import formatNumber from "../../functions/formatNumber";
 
-import translationsContent from "../../translations/content";
+import translationsContent from "../../translations/translations";
 import { LangContext } from "../_app";
-import giniToString from "../../functions/getGini";
+import { giniToString } from "../../functions/getGini";
 import { API_URL } from "../../config";
 import {
   Countries,
@@ -16,26 +16,23 @@ import {
 } from "../../types/types";
 import Map from "../../components/Map/Map";
 
-const getCountry = async (id: String): Promise<CountryType> => {
+const getCountry = async (id: string): Promise<CountryType> => {
   const res = await fetch(`${API_URL}/alpha/${id}`);
-  const data = await res.json();
-  const country = data[0];
+  const country: CountryType = (await res.json())[0];
   return country;
 };
 
 const Country = ({ country }: { country: CountryType }) => {
   const [borders, setBorders] = useState<CountryType[]>([]);
-  const { lang } = useContext(LangContext);
-  const translate: TranslationType = translationsContent[lang];
+  const { language } = useContext(LangContext);
+  const translate: TranslationType = translationsContent[language];
 
   const getBorders = useCallback(async () => {
     if (!country.borders) return;
-
-    const borders = await Promise.all(
+    const bordersData = await Promise.all(
       country.borders.map((border) => getCountry(border))
     );
-
-    setBorders(borders);
+    setBorders(bordersData);
   }, [country.borders]);
 
   useEffect(() => {
@@ -52,7 +49,6 @@ const Country = ({ country }: { country: CountryType }) => {
 
   const getLanguages = () => {
     if (!country.languages) return "-";
-
     return Object.keys(country.languages)
       .map((lang) => country.languages[lang])
       .join(", ");
@@ -60,7 +56,6 @@ const Country = ({ country }: { country: CountryType }) => {
 
   const getNativeName = () => {
     if (!country.name.nativeName) return "-";
-
     return (
       Object.keys(country.name.nativeName)
         // first common native name
@@ -210,7 +205,7 @@ const Country = ({ country }: { country: CountryType }) => {
                             height={150}
                           />
                           <div className={styles.details_panel_name}>
-                            {translations[lang] || name.common}
+                            {translations[language] || name.common}
                           </div>
                         </div>
                       </Link>

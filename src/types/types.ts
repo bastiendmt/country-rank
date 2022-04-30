@@ -16,9 +16,9 @@ export type Country = {
   ccn3: string;
   cca3: string;
   cioc: string;
-  independent: Boolean;
+  independent: boolean;
   status: string;
-  unMember: Boolean;
+  unMember: boolean;
   currencies: {
     [key: string]: {
       name: string;
@@ -34,7 +34,6 @@ export type Country = {
   region: string;
   subregion: string;
   languages: {
-    //Varying
     [key: string]: string;
   };
   translations: {
@@ -44,7 +43,7 @@ export type Country = {
     };
   };
   latlng: [number, number];
-  landlocked: Boolean;
+  landlocked: boolean;
   borders?: string[];
   area: number;
   demonyms: {

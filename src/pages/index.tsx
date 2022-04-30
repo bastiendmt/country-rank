@@ -1,20 +1,20 @@
 import { ShuffleRounded } from "@material-ui/icons";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
-import CountriesTables from "../components/CountriesTable/CountryTable";
+import CountriesTable from "../components/CountriesTable/CountriesTable";
 import Layout from "../components/Layout/Layout";
 import SearchInput from "../components/SearchInput/SearchInput";
 import { API_URL } from "../config";
 import styles from "../styles/Home.module.css";
-import translationsContent from "../translations/content";
+import translationsContent from "../translations/translations";
 import { Countries, TranslationType } from "../types/types";
 import { LangContext } from "./_app";
 
 const Index = ({ countries }: { countries: Countries }) => {
   const [keyword, setKeyword] = useState("");
   const router = useRouter();
-  const { lang } = useContext(LangContext);
-  const translate: TranslationType = translationsContent[lang];
+  const { language } = useContext(LangContext);
+  const translate: TranslationType = translationsContent[language];
 
   const filteredCountry = countries.filter(
     (country) =>
@@ -59,7 +59,7 @@ const Index = ({ countries }: { countries: Countries }) => {
         </div>
       </div>
 
-      <CountriesTables countries={filteredCountry} />
+      <CountriesTable countries={filteredCountry} />
     </Layout>
   );
 };

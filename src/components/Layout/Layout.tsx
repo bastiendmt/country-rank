@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Brightness6Rounded, LanguageRounded } from "@material-ui/icons";
 
 import { LangContext } from "../../pages/_app";
-import translationsContent from "../../translations/content";
+import translationsContent from "../../translations/translations";
 import { TranslationType } from "../../types/types";
 
 interface Props {
@@ -16,8 +16,8 @@ type Theme = "light" | "dark";
 
 const Layout: React.FC<Props> = ({ children, title = "Country rank" }) => {
   const [theme, setTheme] = useState<Theme>("light");
-  const { lang, switchLanguage } = useContext(LangContext);
-  const translate: TranslationType = translationsContent[lang];
+  const { language, switchLanguage } = useContext(LangContext);
+  const translate: TranslationType = translationsContent[language];
 
   useEffect(() => {
     const currentTheme = localStorage.getItem("theme") as Theme;
@@ -29,10 +29,10 @@ const Layout: React.FC<Props> = ({ children, title = "Country rank" }) => {
     }
   }, [theme]);
 
-  const saveTheme = (theme: Theme) => {
-    setTheme(theme);
-    localStorage.setItem("theme", theme);
-    document.documentElement.setAttribute("data-theme", theme);
+  const saveTheme = (newTheme: Theme) => {
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
   };
 
   const switchTheme = () => {
