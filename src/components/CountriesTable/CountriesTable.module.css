@@ -82,14 +82,21 @@
 
 .flag {
   flex: 1;
-  margin-right: 16px;
-}
-
-.flag {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 16px;
 }
+
+.flag img {
+  width: 100%;
+  border-radius: 2px;
+}
+
+.mobileFlag {
+  flex: 1;
+}
+
 .name,
 .population,
 .area,
@@ -97,9 +104,10 @@
   align-self: center;
 }
 
-.flag img {
-  width: 100%;
-  border-radius: 2px;
+@media screen and (min-width: 720px) {
+  .mobileFlag {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 720px) {

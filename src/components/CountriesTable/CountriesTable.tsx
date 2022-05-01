@@ -142,6 +142,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
                 height={40}
               />
             </div>
+            <div className={styles.mobileFlag}>{country.flag}</div>
             <div className={styles.name}>
               {country.translations[language] || country.name.common}
             </div>
