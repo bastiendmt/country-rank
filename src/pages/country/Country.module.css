@@ -62,6 +62,10 @@
   color: var(--text-color-secondary);
 }
 
+.details_panel_value {
+  text-align: right;
+}
+
 .details_panel_borders,
 .details_panel_no_borders {
   padding: 24px;
