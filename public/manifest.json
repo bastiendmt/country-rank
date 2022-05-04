@@ -6,10 +6,18 @@
   "background_color": "#252329",
   "scope": "/",
   "start_url": "/",
+  "display": "standalone",
   "icons": [
     {
       "src": "/favicon.ico"
-    }
+    },
+    {
+      "src": "/icon192x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    },
+    { "src": "/icon512x512.png", "type": "image/png", "sizes": "512x512" }
   ],
   "shortcuts": [
     {
