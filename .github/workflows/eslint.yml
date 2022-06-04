@@ -22,10 +22,7 @@ jobs:
   eslint:
     name: Run eslint scanning
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      security-events: write
-      actions: read
+    permissions: write-all
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
