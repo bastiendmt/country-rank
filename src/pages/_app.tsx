@@ -3,20 +3,20 @@ import React, { useState, useCallback, useMemo, useEffect } from "react";
 import "../styles/globals.css";
 
 interface ContextInterface {
-  language: "en" | "fr" | string;
+  language: "eng" | "fra" | string;
   switchLanguage: () => void;
 }
 
 export const LangContext = React.createContext<ContextInterface>({
-  language: "en",
+  language: "eng",
   switchLanguage: Function,
 });
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  const [language, setLang] = useState("en");
+  const [language, setLang] = useState("eng");
 
   const switchLanguage = useCallback(function () {
-    setLang((l) => (l === "en" ? "fr" : "en"));
+    setLang((l) => (l === "eng" ? "fra" : "eng"));
   }, []);
 
   useEffect(() => {

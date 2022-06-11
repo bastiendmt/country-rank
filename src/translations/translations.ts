@@ -1,11 +1,11 @@
 import { TranslationType } from "../types/types";
 
 const translations: {
-  en: TranslationType;
-  fr: TranslationType;
+  eng: TranslationType;
+  fra: TranslationType;
   [key: string]: TranslationType;
 } = {
-  en: {
+  eng: {
     randomCountry: "Random country",
     switchTheme: "Change theme",
     switchLanguage: "Switch language",
@@ -33,7 +33,7 @@ const translations: {
       area: "Area",
     },
   },
-  fr: {
+  fra: {
     randomCountry: "Pays aléatoire",
     switchTheme: "Changer de thème",
     switchLanguage: "Changer de langue",

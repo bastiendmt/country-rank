@@ -78,7 +78,7 @@ const Country = ({ country }: { country: CountryType }) => {
               />
 
               <h1 className={styles.overview_name}>
-                {country.translations.lang || country.name.common}
+                {country.translations[language]?.common || country.name.common}
               </h1>
               <div className={styles.overview_region}>{country.region}</div>
 
@@ -205,7 +205,7 @@ const Country = ({ country }: { country: CountryType }) => {
                             height={150}
                           />
                           <div className={styles.details_panel_name}>
-                            {translations[language] || name.common}
+                            {translations[language]?.common || name.common}
                           </div>
                         </div>
                       </Link>
