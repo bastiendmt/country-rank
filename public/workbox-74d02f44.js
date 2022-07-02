@@ -526,6 +526,7 @@ define(["exports"], function (exports) {
 
   const isInstance = (
     object, // Need the general type to do the check later.
+
     expectedClass,
     details
   ) => {
