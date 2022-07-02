@@ -92,7 +92,7 @@ define(["./workbox-74d02f44"], function (workbox) {
       cacheName: "start-url",
       plugins: [
         {
-          cacheWillUpdate: async ({ request, response, event, state }) => {
+          cacheWillUpdate: async ({ _request, response, _event, _state }) => {
             if (response && response.type === "opaqueredirect") {
               return new Response(response.body, {
                 status: 200,
