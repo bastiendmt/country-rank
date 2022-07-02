@@ -1,8 +1,11 @@
 # Project
+
 Running demo [here](https://country-rank.bastiendmt.vercel.app/)
 
 This website is displaying countries in list and details about a country such as its population, languages, neighboors...
-## Features : 
+
+## Features :
+
 - getting countries from an API
 - responsive layout
 - search information
@@ -13,6 +16,7 @@ This website is displaying countries in list and details about a country such as
 - select a random country
 
 ## Preview
+
 **Countries list**
 ![Countries list](/preview/list.png)
 
@@ -23,6 +27,7 @@ This website is displaying countries in list and details about a country such as
 ![Performance](/preview/performances.png)
 
 ## About
+
 This project was made with of tutorial made by [Thu Nghiem](https://github.com/nghiemthu)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
