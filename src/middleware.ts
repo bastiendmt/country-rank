@@ -1,6 +1,6 @@
 import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
-import { API_URL } from "../../config";
-import { Countries } from "../../types/types";
+import { API_URL } from "./config";
+import { Countries } from "./types/types";
 
 const randomCountry = (countries: Countries) => {
   const random = Math.floor(Math.random() * countries.length);
@@ -17,3 +17,7 @@ export async function middleware(req: NextRequest, _ev: NextFetchEvent) {
   }
   return NextResponse.next();
 }
+
+export const config = {
+  matcher: ["/country/:country*"],
+};
