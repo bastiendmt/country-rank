@@ -20,7 +20,12 @@
     "react/react-in-jsx-scope": "off",
     "prettier/prettier": "error",
     "linebreak-style": ["error", "unix"],
-    "semi": ["error", "always"]
+    "semi": ["error", "always"],
+    "sort-keys": ["error", "asc", { "minKeys": 3 }],
+    "@typescript-eslint/member-ordering": [
+      "error",
+      { "default": { "memberTypes": "never", "order": "alphabetically" } }
+    ]
   },
   "settings": {
     "react": {

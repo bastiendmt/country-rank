@@ -13,9 +13,9 @@ const Map = ({ coordinates }: { coordinates: [number, number] }) => {
   useEffect(() => {
     if (map.current) return; // initialize map only once
     map.current = new mapboxgl.Map({
+      center: [coordinates[1], coordinates[0]],
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [coordinates[1], coordinates[0]],
       zoom: 3,
     });
   });

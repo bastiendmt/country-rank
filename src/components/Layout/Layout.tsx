@@ -9,8 +9,8 @@ import translationsContent from '../../translations/translations';
 import { TranslationType } from '../../types/types';
 
 interface Props {
-  title: string;
   children: React.ReactNode;
+  title: string;
 }
 
 type Theme = 'light' | 'dark';
