@@ -9,7 +9,7 @@ import { Country } from '../types/types';
 export const giniToString = (object: Country): string => {
   if (!object.gini) return '-';
 
-  return object.gini[Object.keys(object.gini)[0]] + ' %';
+  return `${object.gini[Object.keys(object.gini)[0]]} %`;
 };
 
 // Get gini from latest year. If no value returns 0

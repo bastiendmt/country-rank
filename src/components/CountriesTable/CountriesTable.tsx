@@ -1,13 +1,13 @@
 import React, { useState, useContext } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import styles from './CountriesTable.module.css';
-import formatNumber from '../../functions/formatNumber';
-import { giniToString, formatGini } from '../../functions/getGini';
 import {
   KeyboardArrowDownRounded,
   KeyboardArrowUpRounded,
 } from '@material-ui/icons';
+import styles from './CountriesTable.module.css';
+import formatNumber from '../../functions/formatNumber';
+import { giniToString, formatGini } from '../../functions/getGini';
 
 import translationsContent from '../../translations/translations';
 import { LangContext } from '../../pages/_app';
@@ -16,9 +16,10 @@ import { Countries, TranslationType } from '../../types/types';
 const orderBy = (
   countries: Countries,
   value: string,
+  // TODO type direction
   direction: string | null,
 ) => {
-  //Sort nested name
+  // Sort nested name
   let sortDirection = 1;
   if (direction === 'desc') {
     sortDirection = -1;
@@ -49,7 +50,7 @@ const orderBy = (
 };
 
 const SortArrow = ({ direction }: { direction: string }) => {
-  if (!direction) return <></>;
+  if (!direction) return null;
 
   if (direction === 'desc') {
     return (
@@ -57,13 +58,12 @@ const SortArrow = ({ direction }: { direction: string }) => {
         <KeyboardArrowDownRounded color="inherit" />
       </div>
     );
-  } else {
-    return (
-      <div className={styles.heading_arrow}>
-        <KeyboardArrowUpRounded color="inherit" />
-      </div>
-    );
   }
+  return (
+    <div className={styles.heading_arrow}>
+      <KeyboardArrowUpRounded color="inherit" />
+    </div>
+  );
 };
 
 const CountriesTable = ({ countries }: { countries: Countries }) => {
@@ -92,8 +92,9 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
   return (
     <div>
       <div className={styles.heading}>
-        <div className={styles.heading_flag}></div>
+        <div className={styles.heading_flag} />
         <button
+          type="button"
           className={styles.heading_name}
           onClick={() => setValueAndDirection('name')}
         >
@@ -102,6 +103,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
         </button>
 
         <button
+          type="button"
           className={styles.heading_population}
           onClick={() => setValueAndDirection('population')}
         >
@@ -110,6 +112,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
         </button>
 
         <button
+          type="button"
           className={styles.heading_area}
           onClick={() => setValueAndDirection('area')}
         >
@@ -121,6 +124,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
         </button>
 
         <button
+          type="button"
           className={styles.heading_gini}
           onClick={() => setValueAndDirection('gini')}
         >

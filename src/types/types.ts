@@ -1,5 +1,3 @@
-export type Countries = Country[];
-
 export type Country = {
   altSpellings: string[];
   area: number;
@@ -89,6 +87,8 @@ export type Country = {
   };
   unMember: boolean;
 };
+
+export type Countries = Country[];
 
 export type TranslationType = {
   country: {

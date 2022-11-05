@@ -9,7 +9,7 @@ const randomCountry = (countries: Countries) => {
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  if (pathname == '/country/random') {
+  if (pathname === '/country/random') {
     const res = await fetch(`${API_URL}/all`);
     const countries: Countries = await res.json();
 

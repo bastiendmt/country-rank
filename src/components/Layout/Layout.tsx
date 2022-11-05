@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
 import Head from 'next/head';
-import styles from './Layout.module.css';
 import Link from 'next/link';
 import { Brightness6Rounded, LanguageRounded } from '@material-ui/icons';
+import styles from './Layout.module.css';
 
 import { LangContext } from '../../pages/_app';
 import translationsContent from '../../translations/translations';
@@ -55,7 +55,7 @@ const Layout: React.FC<Props> = ({ children, title = 'Country rank' }) => {
         <meta name="keywords" content="rank, country, infos, stats" />
         <meta name="author" content="Bastien Dumont" />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/apple-icon.png"></link>
+        <link rel="apple-touch-icon" href="/apple-icon.png" />
       </Head>
 
       <header className={styles.header}>
@@ -88,6 +88,7 @@ const Layout: React.FC<Props> = ({ children, title = 'Country rank' }) => {
         </Link>
 
         <button
+          type="button"
           className={styles.theme_switcher}
           onClick={switchTheme}
           title={translate.switchTheme}
@@ -96,6 +97,7 @@ const Layout: React.FC<Props> = ({ children, title = 'Country rank' }) => {
         </button>
 
         <button
+          type="button"
           className={styles.language_switcher}
           onClick={switchLanguage}
           title={translate.switchLanguage}

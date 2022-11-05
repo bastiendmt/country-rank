@@ -15,7 +15,7 @@ export const LangContext = React.createContext<ContextInterface>({
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const [language, setLang] = useState('eng');
 
-  const switchLanguage = useCallback(function () {
+  const switchLanguage = useCallback(() => {
     setLang((l) => (l === 'eng' ? 'fra' : 'eng'));
   }, []);
 
@@ -24,12 +24,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   }, [language]);
 
   const value = useMemo(
-    function () {
-      return {
-        language,
-        switchLanguage,
-      };
-    },
+    () => ({
+      language,
+      switchLanguage,
+    }),
     [language, switchLanguage],
   );
 

@@ -43,6 +43,7 @@ const Index = ({ countries }: { countries: Countries }) => {
           </div>
 
           <button
+            type="button"
             className={styles.shufflebutton}
             title={translate.randomCountry}
             onClick={randomCountry}
@@ -53,8 +54,8 @@ const Index = ({ countries }: { countries: Countries }) => {
 
         <div className={styles.input}>
           <SearchInput
-            placeholder={translate.filter}
             onChange={onInputChange}
+            placeholder={translate.filter}
           />
         </div>
       </div>

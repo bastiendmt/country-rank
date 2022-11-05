@@ -4,6 +4,7 @@
     "es2021": true
   },
   "extends": [
+    "airbnb",
     "prettier",
     "eslint:recommended",
     "plugin:react/recommended",
@@ -25,11 +26,36 @@
     "@typescript-eslint/member-ordering": [
       "error",
       { "default": { "memberTypes": "never", "order": "alphabetically" } }
-    ]
+    ],
+
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+    ],
+    "import/extensions": [
+      "error",
+      "never",
+      { "svg": "always", "css": "always" }
+    ],
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
+    "@typescript-eslint/no-var-requires": "off",
+    "react/jsx-props-no-spreading": "off",
+    "import/prefer-default-export": "off"
   },
   "settings": {
     "react": {
       "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
     }
   }
 }
