@@ -10,7 +10,7 @@ import {
 } from "@material-ui/icons";
 
 import translationsContent from "../../translations/translations";
-import { LangContext } from "../../pages/_app";
+import { LangContext } from "../../app/new/_app";
 import { Countries, TranslationType } from "../../types/types";
 
 const orderBy = (

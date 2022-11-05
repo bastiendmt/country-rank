@@ -1,6 +1,6 @@
 import { TranslationType } from "../types/types";
 
-const translations: {
+const translationsContent: {
   eng: TranslationType;
   fra: TranslationType;
   [key: string]: TranslationType;
@@ -63,4 +63,4 @@ const translations: {
   },
 };
 
-export default translations;
+export default translationsContent;

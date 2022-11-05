@@ -4,7 +4,7 @@ import styles from "./Layout.module.css";
 import Link from "next/link";
 import { Brightness6Rounded, LanguageRounded } from "@material-ui/icons";
 
-import { LangContext } from "../../pages/_app";
+import { LangContext } from "../../app/new/_app";
 import translationsContent from "../../translations/translations";
 import { TranslationType } from "../../types/types";
 
