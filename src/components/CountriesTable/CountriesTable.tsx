@@ -1,45 +1,47 @@
-import React, { useState, useContext } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import styles from "./CountriesTable.module.css";
-import formatNumber from "../../functions/formatNumber";
-import { giniToString, formatGini } from "../../functions/getGini";
+import React, { useState, useContext } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import styles from './CountriesTable.module.css';
+import formatNumber from '../../functions/formatNumber';
+import { giniToString, formatGini } from '../../functions/getGini';
 import {
   KeyboardArrowDownRounded,
   KeyboardArrowUpRounded,
-} from "@material-ui/icons";
+} from '@material-ui/icons';
 
-import translationsContent from "../../translations/translations";
-import { LangContext } from "../../pages/_app";
-import { Countries, TranslationType } from "../../types/types";
+import translationsContent from '../../translations/translations';
+import { LangContext } from '../../pages/_app';
+import { Countries, TranslationType } from '../../types/types';
 
 const orderBy = (
   countries: Countries,
   value: string,
-  direction: string | null
+  direction: string | null,
 ) => {
   //Sort nested name
   let sortDirection = 1;
-  if (direction === "desc") {
+  if (direction === 'desc') {
     sortDirection = -1;
   }
 
   switch (value) {
-    case "name":
+    case 'name':
       return [...countries].sort((a, b) =>
-        a.name.common > b.name.common ? sortDirection : -sortDirection
+        a.name.common > b.name.common ? sortDirection : -sortDirection,
       );
-    case "population":
+    case 'population':
       return [...countries].sort((a, b) =>
-        a.population > b.population ? sortDirection : -sortDirection
+        a.population > b.population ? sortDirection : -sortDirection,
       );
-    case "gini":
+    case 'gini':
       return [...countries].sort((a, b) =>
-        formatGini(a.gini) > formatGini(b.gini) ? sortDirection : -sortDirection
+        formatGini(a.gini) > formatGini(b.gini)
+          ? sortDirection
+          : -sortDirection,
       );
-    case "area":
+    case 'area':
       return [...countries].sort((a, b) =>
-        a.area > b.area ? sortDirection : -sortDirection
+        a.area > b.area ? sortDirection : -sortDirection,
       );
     default:
       return countries;
@@ -49,7 +51,7 @@ const orderBy = (
 const SortArrow = ({ direction }: { direction: string }) => {
   if (!direction) return <></>;
 
-  if (direction === "desc") {
+  if (direction === 'desc') {
     return (
       <div className={styles.heading_arrow}>
         <KeyboardArrowDownRounded color="inherit" />
@@ -65,8 +67,8 @@ const SortArrow = ({ direction }: { direction: string }) => {
 };
 
 const CountriesTable = ({ countries }: { countries: Countries }) => {
-  const [direction, setDirection] = useState<string>("");
-  const [value, setValue] = useState("");
+  const [direction, setDirection] = useState<string>('');
+  const [value, setValue] = useState('');
   const { language } = useContext(LangContext);
   const translate: TranslationType = translationsContent[language];
 
@@ -74,11 +76,11 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
 
   const switchDirection = () => {
     if (!direction) {
-      setDirection("desc");
-    } else if (direction === "desc") {
-      setDirection("asc");
+      setDirection('desc');
+    } else if (direction === 'desc') {
+      setDirection('asc');
     } else {
-      setDirection("");
+      setDirection('');
     }
   };
 
@@ -93,37 +95,37 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
         <div className={styles.heading_flag}></div>
         <button
           className={styles.heading_name}
-          onClick={() => setValueAndDirection("name")}
+          onClick={() => setValueAndDirection('name')}
         >
           <div>{translate.sort.name}</div>
-          {value === "name" && <SortArrow direction={direction} />}
+          {value === 'name' && <SortArrow direction={direction} />}
         </button>
 
         <button
           className={styles.heading_population}
-          onClick={() => setValueAndDirection("population")}
+          onClick={() => setValueAndDirection('population')}
         >
           <div>{translate.sort.population}</div>
-          {value === "population" && <SortArrow direction={direction} />}
+          {value === 'population' && <SortArrow direction={direction} />}
         </button>
 
         <button
           className={styles.heading_area}
-          onClick={() => setValueAndDirection("area")}
+          onClick={() => setValueAndDirection('area')}
         >
           <div>
             {translate.sort.area} (km
-            <sup style={{ fontSize: "0.5rem" }}> 2</sup>)
+            <sup style={{ fontSize: '0.5rem' }}> 2</sup>)
           </div>
-          {value === "area" && <SortArrow direction={direction} />}
+          {value === 'area' && <SortArrow direction={direction} />}
         </button>
 
         <button
           className={styles.heading_gini}
-          onClick={() => setValueAndDirection("gini")}
+          onClick={() => setValueAndDirection('gini')}
         >
           <div>{translate.sort.gini}</div>
-          {value === "gini" && <SortArrow direction={direction} />}
+          {value === 'gini' && <SortArrow direction={direction} />}
         </button>
       </div>
 

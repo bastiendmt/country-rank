@@ -1,15 +1,15 @@
-import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
-import { API_URL } from "./config";
-import { Countries } from "./types/types";
+import { NextRequest, NextResponse } from 'next/server';
+import { API_URL } from './config';
+import { Countries } from './types/types';
 
 const randomCountry = (countries: Countries) => {
   const random = Math.floor(Math.random() * countries.length);
   return `/country/${countries[random].cca3}`;
 };
 
-export async function middleware(req: NextRequest, _ev: NextFetchEvent) {
+export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  if (pathname == "/country/random") {
+  if (pathname == '/country/random') {
     const res = await fetch(`${API_URL}/all`);
     const countries: Countries = await res.json();
 
@@ -19,5 +19,5 @@ export async function middleware(req: NextRequest, _ev: NextFetchEvent) {
 }
 
 export const config = {
-  matcher: ["/country/:country*"],
+  matcher: ['/country/:country*'],
 };

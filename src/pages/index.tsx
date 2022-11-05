@@ -1,17 +1,17 @@
-import { ShuffleRounded } from "@material-ui/icons";
-import { useRouter } from "next/router";
-import { useContext, useState } from "react";
-import CountriesTable from "../components/CountriesTable/CountriesTable";
-import Layout from "../components/Layout/Layout";
-import SearchInput from "../components/SearchInput/SearchInput";
-import { API_URL } from "../config";
-import styles from "../styles/Home.module.css";
-import translationsContent from "../translations/translations";
-import { Countries, TranslationType } from "../types/types";
-import { LangContext } from "./_app";
+import { ShuffleRounded } from '@material-ui/icons';
+import { useRouter } from 'next/router';
+import { useContext, useState } from 'react';
+import CountriesTable from '../components/CountriesTable/CountriesTable';
+import Layout from '../components/Layout/Layout';
+import SearchInput from '../components/SearchInput/SearchInput';
+import { API_URL } from '../config';
+import styles from '../styles/Home.module.css';
+import translationsContent from '../translations/translations';
+import { Countries, TranslationType } from '../types/types';
+import { LangContext } from './_app';
 
 const Index = ({ countries }: { countries: Countries }) => {
-  const [keyword, setKeyword] = useState("");
+  const [keyword, setKeyword] = useState('');
   const router = useRouter();
   const { language } = useContext(LangContext);
   const translate: TranslationType = translationsContent[language];
@@ -20,7 +20,7 @@ const Index = ({ countries }: { countries: Countries }) => {
     (country) =>
       country.name.common?.toLowerCase().includes(keyword) ||
       country.region?.toLowerCase().includes(keyword) ||
-      country.subregion?.toLowerCase().includes(keyword)
+      country.subregion?.toLowerCase().includes(keyword),
   );
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,7 +47,7 @@ const Index = ({ countries }: { countries: Countries }) => {
             title={translate.randomCountry}
             onClick={randomCountry}
           >
-            <ShuffleRounded color="inherit" style={{ fontSize: "1.5rem" }} />
+            <ShuffleRounded color="inherit" style={{ fontSize: '1.5rem' }} />
           </button>
         </div>
 

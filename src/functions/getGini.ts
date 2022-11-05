@@ -1,4 +1,4 @@
-import { Country } from "../types/types";
+import { Country } from '../types/types';
 
 /**
  * Returns gini from lastest year value
@@ -7,14 +7,13 @@ import { Country } from "../types/types";
  * @returns "-" if no gini data
  */
 export const giniToString = (object: Country): string => {
-  if (!object.gini) return "-";
+  if (!object.gini) return '-';
 
-  return object.gini[Object.keys(object.gini)[0]] + " %";
+  return object.gini[Object.keys(object.gini)[0]] + ' %';
 };
 
 // Get gini from latest year. If no value returns 0
-//TODO remove any
-export const formatGini = (gini: any): number => {
+export const formatGini = (gini?: { [key: string]: number }): number => {
   if (!gini) return 0;
 
   if (gini) {
