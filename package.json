@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "yarn lint && next build",
     "start": "next start",
-    "lint": "eslint src -c .eslintrc.json --fix"
+    "lint": "yarn run eslint src -c .eslintrc.json --fix"
   },
   "dependencies": {
     "@material-ui/core": "^4.12.4",
