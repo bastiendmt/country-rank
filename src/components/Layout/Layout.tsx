@@ -58,6 +58,12 @@ const Layout: React.FC<Props> = ({ children, title = 'Country rank' }) => {
         <meta name="author" content="Bastien Dumont" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/apple-icon.png" />
+        {/*   Apple hide Safari */}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        {/*  Apple changing the status bar appearance */}
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        {/* Android add to the home screen */}
+        <meta name="mobile-web-app-capable" content="yes" />
       </Head>
 
       <header className={styles.header}>
