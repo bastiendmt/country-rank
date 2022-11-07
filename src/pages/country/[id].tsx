@@ -1,20 +1,20 @@
-import { useEffect, useState, useContext, useCallback } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import Layout from "../../components/Layout/Layout";
-import styles from "./Country.module.css";
-import formatNumber from "../../functions/formatNumber";
+import { useEffect, useState, useContext, useCallback } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import Layout from '../../components/Layout/Layout';
+import styles from './Country.module.css';
+import formatNumber from '../../functions/formatNumber';
 
-import translationsContent from "../../translations/translations";
-import { LangContext } from "../_app";
-import { giniToString } from "../../functions/getGini";
-import { API_URL } from "../../config";
+import translationsContent from '../../translations/translations';
+import { LangContext } from '../_app';
+import { giniToString } from '../../functions/getGini';
+import { API_URL } from '../../config';
 import {
   Countries,
   Country as CountryType,
   TranslationType,
-} from "../../types/types";
-import Map from "../../components/Map/Map";
+} from '../../types/types';
+import Map from '../../components/Map/Map';
 
 const getCountry = async (id: string): Promise<CountryType> => {
   const res = await fetch(`${API_URL}/alpha/${id}`);
@@ -30,7 +30,7 @@ const Country = ({ country }: { country: CountryType }) => {
   const getBorders = useCallback(async () => {
     if (!country.borders) return;
     const bordersData = await Promise.all(
-      country.borders.map((border) => getCountry(border))
+      country.borders.map((border) => getCountry(border)),
     );
     setBorders(bordersData);
   }, [country.borders]);
@@ -40,27 +40,27 @@ const Country = ({ country }: { country: CountryType }) => {
   }, [country, getBorders]);
 
   const getCurrencies = () => {
-    if (!country.currencies) return "-";
+    if (!country.currencies) return '-';
 
     return Object.keys(country.currencies)
       .map((curr) => country.currencies[curr].name)
-      .join(", ");
+      .join(', ');
   };
 
   const getLanguages = () => {
-    if (!country.languages) return "-";
+    if (!country.languages) return '-';
     return Object.keys(country.languages)
       .map((lang) => country.languages[lang])
-      .join(", ");
+      .join(', ');
   };
 
   const getNativeName = () => {
-    if (!country.name.nativeName) return "-";
+    if (!country.name.nativeName) return '-';
     return (
       Object.keys(country.name.nativeName)
         // first common native name
         .map((native) => country.name.nativeName[native].common)
-        .join(", ")
+        .join(', ')
     );
   };
 
@@ -95,7 +95,7 @@ const Country = ({ country }: { country: CountryType }) => {
                 <div className={styles.overview_area}>
                   <div className={styles.overview_value}>
                     {formatNumber(country.area)} (km
-                    <sup style={{ fontSize: "0.5rem" }}> 2</sup>)
+                    <sup style={{ fontSize: '0.5rem' }}> 2</sup>)
                   </div>
                   <div className={styles.overview_label}>
                     {translate.country.area}
@@ -123,7 +123,7 @@ const Country = ({ country }: { country: CountryType }) => {
                   {translate.country.capital}
                 </div>
                 <div className={styles.details_panel_value}>
-                  {country.capital ? country.capital[0] : "-"}
+                  {country.capital ? country.capital[0] : '-'}
                 </div>
               </div>
 

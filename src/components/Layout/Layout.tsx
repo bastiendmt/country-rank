@@ -1,46 +1,46 @@
-import React, { useContext, useState, useEffect } from "react";
-import Head from "next/head";
-import styles from "./Layout.module.css";
-import Link from "next/link";
-import { Brightness6Rounded, LanguageRounded } from "@material-ui/icons";
+import React, { useContext, useState, useEffect } from 'react';
+import Head from 'next/head';
+import Link from 'next/link';
+import { Brightness6Rounded, LanguageRounded } from '@material-ui/icons';
+import styles from './Layout.module.css';
 
-import { LangContext } from "../../pages/_app";
-import translationsContent from "../../translations/translations";
-import { TranslationType } from "../../types/types";
+import { LangContext } from '../../pages/_app';
+import translationsContent from '../../translations/translations';
+import { TranslationType } from '../../types/types';
 
 interface Props {
-  title: string;
   children: React.ReactNode;
+  title: string;
 }
 
-type Theme = "light" | "dark";
+type Theme = 'light' | 'dark';
 
-const Layout: React.FC<Props> = ({ children, title = "Country rank" }) => {
-  const [theme, setTheme] = useState<Theme>("light");
+const Layout: React.FC<Props> = ({ children, title = 'Country rank' }) => {
+  const [theme, setTheme] = useState<Theme>('light');
   const { language, switchLanguage } = useContext(LangContext);
   const translate: TranslationType = translationsContent[language];
 
   useEffect(() => {
-    const currentTheme = localStorage.getItem("theme") as Theme;
-    document.documentElement.setAttribute("data-theme", currentTheme);
+    const currentTheme = localStorage.getItem('theme') as Theme;
+    document.documentElement.setAttribute('data-theme', currentTheme);
     if (currentTheme) {
       setTheme(currentTheme);
     } else {
-      localStorage.setItem("theme", theme);
+      localStorage.setItem('theme', theme);
     }
   }, [theme]);
 
   const saveTheme = (newTheme: Theme) => {
     setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
   };
 
   const switchTheme = () => {
-    if (theme === "light") {
-      saveTheme("dark");
+    if (theme === 'light') {
+      saveTheme('dark');
     } else {
-      saveTheme("light");
+      saveTheme('light');
     }
   };
 
@@ -55,7 +55,7 @@ const Layout: React.FC<Props> = ({ children, title = "Country rank" }) => {
         <meta name="keywords" content="rank, country, infos, stats" />
         <meta name="author" content="Bastien Dumont" />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/apple-icon.png"></link>
+        <link rel="apple-touch-icon" href="/apple-icon.png" />
       </Head>
 
       <header className={styles.header}>
@@ -88,19 +88,21 @@ const Layout: React.FC<Props> = ({ children, title = "Country rank" }) => {
         </Link>
 
         <button
+          type="button"
           className={styles.theme_switcher}
           onClick={switchTheme}
           title={translate.switchTheme}
         >
-          <Brightness6Rounded style={{ fontSize: "1.5rem" }} />
+          <Brightness6Rounded style={{ fontSize: '1.5rem' }} />
         </button>
 
         <button
+          type="button"
           className={styles.language_switcher}
           onClick={switchLanguage}
           title={translate.switchLanguage}
         >
-          <LanguageRounded style={{ fontSize: "1.5rem" }} />
+          <LanguageRounded style={{ fontSize: '1.5rem' }} />
         </button>
       </header>
 

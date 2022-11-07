@@ -1,10 +1,10 @@
-import { useRef, useEffect } from "react";
-import mapboxgl from "mapbox-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
-import styles from "./Map.module.css";
+import { useRef, useEffect } from 'react';
+import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import styles from './Map.module.css';
 
 mapboxgl.accessToken =
-  "pk.eyJ1Ijoic3RhcnJ4cyIsImEiOiJjam9lZGppdGsxaDgxM2ttcmpncXNtMnpoIn0.7SJLcJzoWrgNDktWnAmTbQ";
+  'pk.eyJ1Ijoic3RhcnJ4cyIsImEiOiJjam9lZGppdGsxaDgxM2ttcmpncXNtMnpoIn0.7SJLcJzoWrgNDktWnAmTbQ';
 
 const Map = ({ coordinates }: { coordinates: [number, number] }) => {
   const mapContainer = useRef<any>(null);
@@ -13,9 +13,9 @@ const Map = ({ coordinates }: { coordinates: [number, number] }) => {
   useEffect(() => {
     if (map.current) return; // initialize map only once
     map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: "mapbox://styles/mapbox/streets-v11",
       center: [coordinates[1], coordinates[0]],
+      container: mapContainer.current,
+      style: 'mapbox://styles/mapbox/streets-v11',
       zoom: 3,
     });
   });
