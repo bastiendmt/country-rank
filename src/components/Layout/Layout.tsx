@@ -50,6 +50,7 @@ const Layout: React.FC<Props> = ({ children, title = 'Country rank' }) => {
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
         <meta charSet="UTF-8" />
+        <meta name="application-name" content="Country rank" />
         <meta name="theme-color" content="#252329" />
         <meta name="description" content="Country ranking" />
         <meta name="keywords" content="rank, country, infos, stats" />
