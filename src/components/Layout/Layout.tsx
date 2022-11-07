@@ -51,6 +51,7 @@ const Layout: React.FC<Props> = ({ children, title = 'Country rank' }) => {
         <link rel="icon" href="/favicon.ico" />
         <meta charSet="UTF-8" />
         <meta name="application-name" content="Country rank" />
+        <meta name="apple-mobile-web-app-title" content="Country rank" />
         <meta name="theme-color" content="#252329" />
         <meta name="description" content="Country ranking" />
         <meta name="keywords" content="rank, country, infos, stats" />
