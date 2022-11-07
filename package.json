@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "yarn lint && next build",
     "start": "next start",
-    "lint": "eslint src -c .eslintrc.json --fix"
+    "lint": "yarn run eslint src -c .eslintrc.json --fix"
   },
   "dependencies": {
     "@material-ui/core": "^4.12.4",
@@ -27,7 +27,7 @@
     "@types/react-dom": "^18.0.5",
     "@typescript-eslint/eslint-plugin": "^5.42.0",
     "@typescript-eslint/parser": "^5.42.0",
-    "eslint": "^8.19.0",
+    "eslint": "^8.27.0",
     "eslint-config-next": "^12.2.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
