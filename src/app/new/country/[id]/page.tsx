@@ -17,38 +17,42 @@ import {
 } from "../../../../types/types";
 import Mapbox from "../../../../components/Map/Map";
 
-const fetchMap = new Map<string, Promise<any>>();
-function queryClient<QueryResult>(
-  name: string,
-  query: () => Promise<QueryResult>
-): Promise<QueryResult> {
-  if (!fetchMap.has(name)) {
-    fetchMap.set(name, query());
-  }
-  return fetchMap.get(name)!;
+function makeQueryClient() {
+  const fetchMap = new Map<string, Promise<any>>();
+  return function queryClient<QueryResult>(
+    name: string,
+    query: () => Promise<QueryResult>
+  ): Promise<QueryResult> {
+    if (!fetchMap.has(name)) {
+      fetchMap.set(name, query());
+    }
+    return fetchMap.get(name)!;
+  };
 }
+
+const queryClient = makeQueryClient();
 
 const Country = ({ params: { id } }: { params: { id: string } }) => {
   const country: CountryType = use(
     queryClient("getCountry", () =>
-      fetch(`${API_URL}/alpha/${id}`).then((res) => res.json())
+      fetch(`${API_URL}/alpha/${id}`)
+        .then((res) => res.json())
+        .then((data) => data[0])
     )
-  )[0];
-  const [borders, setBorders] = useState<CountryType[]>([]);
+  );
+
+  const borders: CountryType[] = !country.borders
+    ? null
+    : use(
+        queryClient(`getborders/${id}`, () =>
+          fetch(`${API_URL}/alpha?codes=${country.borders?.join(",")}`).then(
+            (res) => res.json()
+          )
+        )
+      );
+
   const { language } = useContext(LangContext);
   const translate: TranslationType = translationsContent[language];
-
-  // const getBorders = useCallback(async () => {
-  //   if (!country.borders) return;
-  //   const bordersData = await Promise.all(
-  //     country.borders.map((border) => getCountry(border))
-  //   );
-  //   setBorders(bordersData);
-  // }, [country.borders]);
-
-  // useEffect(() => {
-  //   getBorders();
-  // }, [country, getBorders]);
 
   const getCurrencies = () => {
     if (!country.currencies) return "-";
