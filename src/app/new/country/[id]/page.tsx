@@ -15,10 +15,25 @@ import {
   Country as CountryType,
   TranslationType,
 } from "../../../../types/types";
-import Map from "../../../../components/Map/Map";
+import Mapbox from "../../../../components/Map/Map";
+
+const fetchMap = new Map<string, Promise<any>>();
+function queryClient<QueryResult>(
+  name: string,
+  query: () => Promise<QueryResult>
+): Promise<QueryResult> {
+  if (!fetchMap.has(name)) {
+    fetchMap.set(name, query());
+  }
+  return fetchMap.get(name)!;
+}
 
 const Country = ({ params: { id } }: { params: { id: string } }) => {
-  const country: CountryType = use(getCountry(id));
+  const country: CountryType = use(
+    queryClient("getCountry", () =>
+      fetch(`${API_URL}/alpha/${id}`).then((res) => res.json())
+    )
+  )[0];
   const [borders, setBorders] = useState<CountryType[]>([]);
   const { language } = useContext(LangContext);
   const translate: TranslationType = translationsContent[language];
@@ -103,7 +118,7 @@ const Country = ({ params: { id } }: { params: { id: string } }) => {
           <div className={styles.container_botton}>
             <div className={styles.details_map}>
               <h2 className={styles.details_panel_heading}>Map</h2>
-              <Map coordinates={country.latlng} />
+              <Mapbox coordinates={country.latlng} />
             </div>
           </div>
 
@@ -228,10 +243,3 @@ export default Country;
 
 //   return paths;
 // };
-
-const getCountry = async (id: string) => {
-  console.log("get country function");
-  const res = await fetch(`${API_URL}/alpha/${id}`);
-  const country: CountryType = (await res.json())[0];
-  return country;
-};
