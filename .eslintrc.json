@@ -46,7 +46,8 @@
     ],
     "@typescript-eslint/no-var-requires": "off",
     "react/jsx-props-no-spreading": "off",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "@typescript-eslint/prefer-optional-chain": "warn"
   },
   "settings": {
     "react": {
