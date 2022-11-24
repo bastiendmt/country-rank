@@ -1,38 +1,28 @@
 "use client";
 
-import { use, useEffect, useState, useContext, useCallback } from "react";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import { use, useContext } from "react";
 import Layout from "../../../../components/Layout/Layout";
-import styles from "./Country.module.css";
-import formatNumber from "../../../../functions/formatNumber";
-import translationsContent from "../../../../translations/translations";
-import { LangContext } from "../../_app";
-import { giniToString } from "../../../../functions/getGini";
+import Mapbox from "../../../../components/Map/Map";
 import { API_URL } from "../../../../config";
+import formatNumber from "../../../../functions/formatNumber";
+import { giniToString } from "../../../../functions/getGini";
+import { makeQueryClient } from "../../../../queryClient";
+import translationsContent from "../../../../translations/translations";
 import {
-  Countries,
   Country as CountryType,
   TranslationType,
 } from "../../../../types/types";
-import Mapbox from "../../../../components/Map/Map";
-
-function makeQueryClient() {
-  const fetchMap = new Map<string, Promise<any>>();
-  return function queryClient<QueryResult>(
-    name: string,
-    query: () => Promise<QueryResult>
-  ): Promise<QueryResult> {
-    if (!fetchMap.has(name)) {
-      fetchMap.set(name, query());
-    }
-    return fetchMap.get(name)!;
-  };
-}
+import { LangContext } from "../../_app";
+import styles from "./Country.module.css";
 
 const queryClient = makeQueryClient();
 
 const Country = ({ params: { id } }: { params: { id: string } }) => {
+  const { language } = useContext(LangContext);
+  const translate: TranslationType = translationsContent[language];
+
   const country: CountryType = use(
     queryClient("getCountry", () =>
       fetch(`${API_URL}/alpha/${id}`)
@@ -50,9 +40,6 @@ const Country = ({ params: { id } }: { params: { id: string } }) => {
           )
         )
       );
-
-  const { language } = useContext(LangContext);
-  const translate: TranslationType = translationsContent[language];
 
   const getCurrencies = () => {
     if (!country.currencies) return "-";

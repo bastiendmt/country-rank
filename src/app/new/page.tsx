@@ -6,15 +6,26 @@ import { use, useContext, useState } from "react";
 import CountriesTable from "../../components/CountriesTable/CountriesTable";
 import SearchInput from "../../components/SearchInput/SearchInput";
 import { API_URL } from "../../config";
+import { makeQueryClient } from "../../queryClient";
 import translationsContent from "../../translations/translations";
 import { Countries, TranslationType } from "../../types/types";
-import styles from "../styles/Home.module.css";
+import styles from "../../styles/Home.module.css";
 import Layout from "./layout";
-
 import { LangContext } from "./_app";
 
+const queryClient = makeQueryClient();
+
 const Index = () => {
-  const countries: Countries = use(getCountries());
+  const countries: Countries = use(
+    queryClient("getCountries", () =>
+      fetch(`${API_URL}/all`).then((res) => {
+        console.log(res);
+        return res.json();
+      })
+    )
+  );
+
+  // const countries: Countries = use(getCountries());
   const [keyword, setKeyword] = useState("");
   const router = useRouter();
   const { language } = useContext(LangContext);
@@ -34,7 +45,6 @@ const Index = () => {
 
   const randomCountry = () => {
     const random = Math.floor(Math.random() * filteredCountry.length);
-
     return router.push(`/country/${countries[random].cca3}`);
   };
 
