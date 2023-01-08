@@ -86,6 +86,8 @@
   justify-content: center;
   align-items: center;
   margin-right: 16px;
+  aspect-ratio: 16 / 9;
+  position: relative;
 }
 
 .flag img {

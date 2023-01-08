@@ -1,8 +1,10 @@
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+'use client';
+
+import { useContext } from 'react';
+import { LangContext } from './_app';
+
+const RootLayout = ({ children }: { children: React.ReactNode }) => {
+  const { language } = useContext(LangContext);
   return (
     <html>
       <head>
@@ -11,4 +13,6 @@ export default function RootLayout({
       <body>{children}</body>
     </html>
   );
-}
+};
+
+export default RootLayout;

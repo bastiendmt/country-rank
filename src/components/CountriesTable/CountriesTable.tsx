@@ -1,17 +1,16 @@
 import {
   KeyboardArrowDownRounded,
-  KeyboardArrowUpRounded
+  KeyboardArrowUpRounded,
 } from '@material-ui/icons';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useContext, useState } from 'react';
+import { LangContext } from '../../app/new/_app';
 import formatNumber from '../../functions/formatNumber';
 import { formatGini, giniToString } from '../../functions/getGini';
+import translationsContent from '../../translations/translations';
+import { Countries, TranslationType } from '../../types/types';
 import styles from './CountriesTable.module.css';
-
-import { LangContext } from "../../app/new/_app";
-import translationsContent from "../../translations/translations";
-import { Countries, TranslationType } from "../../types/types";
 
 const orderBy = (
   countries: Countries,
@@ -141,12 +140,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
         >
           <div className={styles.row}>
             <div className={styles.flag}>
-              <Image
-                src={country.flags.svg}
-                alt={country.name.common}
-                width={60}
-                height={40}
-              />
+              <Image src={country.flags.svg} alt={country.name.common} fill />
             </div>
             <div className={styles.mobileFlag}>{country.flag}</div>
             <div className={styles.name}>

@@ -2,11 +2,10 @@ import { Brightness6Rounded, LanguageRounded } from '@material-ui/icons';
 import Head from 'next/head';
 import Link from 'next/link';
 import React, { useContext, useEffect, useState } from 'react';
+import { LangContext } from '../../app/new/_app';
+import translationsContent from '../../translations/translations';
+import { TranslationType } from '../../types/types';
 import styles from './Layout.module.css';
-
-import { LangContext } from "../../app/new/_app";
-import translationsContent from "../../translations/translations";
-import { TranslationType } from "../../types/types";
 
 interface Props {
   children: React.ReactNode;

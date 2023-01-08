@@ -1,41 +1,41 @@
-"use client";
+'use client';
 
-import { ShuffleRounded } from "@material-ui/icons";
-import { useRouter } from "next/router";
-import { use, useContext, useState } from "react";
-import CountriesTable from "../../components/CountriesTable/CountriesTable";
-import SearchInput from "../../components/SearchInput/SearchInput";
-import { API_URL } from "../../config";
-import { makeQueryClient } from "../../queryClient";
-import translationsContent from "../../translations/translations";
-import { Countries, TranslationType } from "../../types/types";
-import styles from "../../styles/Home.module.css";
-import Layout from "./layout";
-import { LangContext } from "./_app";
+import { ShuffleRounded } from '@material-ui/icons';
+import { useRouter } from 'next/navigation';
+import { use, useContext, useState } from 'react';
+import CountriesTable from '../../components/CountriesTable/CountriesTable';
+import SearchInput from '../../components/SearchInput/SearchInput';
+import { API_URL } from '../../config';
+import { makeQueryClient } from '../../queryClient';
+import styles from '../../styles/Home.module.css';
+import translationsContent from '../../translations/translations';
+import { Countries, TranslationType } from '../../types/types';
+import Layout from './layout';
+import { LangContext } from './_app';
 
 const queryClient = makeQueryClient();
 
 const Index = () => {
-  const countries: Countries = use(
-    queryClient("getCountries", () =>
-      fetch(`${API_URL}/all`).then((res) => {
-        console.log(res);
-        return res.json();
-      })
-    )
-  );
-
   // const countries: Countries = use(getCountries());
-  const [keyword, setKeyword] = useState("");
+  const [keyword, setKeyword] = useState('');
   const router = useRouter();
   const { language } = useContext(LangContext);
   const translate: TranslationType = translationsContent[language];
+
+  const countries: Countries = use(
+    queryClient('getCountries', () =>
+      fetch(`${API_URL}/all`).then((res) => {
+        console.log(res);
+        return res.json();
+      }),
+    ),
+  );
 
   const filteredCountry = countries.filter(
     (country) =>
       country.name.common?.toLowerCase().includes(keyword) ||
       country.region?.toLowerCase().includes(keyword) ||
-      country.subregion?.toLowerCase().includes(keyword)
+      country.subregion?.toLowerCase().includes(keyword),
   );
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,11 +57,12 @@ const Index = () => {
           </div>
 
           <button
+            type="button"
             className={styles.shufflebutton}
             title={translate.randomCountry}
             onClick={randomCountry}
           >
-            <ShuffleRounded color="inherit" style={{ fontSize: "1.5rem" }} />
+            <ShuffleRounded color="inherit" style={{ fontSize: '1.5rem' }} />
           </button>
         </div>
 
@@ -79,7 +80,7 @@ const Index = () => {
 };
 
 const getCountries = async () => {
-  console.log("getCountries");
+  console.log('getCountries');
   const res = await fetch(`${API_URL}/all`);
   const countries: Countries = await res.json();
   return countries;
