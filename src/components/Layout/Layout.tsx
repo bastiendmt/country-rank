@@ -2,7 +2,7 @@ import { Brightness6Rounded, LanguageRounded } from '@material-ui/icons';
 import Head from 'next/head';
 import Link from 'next/link';
 import React, { useContext, useEffect, useState } from 'react';
-import { LangContext } from '../../app/new/_app';
+import { LangContext } from '../../app/_app';
 import translationsContent from '../../translations/translations';
 import { TranslationType } from '../../types/types';
 import styles from './Layout.module.css';

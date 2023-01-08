@@ -3,13 +3,13 @@
 import { ShuffleRounded } from '@material-ui/icons';
 import { useRouter } from 'next/navigation';
 import { use, useContext, useState } from 'react';
-import CountriesTable from '../../components/CountriesTable/CountriesTable';
-import SearchInput from '../../components/SearchInput/SearchInput';
-import { API_URL } from '../../config';
-import { makeQueryClient } from '../../queryClient';
-import styles from '../../styles/Home.module.css';
-import translationsContent from '../../translations/translations';
-import { Countries, TranslationType } from '../../types/types';
+import CountriesTable from '../components/CountriesTable/CountriesTable';
+import SearchInput from '../components/SearchInput/SearchInput';
+import { API_URL } from '../config';
+import { makeQueryClient } from '../queryClient';
+import styles from '../styles/Home.module.css';
+import translationsContent from '../translations/translations';
+import { Countries, TranslationType } from '../types/types';
 import Layout from './layout';
 import { LangContext } from './_app';
 

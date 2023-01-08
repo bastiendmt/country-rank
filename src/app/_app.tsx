@@ -1,6 +1,6 @@
 import { AppProps } from 'next/app';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import '../../styles/globals.css';
+import '../styles/globals.css';
 
 interface ContextInterface {
   language: 'eng' | 'fra' | string;

@@ -5,7 +5,7 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { useContext, useState } from 'react';
-import { LangContext } from '../../app/new/_app';
+import { LangContext } from '../../app/_app';
 import formatNumber from '../../functions/formatNumber';
 import { formatGini, giniToString } from '../../functions/getGini';
 import translationsContent from '../../translations/translations';
