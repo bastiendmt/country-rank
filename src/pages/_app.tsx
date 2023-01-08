@@ -1,22 +1,22 @@
-import { AppProps } from "next/app";
-import React, { useState, useCallback, useMemo, useEffect } from "react";
-import "../styles/globals.css";
+import { AppProps } from 'next/app';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
+import '../styles/globals.css';
 
 interface ContextInterface {
-  language: "eng" | "fra" | string;
+  language: 'eng' | 'fra' | string;
   switchLanguage: () => void;
 }
 
 export const LangContext = React.createContext<ContextInterface>({
-  language: "eng",
+  language: 'eng',
   switchLanguage: Function,
 });
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  const [language, setLang] = useState("eng");
+  const [language, setLang] = useState('eng');
 
-  const switchLanguage = useCallback(function () {
-    setLang((l) => (l === "eng" ? "fra" : "eng"));
+  const switchLanguage = useCallback(() => {
+    setLang((l) => (l === 'eng' ? 'fra' : 'eng'));
   }, []);
 
   useEffect(() => {
@@ -24,13 +24,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   }, [language]);
 
   const value = useMemo(
-    function () {
-      return {
-        language,
-        switchLanguage,
-      };
-    },
-    [language, switchLanguage]
+    () => ({
+      language,
+      switchLanguage,
+    }),
+    [language, switchLanguage],
   );
 
   return (
