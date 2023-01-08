@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import { use, useContext } from "react";
-import Layout from "../../../../components/Layout/Layout";
-import Mapbox from "../../../../components/Map/Map";
-import { API_URL } from "../../../../config";
-import formatNumber from "../../../../functions/formatNumber";
-import { giniToString } from "../../../../functions/getGini";
-import { makeQueryClient } from "../../../../queryClient";
-import translationsContent from "../../../../translations/translations";
+import Image from 'next/image';
+import Link from 'next/link';
+import { use, useContext } from 'react';
+import Layout from '../../../../components/Layout/Layout';
+import Mapbox from '../../../../components/Map/Map';
+import { API_URL } from '../../../../config';
+import formatNumber from '../../../../functions/formatNumber';
+import { giniToString } from '../../../../functions/getGini';
+import { makeQueryClient } from '../../../../queryClient';
+import translationsContent from '../../../../translations/translations';
 import {
   Country as CountryType,
   TranslationType,
-} from "../../../../types/types";
-import { LangContext } from "../../_app";
-import styles from "./Country.module.css";
+} from '../../../../types/types';
+import { LangContext } from '../../_app';
+import styles from './Country.module.css';
 
 const queryClient = makeQueryClient();
 
@@ -24,44 +24,44 @@ const Country = ({ params: { id } }: { params: { id: string } }) => {
   const translate: TranslationType = translationsContent[language];
 
   const country: CountryType = use(
-    queryClient("getCountry", () =>
+    queryClient('getCountry', () =>
       fetch(`${API_URL}/alpha/${id}`)
         .then((res) => res.json())
-        .then((data) => data[0])
-    )
+        .then((data) => data[0]),
+    ),
   );
 
   const borders: CountryType[] = !country.borders
     ? null
     : use(
         queryClient(`getborders/${id}`, () =>
-          fetch(`${API_URL}/alpha?codes=${country.borders?.join(",")}`).then(
-            (res) => res.json()
-          )
-        )
+          fetch(`${API_URL}/alpha?codes=${country.borders?.join(',')}`).then(
+            (res) => res.json(),
+          ),
+        ),
       );
 
   const getCurrencies = () => {
-    if (!country.currencies) return "-";
+    if (!country.currencies) return '-';
     return Object.keys(country.currencies)
       .map((curr) => country.currencies[curr].name)
-      .join(", ");
+      .join(', ');
   };
 
   const getLanguages = () => {
-    if (!country.languages) return "-";
+    if (!country.languages) return '-';
     return Object.keys(country.languages)
       .map((lang) => country.languages[lang])
-      .join(", ");
+      .join(', ');
   };
 
   const getNativeName = () => {
-    if (!country.name.nativeName) return "-";
+    if (!country.name.nativeName) return '-';
     return (
       Object.keys(country.name.nativeName)
         // first common native name
         .map((native) => country.name.nativeName[native].common)
-        .join(", ")
+        .join(', ')
     );
   };
 
@@ -71,12 +71,9 @@ const Country = ({ params: { id } }: { params: { id: string } }) => {
         <div className={styles.container}>
           <div className={styles.container_left}>
             <div className={styles.overview_panel}>
-              <Image
-                src={country.flags.svg}
-                alt={country.name.common}
-                width={700}
-                height={500}
-              />
+              <div className={styles.overview_image_container}>
+                <Image src={country.flags.svg} alt={country.name.common} fill />
+              </div>
 
               <h1 className={styles.overview_name}>
                 {country.translations[language]?.common || country.name.common}
@@ -96,7 +93,7 @@ const Country = ({ params: { id } }: { params: { id: string } }) => {
                 <div className={styles.overview_area}>
                   <div className={styles.overview_value}>
                     {formatNumber(country.area)} (km
-                    <sup style={{ fontSize: "0.5rem" }}> 2</sup>)
+                    <sup style={{ fontSize: '0.5rem' }}> 2</sup>)
                   </div>
                   <div className={styles.overview_label}>
                     {translate.country.area}
@@ -124,7 +121,7 @@ const Country = ({ params: { id } }: { params: { id: string } }) => {
                   {translate.country.capital}
                 </div>
                 <div className={styles.details_panel_value}>
-                  {country.capital ? country.capital[0] : "-"}
+                  {country.capital ? country.capital[0] : '-'}
                 </div>
               </div>
 
@@ -199,12 +196,9 @@ const Country = ({ params: { id } }: { params: { id: string } }) => {
                         passHref
                       >
                         <div className={styles.details_panel_borders_country}>
-                          <Image
-                            src={flags.svg}
-                            alt={name.common}
-                            width={200}
-                            height={150}
-                          />
+                          <div className={styles.details_panel_image_container}>
+                            <Image src={flags.svg} alt={name.common} fill />
+                          </div>
                           <div className={styles.details_panel_name}>
                             {translations[language]?.common || name.common}
                           </div>
