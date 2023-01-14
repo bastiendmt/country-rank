@@ -118,7 +118,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
         >
           <div>
             {translate.sort.area} (km
-            <sup style={{ fontSize: '0.5rem' }}> 2</sup>)
+            <sup style={{ fontSize: '0.5rem' }}>2</sup>)
           </div>
           {value === 'area' && <SortArrow direction={direction} />}
         </button>

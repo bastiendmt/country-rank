@@ -90,7 +90,7 @@ const Country = ({ params: { id } }: { params: { id: string } }) => {
                 <div className={styles.overview_area}>
                   <div className={styles.overview_value}>
                     {formatNumber(country.area)} (km
-                    <sup style={{ fontSize: '0.5rem' }}> 2</sup>)
+                    <sup style={{ fontSize: '0.5rem' }}>2</sup>)
                   </div>
                   <div className={styles.overview_label}>
                     {translate.country.area}
