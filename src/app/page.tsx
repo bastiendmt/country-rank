@@ -4,19 +4,18 @@ import { ShuffleRounded } from '@material-ui/icons';
 import { useRouter } from 'next/navigation';
 import { use, useContext, useState } from 'react';
 import CountriesTable from '../components/CountriesTable/CountriesTable';
+import Layout from '../components/Layout/Layout';
 import SearchInput from '../components/SearchInput/SearchInput';
 import { API_URL } from '../config';
 import { makeQueryClient } from '../queryClient';
-import styles from '../styles/Home.module.css';
 import translationsContent from '../translations/translations';
 import { Countries, TranslationType } from '../types/types';
-import Layout from './layout';
+import styles from './Home.module.css';
 import { LangContext } from './_app';
 
 const queryClient = makeQueryClient();
 
 const Index = () => {
-  // const countries: Countries = use(getCountries());
   const [keyword, setKeyword] = useState('');
   const router = useRouter();
   const { language } = useContext(LangContext);
@@ -24,10 +23,7 @@ const Index = () => {
 
   const countries: Countries = use(
     queryClient('getCountries', () =>
-      fetch(`${API_URL}/all`).then((res) => {
-        console.log(res);
-        return res.json();
-      }),
+      fetch(`${API_URL}/all`).then((res) => res.json()),
     ),
   );
 
@@ -49,7 +45,7 @@ const Index = () => {
   };
 
   return (
-    <Layout>
+    <Layout title="Country rank">
       <div className={styles.input_container}>
         <div className={styles.counts}>
           <div>
@@ -77,13 +73,6 @@ const Index = () => {
       <CountriesTable countries={filteredCountry} />
     </Layout>
   );
-};
-
-const getCountries = async () => {
-  console.log('getCountries');
-  const res = await fetch(`${API_URL}/all`);
-  const countries: Countries = await res.json();
-  return countries;
 };
 
 export default Index;

@@ -6,7 +6,7 @@ import { LangContext } from './_app';
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   const { language } = useContext(LangContext);
   return (
-    <html>
+    <html lang="en">
       <head>
         <title>Country rank</title>
       </head>
