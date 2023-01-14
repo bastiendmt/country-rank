@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import '../styles/globals.css';
 
 interface ContextInterface {
-  language: 'eng' | 'fra' | string;
+  language: 'eng' | 'fra';
   switchLanguage: () => void;
 }
 
@@ -13,7 +13,7 @@ export const LangContext = React.createContext<ContextInterface>({
 });
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  const [language, setLang] = useState('eng');
+  const [language, setLang] = useState<'eng' | 'fra'>('eng');
 
   const switchLanguage = useCallback(() => {
     setLang((l) => (l === 'eng' ? 'fra' : 'eng'));

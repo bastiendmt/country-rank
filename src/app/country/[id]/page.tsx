@@ -28,15 +28,15 @@ const Country = ({ params: { id } }: { params: { id: string } }) => {
     ),
   );
 
-  const borders: CountryType[] = !country.borders
-    ? null
-    : use(
+  const borders: CountryType[] = country?.borders?.length
+    ? use(
         queryClient(`getborders/${id}`, () =>
           fetch(`${API_URL}/alpha?codes=${country.borders?.join(',')}`).then(
             (res) => res.json(),
           ),
         ),
-      );
+      )
+    : [];
 
   const getCurrencies = () => {
     if (!country.currencies) return '-';
@@ -170,16 +170,7 @@ const Country = ({ params: { id } }: { params: { id: string } }) => {
                 </div>
               </div>
 
-              {!borders?.length ? (
-                <div className={styles.details_panel_no_borders}>
-                  <div className={styles.details_panel_borders_label}>
-                    {translate.country.neighbouringCountries}
-                  </div>
-                  <div className={styles.details_panel_value}>
-                    {translate.country.noNeighbors}
-                  </div>
-                </div>
-              ) : (
+              {borders?.length !== 0 ? (
                 <div className={styles.details_panel_borders}>
                   <div className={styles.details_panel_borders_label}>
                     {translate.country.neighbouringCountries}
@@ -204,6 +195,15 @@ const Country = ({ params: { id } }: { params: { id: string } }) => {
                     ))}
                   </div>
                 </div>
+              ) : (
+                <div className={styles.details_panel_no_borders}>
+                  <div className={styles.details_panel_borders_label}>
+                    {translate.country.neighbouringCountries}
+                  </div>
+                  <div className={styles.details_panel_value}>
+                    {translate.country.noNeighbors}
+                  </div>
+                </div>
               )}
             </div>
           </div>
@@ -214,14 +214,3 @@ const Country = ({ params: { id } }: { params: { id: string } }) => {
 };
 
 export default Country;
-
-// export const generateStaticParams = async () => {
-//   const res = await fetch(`${API_URL}/all`);
-//   const countries: Countries = await res.json();
-//   // maybe array of params
-//   const paths = countries.map((country) => ({
-//     params: { id: country.cca3 },
-//   }));
-
-//   return paths;
-// };
