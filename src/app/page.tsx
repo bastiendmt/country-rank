@@ -54,7 +54,7 @@ const Index = () => {
 
           <button
             type="button"
-            className={styles.shufflebutton}
+            className={styles.shuffleButton}
             title={translate.randomCountry}
             onClick={randomCountry}
           >

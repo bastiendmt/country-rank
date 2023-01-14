@@ -11,7 +11,7 @@
   margin-bottom: 20px;
 }
 
-.shufflebutton {
+.shuffleButton {
   background-color: transparent;
   border: none;
   display: flex;
@@ -19,7 +19,7 @@
   outline: 0;
 }
 
-.shufflebutton:hover {
+.shuffleButton:hover {
   cursor: pointer;
 }
 
@@ -39,7 +39,7 @@
 }
 
 @media screen and (max-width: 720px) {
-  .shufflebutton {
+  .shuffleButton {
     padding-right: 0;
   }
 }
