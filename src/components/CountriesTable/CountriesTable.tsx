@@ -12,11 +12,12 @@ import translationsContent from '../../translations/translations';
 import { Countries, TranslationType } from '../../types/types';
 import styles from './CountriesTable.module.css';
 
+type DirectionType = 'asc' | 'desc' | '';
+
 const orderBy = (
   countries: Countries,
   value: string,
-  // TODO type direction
-  direction: string | null,
+  direction: DirectionType,
 ) => {
   // Sort nested name
   let sortDirection = 1;
@@ -66,7 +67,7 @@ const SortArrow = ({ direction }: { direction: string }) => {
 };
 
 const CountriesTable = ({ countries }: { countries: Countries }) => {
-  const [direction, setDirection] = useState<string>('');
+  const [direction, setDirection] = useState<DirectionType>('');
   const [value, setValue] = useState('');
   const { language } = useContext(LangContext);
   const translate: TranslationType = translationsContent[language];
