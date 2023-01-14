@@ -99,7 +99,7 @@ export type TranslationType = {
     gini: string;
     languages: string;
     nativeName: string;
-    neighbouringCountries: string;
+    neighboringCountries: string;
     noNeighbors: string;
     population: string;
     subregion: string;

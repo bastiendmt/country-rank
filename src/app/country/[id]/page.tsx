@@ -30,7 +30,7 @@ const Country = ({ params: { id } }: { params: { id: string } }) => {
 
   const borders: CountryType[] = country?.borders?.length
     ? use(
-        queryClient(`getborders/${id}`, () =>
+        queryClient(`getBorders/${id}`, () =>
           fetch(`${API_URL}/alpha?codes=${country.borders?.join(',')}`).then(
             (res) => res.json(),
           ),
@@ -173,7 +173,7 @@ const Country = ({ params: { id } }: { params: { id: string } }) => {
               {borders?.length !== 0 ? (
                 <div className={styles.details_panel_borders}>
                   <div className={styles.details_panel_borders_label}>
-                    {translate.country.neighbouringCountries}
+                    {translate.country.neighboringCountries}
                   </div>
 
                   <div className={styles.details_panel_borders_container}>
@@ -198,7 +198,7 @@ const Country = ({ params: { id } }: { params: { id: string } }) => {
               ) : (
                 <div className={styles.details_panel_no_borders}>
                   <div className={styles.details_panel_borders_label}>
-                    {translate.country.neighbouringCountries}
+                    {translate.country.neighboringCountries}
                   </div>
                   <div className={styles.details_panel_value}>
                     {translate.country.noNeighbors}
