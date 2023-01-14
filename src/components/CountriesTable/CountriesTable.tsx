@@ -13,6 +13,7 @@ import { Countries, TranslationType } from '../../types/types';
 import styles from './CountriesTable.module.css';
 
 type DirectionType = 'asc' | 'desc' | '';
+type SortKeys = 'name' | 'population' | 'area' | 'gini' | '';
 
 const orderBy = (
   countries: Countries,
@@ -68,11 +69,11 @@ const SortArrow = ({ direction }: { direction: string }) => {
 
 const CountriesTable = ({ countries }: { countries: Countries }) => {
   const [direction, setDirection] = useState<DirectionType>('');
-  const [value, setValue] = useState('');
+  const [sortKey, setSortKey] = useState<SortKeys>('');
   const { language } = useContext(LangContext);
   const translate: TranslationType = translationsContent[language];
 
-  const orderedCountry = orderBy(countries, value, direction);
+  const orderedCountry = orderBy(countries, sortKey, direction);
 
   const switchDirection = () => {
     if (!direction) {
@@ -84,9 +85,9 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
     }
   };
 
-  const setValueAndDirection = (sortKey: string) => {
+  const setValueAndDirection = (key: SortKeys) => {
     switchDirection();
-    setValue(sortKey);
+    setSortKey(key);
   };
 
   return (
@@ -99,7 +100,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
           onClick={() => setValueAndDirection('name')}
         >
           <div>{translate.sort.name}</div>
-          {value === 'name' && <SortArrow direction={direction} />}
+          {sortKey === 'name' && <SortArrow direction={direction} />}
         </button>
 
         <button
@@ -108,7 +109,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
           onClick={() => setValueAndDirection('population')}
         >
           <div>{translate.sort.population}</div>
-          {value === 'population' && <SortArrow direction={direction} />}
+          {sortKey === 'population' && <SortArrow direction={direction} />}
         </button>
 
         <button
@@ -120,7 +121,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
             {translate.sort.area} (km
             <sup style={{ fontSize: '0.5rem' }}>2</sup>)
           </div>
-          {value === 'area' && <SortArrow direction={direction} />}
+          {sortKey === 'area' && <SortArrow direction={direction} />}
         </button>
 
         <button
@@ -129,7 +130,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
           onClick={() => setValueAndDirection('gini')}
         >
           <div>{translate.sort.gini}</div>
-          {value === 'gini' && <SortArrow direction={direction} />}
+          {sortKey === 'gini' && <SortArrow direction={direction} />}
         </button>
       </div>
 
