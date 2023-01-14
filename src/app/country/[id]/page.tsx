@@ -1,47 +1,45 @@
-import { useEffect, useState, useContext, useCallback } from 'react';
-import Link from 'next/link';
+'use client';
+
 import Image from 'next/image';
-import Layout from '../../components/Layout/Layout';
+import Link from 'next/link';
+import { use, useContext } from 'react';
+import Layout from '../../../components/Layout/Layout';
+import Mapbox from '../../../components/Map/Map';
+import { API_URL } from '../../../config';
+import formatNumber from '../../../functions/formatNumber';
+import { giniToString } from '../../../functions/getGini';
+import { makeQueryClient } from '../../../queryClient';
+import translationsContent from '../../../translations/translations';
+import { Country as CountryType, TranslationType } from '../../../types/types';
+import { LangContext } from '../../_app';
 import styles from './Country.module.css';
-import formatNumber from '../../functions/formatNumber';
 
-import translationsContent from '../../translations/translations';
-import { LangContext } from '../_app';
-import { giniToString } from '../../functions/getGini';
-import { API_URL } from '../../config';
-import {
-  Countries,
-  Country as CountryType,
-  TranslationType,
-} from '../../types/types';
-import Map from '../../components/Map/Map';
+const queryClient = makeQueryClient();
 
-const getCountry = async (id: string): Promise<CountryType> => {
-  const res = await fetch(`${API_URL}/alpha/${id}`);
-  const country: CountryType = (await res.json())[0];
-  return country;
-};
-
-const Country = ({ country }: { country: CountryType }) => {
-  const [borders, setBorders] = useState<CountryType[]>([]);
+const Country = ({ params: { id } }: { params: { id: string } }) => {
   const { language } = useContext(LangContext);
   const translate: TranslationType = translationsContent[language];
 
-  const getBorders = useCallback(async () => {
-    if (!country.borders) return;
-    const bordersData = await Promise.all(
-      country.borders.map((border) => getCountry(border)),
-    );
-    setBorders(bordersData);
-  }, [country.borders]);
+  const country: CountryType = use(
+    queryClient('getCountry', () =>
+      fetch(`${API_URL}/alpha/${id}`)
+        .then((res) => res.json())
+        .then((data) => data[0]),
+    ),
+  );
 
-  useEffect(() => {
-    getBorders();
-  }, [country, getBorders]);
+  const borders: CountryType[] = country?.borders?.length
+    ? use(
+        queryClient(`getborders/${id}`, () =>
+          fetch(`${API_URL}/alpha?codes=${country.borders?.join(',')}`).then(
+            (res) => res.json(),
+          ),
+        ),
+      )
+    : [];
 
   const getCurrencies = () => {
     if (!country.currencies) return '-';
-
     return Object.keys(country.currencies)
       .map((curr) => country.currencies[curr].name)
       .join(', ');
@@ -70,12 +68,9 @@ const Country = ({ country }: { country: CountryType }) => {
         <div className={styles.container}>
           <div className={styles.container_left}>
             <div className={styles.overview_panel}>
-              <Image
-                src={country.flags.svg}
-                alt={country.name.common}
-                width={700}
-                height={500}
-              />
+              <div className={styles.overview_image_container}>
+                <Image src={country.flags.svg} alt={country.name.common} fill />
+              </div>
 
               <h1 className={styles.overview_name}>
                 {country.translations[language]?.common || country.name.common}
@@ -108,7 +103,7 @@ const Country = ({ country }: { country: CountryType }) => {
           <div className={styles.container_botton}>
             <div className={styles.details_map}>
               <h2 className={styles.details_panel_heading}>Map</h2>
-              <Map coordinates={country.latlng} />
+              <Mapbox coordinates={country.latlng} />
             </div>
           </div>
 
@@ -175,16 +170,7 @@ const Country = ({ country }: { country: CountryType }) => {
                 </div>
               </div>
 
-              {!borders.length ? (
-                <div className={styles.details_panel_no_borders}>
-                  <div className={styles.details_panel_borders_label}>
-                    {translate.country.neighbouringCountries}
-                  </div>
-                  <div className={styles.details_panel_value}>
-                    {translate.country.noNeighbors}
-                  </div>
-                </div>
-              ) : (
+              {borders?.length !== 0 ? (
                 <div className={styles.details_panel_borders}>
                   <div className={styles.details_panel_borders_label}>
                     {translate.country.neighbouringCountries}
@@ -198,18 +184,24 @@ const Country = ({ country }: { country: CountryType }) => {
                         passHref
                       >
                         <div className={styles.details_panel_borders_country}>
-                          <Image
-                            src={flags.svg}
-                            alt={name.common}
-                            width={200}
-                            height={150}
-                          />
+                          <div className={styles.details_panel_image_container}>
+                            <Image src={flags.svg} alt={name.common} fill />
+                          </div>
                           <div className={styles.details_panel_name}>
                             {translations[language]?.common || name.common}
                           </div>
                         </div>
                       </Link>
                     ))}
+                  </div>
+                </div>
+              ) : (
+                <div className={styles.details_panel_no_borders}>
+                  <div className={styles.details_panel_borders_label}>
+                    {translate.country.neighbouringCountries}
+                  </div>
+                  <div className={styles.details_panel_value}>
+                    {translate.country.noNeighbors}
                   </div>
                 </div>
               )}
@@ -222,29 +214,3 @@ const Country = ({ country }: { country: CountryType }) => {
 };
 
 export default Country;
-
-export const getStaticPaths = async () => {
-  const res = await fetch(`${API_URL}/all`);
-  const countries: Countries = await res.json();
-
-  const paths = countries.map((country) => ({
-    params: { id: country.cca3 },
-  }));
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps = async ({
-  params,
-}: {
-  params: { id: string };
-}) => {
-  const country = await getCountry(params.id);
-
-  return {
-    props: { country },
-  };
-};

@@ -10,5 +10,5 @@ module.exports = withPWA({
   images: {
     domains: ['restcountries.com', 'upload.wikimedia.org', 'flagcdn.com'],
   },
-  swcMinify: true,
+  experimental: { appDir: true },
 });

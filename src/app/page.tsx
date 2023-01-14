@@ -1,20 +1,31 @@
+'use client';
+
 import { ShuffleRounded } from '@material-ui/icons';
-import { useRouter } from 'next/router';
-import { useContext, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { use, useContext, useState } from 'react';
 import CountriesTable from '../components/CountriesTable/CountriesTable';
 import Layout from '../components/Layout/Layout';
 import SearchInput from '../components/SearchInput/SearchInput';
 import { API_URL } from '../config';
-import styles from '../styles/Home.module.css';
+import { makeQueryClient } from '../queryClient';
 import translationsContent from '../translations/translations';
 import { Countries, TranslationType } from '../types/types';
+import styles from './Home.module.css';
 import { LangContext } from './_app';
 
-const Index = ({ countries }: { countries: Countries }) => {
+const queryClient = makeQueryClient();
+
+const Index = () => {
   const [keyword, setKeyword] = useState('');
   const router = useRouter();
   const { language } = useContext(LangContext);
   const translate: TranslationType = translationsContent[language];
+
+  const countries: Countries = use(
+    queryClient('getCountries', () =>
+      fetch(`${API_URL}/all`).then((res) => res.json()),
+    ),
+  );
 
   const filteredCountry = countries.filter(
     (country) =>
@@ -30,7 +41,6 @@ const Index = ({ countries }: { countries: Countries }) => {
 
   const randomCountry = () => {
     const random = Math.floor(Math.random() * filteredCountry.length);
-
     return router.push(`/country/${countries[random].cca3}`);
   };
 
@@ -54,8 +64,8 @@ const Index = ({ countries }: { countries: Countries }) => {
 
         <div className={styles.input}>
           <SearchInput
-            onChange={onInputChange}
             placeholder={translate.filter}
+            onChange={onInputChange}
           />
         </div>
       </div>
@@ -63,17 +73,6 @@ const Index = ({ countries }: { countries: Countries }) => {
       <CountriesTable countries={filteredCountry} />
     </Layout>
   );
-};
-
-export const getStaticProps = async () => {
-  const res = await fetch(`${API_URL}/all`);
-  const countries: Countries = await res.json();
-
-  return {
-    props: {
-      countries,
-    },
-  };
 };
 
 export default Index;

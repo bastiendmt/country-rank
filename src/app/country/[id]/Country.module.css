@@ -10,6 +10,12 @@
   background-color: var(--background-color-light);
 }
 
+.overview_image_container {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  margin: auto;
+}
+
 .overview_name {
   text-align: center;
   font-size: 32px;
@@ -40,6 +46,11 @@
   background-color: var(--background-color-light);
   box-shadow: var(--box-shadow);
   border-radius: 8px;
+}
+
+.details_panel_image_container {
+  position: relative;
+  aspect-ratio: 16 / 9;
 }
 
 .details_panel_heading {

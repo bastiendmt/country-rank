@@ -38,8 +38,6 @@
 }
 .theme_switcher {
   display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .language_switcher {
