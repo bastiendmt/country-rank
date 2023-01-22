@@ -21,7 +21,7 @@ const Country = ({ params: { id } }: { params: { id: string } }) => {
   const translate: TranslationType = translationsContent[language];
 
   const country: CountryType = use(
-    queryClient('getCountry', () =>
+    queryClient(`getCountry/${id}`, () =>
       fetch(`${API_URL}/alpha/${id}`)
         .then((res) => res.json())
         .then((data) => data[0]),
@@ -166,7 +166,7 @@ const Country = ({ params: { id } }: { params: { id: string } }) => {
                   {translate.country.gini}
                 </div>
                 <div className={styles.details_panel_value}>
-                  {giniToString(country)}
+                  {giniToString(country.gini)}
                 </div>
               </div>
 

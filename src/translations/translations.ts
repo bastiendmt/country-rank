@@ -3,7 +3,6 @@ import { TranslationType } from '../types/types';
 const translationsContent: {
   eng: TranslationType;
   fra: TranslationType;
-  [key: string]: TranslationType;
 } = {
   eng: {
     country: {

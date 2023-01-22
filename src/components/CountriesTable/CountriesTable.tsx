@@ -148,14 +148,11 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
             <div className={styles.name}>
               {country.translations[language]?.common || country.name.common}
             </div>
-
             <div className={styles.population}>
               {formatNumber(country.population)}
             </div>
-
             <div className={styles.area}>{formatNumber(country.area) || 0}</div>
-
-            <div className={styles.gini}>{giniToString(country)}</div>
+            <div className={styles.gini}>{giniToString(country.gini)}</div>
           </div>
         </Link>
       ))}

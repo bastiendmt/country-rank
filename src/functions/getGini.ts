@@ -1,18 +1,16 @@
-import { Country } from '../types/types';
-
 /**
- * Returns gini from lastest year value
+ * Returns gini from latest year value
  * @param "gini" : { "20XX" : YY }
  * @returns "YY %" if found
  * @returns "-" if no gini data
  */
-export const giniToString = (object: Country): string => {
-  if (!object.gini) return '-';
+export const giniToString = (gini?: { [key: string]: number }): string => {
+  if (!gini) return '-';
 
-  return `${object.gini[Object.keys(object.gini)[0]]} %`;
+  return `${gini[Object.keys(gini)[0]]} %`;
 };
 
-// Get gini from latest year. If no value returns 0
+/** Format gini to sort */
 export const formatGini = (gini?: { [key: string]: number }): number => {
   if (!gini) return 0;
 
