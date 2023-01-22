@@ -1,7 +1,7 @@
 import {
   KeyboardArrowDownRounded,
   KeyboardArrowUpRounded,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useContext, useState } from 'react';

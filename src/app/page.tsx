@@ -1,6 +1,6 @@
 'use client';
 
-import { ShuffleRounded } from '@material-ui/icons';
+import { ShuffleRounded } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 import { use, useContext, useState } from 'react';
 import CountriesTable from '../components/CountriesTable/CountriesTable';
