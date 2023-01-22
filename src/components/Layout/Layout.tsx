@@ -1,4 +1,4 @@
-import { Brightness6Rounded, LanguageRounded } from '@material-ui/icons';
+import { Brightness6Rounded, LanguageRounded } from '@mui/icons-material';
 import Head from 'next/head';
 import Link from 'next/link';
 import React, { useContext, useEffect, useState } from 'react';
