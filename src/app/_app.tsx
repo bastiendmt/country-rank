@@ -1,3 +1,5 @@
+'use client';
+
 import { AppProps } from 'next/app';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import '../styles/globals.css';

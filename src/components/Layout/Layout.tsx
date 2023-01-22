@@ -1,3 +1,5 @@
+'use client';
+
 import { Brightness6Rounded, LanguageRounded } from '@material-ui/icons';
 import Head from 'next/head';
 import Link from 'next/link';
