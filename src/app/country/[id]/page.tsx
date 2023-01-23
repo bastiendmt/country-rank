@@ -12,7 +12,8 @@ async function getCountry(alphaCode: string) {
   return res.json();
 }
 
-async function getBorders(alphaCodes: [string]) {
+async function getBorders(alphaCodes: string[] | undefined) {
+  if (alphaCodes === undefined) return [];
   const res = await fetch(`${API_URL}/alpha?codes=${alphaCodes?.join(',')}`);
 
   if (!res.ok) {
@@ -23,10 +24,11 @@ async function getBorders(alphaCodes: [string]) {
 
 const Country = async ({ params: { id } }: { params: { id: string } }) => {
   const country: Country = (await getCountry(id))[0];
+  const borders: Country[] = await getBorders(country.borders);
 
   return (
     <Layout title={country.name.common}>
-      <CountryDetails country={country} />
+      <CountryDetails country={country} borders={borders} />
     </Layout>
   );
 };

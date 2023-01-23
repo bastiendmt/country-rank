@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useContext } from 'react';
 import { LangContext } from '../../app/_app';
 import formatNumber from '../../functions/formatNumber';
@@ -10,29 +11,15 @@ import { Country, TranslationType } from '../../types/types';
 import Mapbox from '../Map/Map';
 import styles from './CountryDetails.module.css';
 
-const CountryDetails = ({ country }: { country: Country }) => {
+const CountryDetails = ({
+  country,
+  borders,
+}: {
+  borders: Country[];
+  country: Country;
+}) => {
   const { language } = useContext(LangContext);
   const translate: TranslationType = translationsContent[language];
-
-  console.log(country);
-
-  // const country: CountryType = use(
-  //   queryClient(`getCountry/${id}`, () =>
-  //     fetch(`${API_URL}/alpha/${id}`)
-  //       .then((res) => res.json())
-  //       .then((data) => data[0]),
-  //   ),
-  // );
-
-  // const borders: CountryType[] = country?.borders?.length
-  //   ? use(
-  //       queryClient(`getBorders/${id}`, () =>
-  //         fetch(`${API_URL}/alpha?codes=${country.borders?.join(',')}`).then(
-  //           (res) => res.json(),
-  //         ),
-  //       ),
-  //     )
-  //   : [];
 
   const getCurrencies = () => {
     if (!country.currencies) return '-';
@@ -157,7 +144,16 @@ const CountryDetails = ({ country }: { country: Country }) => {
             </div>
           </div>
 
-          {/* {borders?.length !== 0 ? (
+          {borders?.length === 0 ? (
+            <div className={styles.details_panel_no_borders}>
+              <div className={styles.details_panel_borders_label}>
+                {translate.country.neighboringCountries}
+              </div>
+              <div className={styles.details_panel_value}>
+                {translate.country.noNeighbors}
+              </div>
+            </div>
+          ) : (
             <div className={styles.details_panel_borders}>
               <div className={styles.details_panel_borders_label}>
                 {translate.country.neighboringCountries}
@@ -178,16 +174,7 @@ const CountryDetails = ({ country }: { country: Country }) => {
                 ))}
               </div>
             </div>
-          ) : (
-            <div className={styles.details_panel_no_borders}>
-              <div className={styles.details_panel_borders_label}>
-                {translate.country.neighboringCountries}
-              </div>
-              <div className={styles.details_panel_value}>
-                {translate.country.noNeighbors}
-              </div>
-            </div>
-          )} */}
+          )}
         </div>
       </div>
     </div>
