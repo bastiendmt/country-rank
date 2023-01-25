@@ -21,11 +21,6 @@
   cursor: pointer;
 }
 
-.footer {
-  text-align: center;
-  font-size: 0.75rem;
-}
-
 .theme_switcher,
 .language_switcher {
   border: none;
@@ -42,4 +37,9 @@
 
 .language_switcher {
   display: flex;
+}
+
+.footer {
+  text-align: center;
+  font-size: 0.75rem;
 }

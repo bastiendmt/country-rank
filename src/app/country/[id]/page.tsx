@@ -1,5 +1,4 @@
 import CountryDetails from '../../../components/CountryDetails/CountryDetails';
-import Layout from '../../../components/Layout/Layout';
 import { API_URL } from '../../../config';
 import { Country } from '../../../types/types';
 
@@ -26,11 +25,7 @@ const Country = async ({ params: { id } }: { params: { id: string } }) => {
   const country: Country = (await getCountry(id))[0];
   const borders: Country[] = await getBorders(country.borders);
 
-  return (
-    <Layout title={country.name.common}>
-      <CountryDetails country={country} borders={borders} />
-    </Layout>
-  );
+  return <CountryDetails country={country} borders={borders} />;
 };
 
 export default Country;

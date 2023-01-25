@@ -1,9 +1,3 @@
-import Layout from '../components/Layout/Layout';
-
-const Loading = () => (
-  <Layout title="Country rank">
-    <div>Loading...</div>
-  </Layout>
-);
+const Loading = () => <div>Loading...</div>;
 
 export default Loading;
