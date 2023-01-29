@@ -28,24 +28,10 @@ async function getCountry(alphaCode: string) {
   return {};
 }
 
-// async function getBorders(alphaCodes: string[] | undefined) {
-//   return [];
-//   if (alphaCodes === undefined) return [];
-//   const res = await fetch(`${API_URL}/alpha?codes=${alphaCodes?.join(',')}`);
-
-//   if (!res.ok) {
-//     throw new Error('Failed to fetch countries');
-//   }
-//   return res.json();
-// }
-
 const Country = async ({ params: { id } }: { params: { id: string } }) => {
-  // console.log(id);
   const country: Country = (await getCountry(id))[0];
-  console.log(country?.name.common);
-  // const borders: Country[] = await getBorders(country.borders);
 
-  return <CountryDetails country={country} borders={0 || []} />;
+  return <CountryDetails country={country} />;
 };
 
 export default Country;

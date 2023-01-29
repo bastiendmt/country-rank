@@ -1,25 +1,39 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { LangContext } from '../../app/_app';
+import { API_URL } from '../../config';
 import formatNumber from '../../functions/formatNumber';
 import { giniToString } from '../../functions/getGini';
 import translationsContent from '../../translations/translations';
-import { Country, TranslationType } from '../../types/types';
+import { Countries, Country, TranslationType } from '../../types/types';
 import Mapbox from '../Map/Map';
 import styles from './CountryDetails.module.css';
+import NeighboringCountry from './NeighboringCountry';
 
-const CountryDetails = ({
-  country,
-  borders,
-}: {
-  borders: Country[];
-  country: Country;
-}) => {
+async function getBorders(alphaCodes: string[] | undefined) {
+  const res = await fetch(`${API_URL}/alpha?codes=${alphaCodes?.join(',')}`);
+  if (!res.ok) {
+    throw new Error('Failed to fetch countries');
+  }
+  return res.json();
+}
+
+const CountryDetails = ({ country }: { country: Country }) => {
   const { language } = useContext(LangContext);
   const translate: TranslationType = translationsContent[language];
+  const [borders, setBorders] = useState<Countries>([]);
+
+  useEffect(() => {
+    if (country.borders?.length) {
+      const dataFetch = async () => {
+        const data: Countries = await getBorders(country.borders);
+        setBorders(data);
+      };
+      dataFetch();
+    }
+  }, []);
 
   const getCurrencies = () => {
     if (!country.currencies) return '-';
@@ -44,6 +58,9 @@ const CountryDetails = ({
         .join(', ')
     );
   };
+
+  const hasBorders = borders?.length !== 0;
+
   return (
     <div className={styles.container}>
       <div className={styles.container_left}>
@@ -144,7 +161,7 @@ const CountryDetails = ({
             </div>
           </div>
 
-          {borders?.length === 0 ? (
+          {!hasBorders ? (
             <div className={styles.details_panel_no_borders}>
               <div className={styles.details_panel_borders_label}>
                 {translate.country.neighboringCountries}
@@ -158,19 +175,9 @@ const CountryDetails = ({
               <div className={styles.details_panel_borders_label}>
                 {translate.country.neighboringCountries}
               </div>
-
               <div className={styles.details_panel_borders_container}>
-                {borders.map(({ flags, name, cca3, translations }) => (
-                  <Link href={`/country/${cca3}`} key={name.common} passHref>
-                    <div className={styles.details_panel_borders_country}>
-                      <div className={styles.details_panel_image_container}>
-                        <Image src={flags.svg} alt={name.common} fill />
-                      </div>
-                      <div className={styles.details_panel_name}>
-                        {translations[language]?.common || name.common}
-                      </div>
-                    </div>
-                  </Link>
+                {borders.map((border) => (
+                  <NeighboringCountry key={border.cca3} country={border} />
                 ))}
               </div>
             </div>
