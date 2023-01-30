@@ -4,7 +4,7 @@ import {
   KeyboardArrowDownRounded,
   KeyboardArrowUpRounded,
   ShuffleRounded,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';

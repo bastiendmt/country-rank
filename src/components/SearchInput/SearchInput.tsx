@@ -1,4 +1,4 @@
-import SearchRounded from '@material-ui/icons/SearchRounded';
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import styles from './SearchInput.module.css';
 
 const SearchInput = ({
@@ -9,7 +9,10 @@ const SearchInput = ({
   placeholder: string;
 }) => (
   <div className={styles.wrapper}>
-    <SearchRounded color="inherit" style={{ fontSize: '1.5rem', width: 24 }} />
+    <SearchRoundedIcon
+      color="inherit"
+      style={{ fontSize: '1.5rem', width: 24 }}
+    />
     <input
       className={styles.input}
       placeholder={placeholder}

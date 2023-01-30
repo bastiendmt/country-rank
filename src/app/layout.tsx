@@ -1,6 +1,6 @@
 'use client';
 
-import { Brightness6Rounded, LanguageRounded } from '@material-ui/icons';
+import { Brightness6Rounded, LanguageRounded } from '@mui/icons-material';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useContext, useState } from 'react';
