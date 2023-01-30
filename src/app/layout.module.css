@@ -4,6 +4,7 @@
 
   display: grid;
   grid-template-rows: auto 1fr auto;
+  gap: 1rem;
 
   max-width: 1100px;
   margin: 0 auto;
@@ -12,18 +13,12 @@
 .header {
   display: flex;
   justify-content: center;
-  margin-bottom: 32px;
 }
 
 .header:hover,
 .theme_switcher:hover,
 .language_switcher:hover {
   cursor: pointer;
-}
-
-.footer {
-  text-align: center;
-  font-size: 0.75rem;
 }
 
 .theme_switcher,
@@ -42,4 +37,9 @@
 
 .language_switcher {
   display: flex;
+}
+
+.footer {
+  text-align: center;
+  font-size: 0.75rem;
 }

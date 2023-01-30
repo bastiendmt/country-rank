@@ -1,3 +1,5 @@
+'use client';
+
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AppProps } from 'next/app';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
