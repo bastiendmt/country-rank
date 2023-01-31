@@ -1,4 +1,4 @@
-import DefaultHeadTags from '../../../components/DefaultHeadTags';
+import DefaultHeadTags from '@/components/DefaultHeadTags';
 import { getCountry } from './page';
 
 const Head = async ({ params: { id } }: { params: { id: string } }) => {

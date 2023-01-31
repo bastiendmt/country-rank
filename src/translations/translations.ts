@@ -1,4 +1,4 @@
-import { TranslationType } from '../types/types';
+import { TranslationType } from '@/types/types';
 
 const translationsContent: {
   eng: TranslationType;

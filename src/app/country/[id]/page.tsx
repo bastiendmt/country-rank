@@ -1,6 +1,6 @@
-import CountryDetails from '../../../components/CountryDetails/CountryDetails';
-import { API_URL } from '../../../config';
-import { Countries, Country } from '../../../types/types';
+import CountryDetails from '@/components/CountryDetails/CountryDetails';
+import { API_URL } from '@/config';
+import { Countries, Country } from '@/types/types';
 import NotFound from './not-found';
 
 export async function generateStaticParams(): Promise<{ id: string }[]> {

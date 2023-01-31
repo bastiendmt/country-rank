@@ -1,6 +1,6 @@
-import CountriesTable from '../components/CountriesTable/CountriesTable';
-import { API_URL } from '../config';
-import { Countries } from '../types/types';
+import CountriesTable from '@/components/CountriesTable/CountriesTable';
+import { API_URL } from '@/config';
+import { Countries } from '@/types/types';
 
 async function getCountries() {
   const res = await fetch(`${API_URL}/all`);
