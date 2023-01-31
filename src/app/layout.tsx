@@ -1,11 +1,11 @@
 'use client';
 
+import translationsContent from '@/translations/translations';
+import { TranslationType } from '@/types/types';
 import { Brightness6Rounded, LanguageRounded } from '@mui/icons-material';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useContext, useState } from 'react';
-import translationsContent from '../translations/translations';
-import { TranslationType } from '../types/types';
 import styles from './layout.module.css';
 import { LangContext } from './_app';
 

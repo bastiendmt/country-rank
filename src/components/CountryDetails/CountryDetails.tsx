@@ -1,14 +1,14 @@
 'use client';
 
+import { LangContext } from '@/app/_app';
+import Mapbox from '@/components/Map/Map';
+import { API_URL } from '@/config';
+import formatNumber from '@/functions/formatNumber';
+import { giniToString } from '@/functions/getGini';
+import translationsContent from '@/translations/translations';
+import { Countries, Country, TranslationType } from '@/types/types';
 import Image from 'next/image';
 import { useContext, useEffect, useState } from 'react';
-import { LangContext } from '../../app/_app';
-import { API_URL } from '../../config';
-import formatNumber from '../../functions/formatNumber';
-import { giniToString } from '../../functions/getGini';
-import translationsContent from '../../translations/translations';
-import { Countries, Country, TranslationType } from '../../types/types';
-import Mapbox from '../Map/Map';
 import styles from './CountryDetails.module.css';
 import NeighboringCountry from './NeighboringCountry';
 

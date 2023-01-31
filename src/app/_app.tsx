@@ -1,9 +1,9 @@
 'use client';
 
+import '@/styles/globals.css';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AppProps } from 'next/app';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import '../styles/globals.css';
 
 const theme = createTheme();
 

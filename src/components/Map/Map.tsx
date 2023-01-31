@@ -1,6 +1,6 @@
-import { useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { useEffect, useRef } from 'react';
 import styles from './Map.module.css';
 
 mapboxgl.accessToken =
