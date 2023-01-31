@@ -7,8 +7,13 @@ const withPWA = require('next-pwa')({
 });
 
 module.exports = withPWA({
+  experimental: { appDir: true },
   images: {
     domains: ['restcountries.com', 'upload.wikimedia.org', 'flagcdn.com'],
   },
-  experimental: { appDir: true },
+  modularizeImports: {
+    '@mui/icons-material': {
+      transform: '@mui/icons-material/{{member}}',
+    },
+  },
 });
