@@ -12,7 +12,9 @@ export async function generateStaticParams(): Promise<{ id: string }[]> {
   }));
 }
 
-async function getCountry(alphaCode: string): Promise<Country | undefined> {
+export async function getCountry(
+  alphaCode: string,
+): Promise<Country | undefined> {
   try {
     const res = await fetch(`${API_URL}/alpha/${alphaCode}`, {
       cache: 'force-cache',
