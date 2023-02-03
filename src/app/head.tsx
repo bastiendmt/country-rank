@@ -1,4 +1,4 @@
-import DefaultHeadTags from '../components/DefaultHeadTags';
+import DefaultHeadTags from '@/components/DefaultHeadTags';
 
 const Head = () => (
   <>

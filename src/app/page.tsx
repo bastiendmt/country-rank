@@ -1,19 +1,10 @@
-import CountriesTable from '../components/CountriesTable/CountriesTable';
-import { API_URL } from '../config';
-import { Countries } from '../types/types';
-
-async function getCountries() {
-  const res = await fetch(`${API_URL}/all`);
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch countries');
-  }
-  return res.json();
-}
+import { getCountries } from '@/api/getCountries';
+import CountriesTable from '@/components/CountriesTable/CountriesTable';
+import NotFound from './not-found';
 
 const Index = async () => {
-  const countries: Countries = await getCountries();
-
+  const countries = await getCountries();
+  if (!countries) return NotFound();
   return <CountriesTable countries={countries} />;
 };
 
