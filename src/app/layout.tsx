@@ -1,12 +1,12 @@
 'use client';
 
+import styles from '@/styles/layout.module.css';
 import translationsContent from '@/translations/translations';
 import { TranslationType } from '@/types/types';
 import { Brightness6Rounded, LanguageRounded } from '@mui/icons-material';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useContext, useState } from 'react';
-import styles from './layout.module.css';
 import { LangContext } from './_app';
 
 type Theme = 'light' | 'dark';
