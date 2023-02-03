@@ -1,19 +1,17 @@
+# [Country rank](https://country-rank.bastiendmt.vercel.app/)
+
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bastiendmt_clean-my-city&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=bastiendmt_clean-my-city)
 
-# Project
+This website is displaying countries in list and details about a country such as its population, languages, neighbors...
 
-Running demo [here](https://country-rank.bastiendmt.vercel.app/)
-
-This website is displaying countries in list and details about a country such as its population, languages, neighboors...
-
-## Features :
+## Features
 
 - getting countries from an API
 - responsive layout
 - search information
 - filter by country, region
 - dark mode
-- random country
+- [random country](https://country-rank.bastiendmt.vercel.app/country/random)
 - language switch (en & fr)
 - select a random country
 
