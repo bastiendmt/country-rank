@@ -1,8 +1,8 @@
 'use client';
 
+import { getBorders } from '@/api/getBorders';
 import { LangContext } from '@/app/_app';
 import Mapbox from '@/components/Map/Map';
-import { API_URL } from '@/config';
 import formatNumber from '@/functions/formatNumber';
 import { giniToString } from '@/functions/getGini';
 import translationsContent from '@/translations/translations';
@@ -11,14 +11,6 @@ import Image from 'next/image';
 import { useContext, useEffect, useState } from 'react';
 import styles from './CountryDetails.module.css';
 import NeighboringCountry from './NeighboringCountry';
-
-async function getBorders(alphaCodes: string[] | undefined) {
-  const res = await fetch(`${API_URL}/alpha?codes=${alphaCodes?.join(',')}`);
-  if (!res.ok) {
-    throw new Error('Failed to fetch countries');
-  }
-  return res.json();
-}
 
 const CountryDetails = ({ country }: { country: Country }) => {
   const { language } = useContext(LangContext);
