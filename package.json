@@ -9,7 +9,7 @@
     "lint": "yarn run eslint src -c .eslintrc.json --fix"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.5",
+    "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.11.9",
     "@mui/material": "^5.11.9",
