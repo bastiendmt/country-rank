@@ -9,9 +9,9 @@
     "lint": "yarn run eslint src -c .eslintrc.json --fix"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "@mui/icons-material": "^5.11.9",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.10",
     "@mui/material": "^5.11.9",
     "@mui/styles": "^5.11.9",
     "eslint-config-airbnb": "^19.0.4",
