@@ -3684,10 +3684,10 @@ make-dir@^3.0.2, make-dir@^3.1.0:
   dependencies:
     semver "^6.0.0"
 
-mapbox-gl@^2.12.1:
-  version "2.12.1"
-  resolved "https://registry.yarnpkg.com/mapbox-gl/-/mapbox-gl-2.12.1.tgz#ab382c7dcd5c5d993bbf56f877ae8e9d9f85741c"
-  integrity sha512-45LVQauimFGX/fkCJzK3O2KpQQrIB0fGlg8sERu4NH0xWiBw9JsLOLYD2xAgD5SPramQvsjzM7vYWIkGxpGYNQ==
+mapbox-gl@^2.14.1:
+  version "2.14.1"
+  resolved "https://registry.yarnpkg.com/mapbox-gl/-/mapbox-gl-2.14.1.tgz#5e6aef1010e83d3dc5af7bc62ed8eec099803667"
+  integrity sha512-KfHYcjzJeEF1UXZQin3vSdyIXoTBBdpNesTMmyzP9Dv8wRg8DnRu078Vr/CJ2A6Xocsvh9UAqTWYtHlrc20nwA==
   dependencies:
     "@mapbox/geojson-rewind" "^0.5.2"
     "@mapbox/jsonlint-lines-primitives" "^2.0.2"
