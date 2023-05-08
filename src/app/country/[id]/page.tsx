@@ -12,6 +12,11 @@ export async function generateStaticParams(): Promise<{ id: string }[]> {
   }));
 }
 
+export async function generateMetadata({ id }: { id: string }) {
+  const country = await getCountry(id);
+  return { title: country?.name.common || 'Country rank' };
+}
+
 const Country = async ({ params: { id } }: { params: { id: string } }) => {
   const country = await getCountry(id);
   if (!country) return NotFound();
