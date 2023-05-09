@@ -12,7 +12,20 @@ export async function generateStaticParams(): Promise<{ id: string }[]> {
   }));
 }
 
-const Country = async ({ params: { id } }: { params: { id: string } }) => {
+type PageProps = {
+  params: { id: string };
+};
+
+export async function generateMetadata({ params: { id } }: PageProps) {
+  const country = await getCountry(id);
+  return {
+    title: country?.name.common
+      ? `Country rank - ${country.name.common}`
+      : 'Country rank - Country page',
+  };
+}
+
+const Country = async ({ params: { id } }: PageProps) => {
   const country = await getCountry(id);
   if (!country) return NotFound();
   return <CountryDetails country={country} />;
