@@ -107,6 +107,7 @@ export type TranslationType = {
   filter: string;
   foundCountries: string;
   giniDefinition: string;
+  loading: string;
   randomCountry: string;
   sort: {
     area: string;

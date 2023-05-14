@@ -2,7 +2,7 @@
 
 import { getBorders } from '@/api/getBorders';
 import { LangContext } from '@/app/_app';
-import Mapbox from '@/components/Map/Map';
+import Mapbox from '@/components/MapboxMap/MapboxMap';
 import formatNumber from '@/functions/formatNumber';
 import { giniToString } from '@/functions/getGini';
 import translationsContent from '@/translations/translations';
@@ -15,17 +15,23 @@ import NeighboringCountry from './NeighboringCountry';
 const CountryDetails = ({ country }: { country: Country }) => {
   const { language } = useContext(LangContext);
   const translate: TranslationType = translationsContent[language];
+  const [bordersLoading, setBordersLoading] = useState(true);
   const [borders, setBorders] = useState<Countries>([]);
 
   useEffect(() => {
     if (country.borders?.length) {
-      const dataFetch = async () => {
-        const data: Countries = await getBorders(country.borders);
-        setBorders(data);
-      };
-      dataFetch();
+      getBorders(country.borders)
+        .then((countries: Countries) => {
+          setBorders(countries);
+          setBordersLoading(false);
+        })
+        .catch((err) => {
+          throw new Error(err);
+        });
     }
   }, []);
+
+  const hasBorders = borders?.length !== 0;
 
   const getCurrencies = () => {
     if (!country.currencies) return '-';
@@ -50,8 +56,6 @@ const CountryDetails = ({ country }: { country: Country }) => {
         .join(', ')
     );
   };
-
-  const hasBorders = borders?.length !== 0;
 
   return (
     <div className={styles.container}>
@@ -168,9 +172,11 @@ const CountryDetails = ({ country }: { country: Country }) => {
                 {translate.country.neighboringCountries}
               </div>
               <div className={styles.details_panel_borders_container}>
-                {borders.map((border) => (
-                  <NeighboringCountry key={border.cca3} country={border} />
-                ))}
+                {bordersLoading && translate.loading}
+                {!bordersLoading &&
+                  borders.map((border) => (
+                    <NeighboringCountry key={border.cca3} country={border} />
+                  ))}
               </div>
             </div>
           )}
