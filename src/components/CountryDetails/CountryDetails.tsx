@@ -20,10 +20,14 @@ const CountryDetails = ({ country }: { country: Country }) => {
 
   useEffect(() => {
     if (country.borders?.length) {
-      getBorders(country.borders).then((countries: Countries) => {
-        setBorders(countries);
-        setBordersLoading(false);
-      });
+      getBorders(country.borders)
+        .then((countries: Countries) => {
+          setBorders(countries);
+          setBordersLoading(false);
+        })
+        .catch((err) => {
+          throw new Error(err);
+        });
     }
   }, []);
 
