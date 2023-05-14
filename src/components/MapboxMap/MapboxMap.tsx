@@ -1,12 +1,12 @@
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useEffect, useRef } from 'react';
-import styles from './Map.module.css';
+import styles from './MapboxMap.module.css';
 
 mapboxgl.accessToken =
   'pk.eyJ1Ijoic3RhcnJ4cyIsImEiOiJjam9lZGppdGsxaDgxM2ttcmpncXNtMnpoIn0.7SJLcJzoWrgNDktWnAmTbQ';
 
-const Map = ({ coordinates }: { coordinates: [number, number] }) => {
+const MapboxMap = ({ coordinates }: { coordinates: [number, number] }) => {
   const mapContainer = useRef<any>(null);
   const map = useRef<any>(null);
 
@@ -30,4 +30,4 @@ const Map = ({ coordinates }: { coordinates: [number, number] }) => {
   return <div ref={mapContainer} className={styles.map_container} />;
 };
 
-export default Map;
+export default MapboxMap;
