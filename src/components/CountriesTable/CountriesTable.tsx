@@ -13,12 +13,20 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import SearchInput from '../SearchInput/SearchInput';
 import styles from './CountriesTable.module.css';
 
 type DirectionType = 'asc' | 'desc' | '';
 type SortKeys = 'name' | 'population' | 'area' | 'gini' | '';
+
+const filterCountries = (countries: Countries, keyword: string): Countries =>
+  countries.filter(
+    (country) =>
+      country.name.common?.toLowerCase().includes(keyword) ||
+      country.region?.toLowerCase().includes(keyword) ||
+      country.subregion?.toLowerCase().includes(keyword),
+  );
 
 const orderBy = (
   countries: Countries,
@@ -79,8 +87,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
   const [sortKey, setSortKey] = useState<SortKeys>('');
   const { language } = useContext(LangContext);
   const translate: TranslationType = translationsContent[language];
-
-  const orderedCountry = orderBy(countries, sortKey, direction);
+  const [currentCountries, setCurrentCountries] = useState(countries);
 
   const switchDirection = () => {
     if (!direction) {
@@ -102,15 +109,14 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
     setKeyword(e.target.value.toLowerCase());
   };
 
-  const filteredCountry = countries.filter(
-    (country) =>
-      country.name.common?.toLowerCase().includes(keyword) ||
-      country.region?.toLowerCase().includes(keyword) ||
-      country.subregion?.toLowerCase().includes(keyword),
-  );
+  useEffect(() => {
+    const filteredCountry = filterCountries(countries, keyword);
+    const orderedCountry = orderBy(filteredCountry, sortKey, direction);
+    setCurrentCountries(orderedCountry);
+  }, [keyword, sortKey, direction]);
 
   const randomCountry = () => {
-    const random = Math.floor(Math.random() * filteredCountry.length);
+    const random = Math.floor(Math.random() * countries.length);
     return router.push(`/country/${countries[random].cca3}`);
   };
 
@@ -179,7 +185,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
             {sortKey === 'gini' && <SortArrow direction={direction} />}
           </button>
         </div>
-        {orderedCountry.map((country) => (
+        {currentCountries.map((country) => (
           <Link
             href={`/country/${country.cca3}`}
             key={country.name.common}
