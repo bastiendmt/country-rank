@@ -9,11 +9,11 @@
     "lint": "yarn run eslint src -c .eslintrc.json --fix"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.6",
+    "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.11.10",
-    "@mui/material": "^5.12.1",
-    "@mui/styles": "^5.12.3",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.4",
+    "@mui/system": "^5.13.2",
     "eslint-config-airbnb": "^19.0.4",
     "mapbox-gl": "^2.14.1",
     "next": "^13.4.1",
