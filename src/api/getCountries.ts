@@ -10,5 +10,5 @@ export async function getCountries(): Promise<Countries | undefined> {
   if (!res.ok) {
     throw new Error('Failed to fetch countries');
   }
-  return res.json();
+  return res.json() as Promise<Countries>;
 }

@@ -6,7 +6,7 @@ import NotFound from './not-found';
 
 export async function generateStaticParams(): Promise<{ id: string }[]> {
   const res = await fetch(`${API_URL}/all`);
-  const countries: Countries = await res.json();
+  const countries = (await res.json()) as Countries;
   return countries.map((country) => ({
     id: country.cca3,
   }));

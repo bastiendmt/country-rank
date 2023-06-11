@@ -8,11 +8,35 @@
     "prettier",
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:import/typescript",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@next/next/recommended"
+    "plugin:import/typescript"
   ],
-  "overrides": [],
+  "overrides": [
+    {
+      "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/eslint-recommended", // Uses the recommended rules from @typescript-eslint/eslint-plugin
+        // This enables a lot of type checking
+        "plugin:@typescript-eslint/recommended-requiring-type-checking" // Uses the recommended rules from @typescript-eslint/eslint-plugin
+      ],
+      "files": ["**/*.{ts,tsx}"],
+      "parserOptions": {
+        "project": ["./tsconfig.json"]
+      },
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-unused-vars": "warn",
+        "@typescript-eslint/no-explicit-any": "warn",
+        "@typescript-eslint/prefer-optional-chain": "warn",
+        "@typescript-eslint/prefer-as-const": "error",
+        "@typescript-eslint/await-thenable": "error",
+        "@typescript-eslint/no-var-requires": "error",
+        "@typescript-eslint/member-ordering": [
+          "error",
+          { "default": { "memberTypes": "never", "order": "alphabetically" } }
+        ]
+      }
+    }
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -26,10 +50,6 @@
     "linebreak-style": ["error", "unix"],
     "semi": ["error", "always"],
     "sort-keys": ["error", "asc", { "minKeys": 3 }],
-    "@typescript-eslint/member-ordering": [
-      "error",
-      { "default": { "memberTypes": "never", "order": "alphabetically" } }
-    ],
 
     "react/jsx-filename-extension": [
       1,
@@ -47,10 +67,9 @@
         "unnamedComponents": "arrow-function"
       }
     ],
-    "@typescript-eslint/no-var-requires": "off",
+
     "react/jsx-props-no-spreading": "off",
-    "import/prefer-default-export": "off",
-    "@typescript-eslint/prefer-optional-chain": "warn"
+    "import/prefer-default-export": "off"
   },
   "settings": {
     "react": {

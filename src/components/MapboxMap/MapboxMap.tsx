@@ -7,11 +7,12 @@ mapboxgl.accessToken =
   'pk.eyJ1Ijoic3RhcnJ4cyIsImEiOiJjam9lZGppdGsxaDgxM2ttcmpncXNtMnpoIn0.7SJLcJzoWrgNDktWnAmTbQ';
 
 const MapboxMap = ({ coordinates }: { coordinates: [number, number] }) => {
-  const mapContainer = useRef<any>(null);
-  const map = useRef<any>(null);
+  const mapContainer = useRef<HTMLDivElement>(null);
+  const map = useRef<mapboxgl.Map | null>(null);
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
+    if (!mapContainer.current) return;
     map.current = new mapboxgl.Map({
       center: [coordinates[1], coordinates[0]],
       container: mapContainer.current,
@@ -21,7 +22,7 @@ const MapboxMap = ({ coordinates }: { coordinates: [number, number] }) => {
   });
 
   useEffect(() => {
-    map.current.flyTo({
+    map.current?.flyTo({
       center: [coordinates[1], coordinates[0]],
       essential: true,
     });

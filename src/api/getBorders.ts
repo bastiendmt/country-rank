@@ -7,7 +7,7 @@ import { API_URL } from '@/config';
  * // https://restcountries.com/v3.1/alpha?codes=fra,bel
  * @returns Country[]
  */
-export async function getBorders(alphaCodes: string[] | undefined) {
+export async function getBorders(alphaCodes: string[]) {
   const res = await fetch(`${API_URL}/alpha?codes=${alphaCodes?.join(',')}`);
   if (!res.ok) {
     throw new Error('Failed to fetch countries');
