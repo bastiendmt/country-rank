@@ -13,7 +13,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.4",
-    "@mui/system": "^5.13.2",
+    "@mui/system": "^5.14.0",
     "eslint-config-airbnb": "^19.0.4",
     "mapbox-gl": "^2.14.1",
     "next": "^13.4.6",
