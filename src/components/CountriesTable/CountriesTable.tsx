@@ -116,8 +116,10 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
   }, [keyword, sortKey, direction]);
 
   const randomCountry = () => {
-    const random = Math.floor(Math.random() * countries.length);
-    return router.push(`/country/${countries[random].cca3}`);
+    const randomIndex = Math.floor(Math.random() * countries.length);
+    const countryCode = countries[randomIndex]?.cca3;
+    if (!countryCode) return;
+    router.push(`/country/${countryCode}`);
   };
 
   return (
@@ -132,6 +134,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
             className={styles.shuffleButton}
             title={translate.randomCountry}
             onClick={randomCountry}
+            disabled={countries.length === 0}
           >
             <ShuffleRounded color="inherit" style={{ fontSize: '1.5rem' }} />
           </button>
