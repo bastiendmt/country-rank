@@ -38,6 +38,7 @@ export type Country = {
   fifa: string;
   flag: string;
   flags: {
+    alt: string;
     png: string;
     svg: string;
   };

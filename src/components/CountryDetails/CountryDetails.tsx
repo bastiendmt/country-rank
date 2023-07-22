@@ -62,7 +62,12 @@ const CountryDetails = ({ country }: { country: Country }) => {
       <div className={styles.container_left}>
         <div className={styles.overview_panel}>
           <div className={styles.overview_image_container}>
-            <Image src={country.flags.svg} alt={country.name.common} fill />
+            <Image
+              src={country.flags.svg}
+              alt={country.flags.alt ?? country.name.common}
+              title={country.flags.alt ?? country.name.common}
+              fill
+            />
           </div>
 
           <h1 className={styles.overview_name}>
