@@ -22,6 +22,9 @@
 .shuffleButton:hover {
   cursor: pointer;
 }
+.shuffleButton:disabled {
+  cursor: not-allowed;
+}
 
 @media screen and (min-width: 720px) {
   .input_container {

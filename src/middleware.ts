@@ -7,8 +7,10 @@ export async function middleware(req: NextRequest) {
   if (pathname === '/country/random') {
     const countries = await getCountries();
     if (!countries) return NotFound();
-    const random = Math.floor(Math.random() * countries.length);
-    return NextResponse.rewrite(`${origin}/country/${countries[random].cca3}`);
+    const randomIndex = Math.floor(Math.random() * countries.length);
+    const countryCode = countries[randomIndex]?.cca3;
+    if (!countryCode) return NextResponse.next();
+    return NextResponse.rewrite(`${origin}/country/${countryCode}`);
   }
   return NextResponse.next();
 }

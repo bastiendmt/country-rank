@@ -36,7 +36,7 @@ const CountryDetails = ({ country }: { country: Country }) => {
   const getCurrencies = () => {
     if (!country.currencies) return '-';
     return Object.keys(country.currencies)
-      .map((curr) => country.currencies[curr].name)
+      .map((curr) => country.currencies[curr]?.name)
       .join(', ');
   };
 
@@ -52,7 +52,7 @@ const CountryDetails = ({ country }: { country: Country }) => {
     return (
       Object.keys(country.name.nativeName)
         // first common native name
-        .map((native) => country.name.nativeName[native].common)
+        .map((native) => country.name.nativeName[native]?.common)
         .join(', ')
     );
   };
