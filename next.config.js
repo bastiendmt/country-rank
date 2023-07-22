@@ -11,9 +11,4 @@ module.exports = withPWA({
   images: {
     domains: ['restcountries.com', 'upload.wikimedia.org', 'flagcdn.com'],
   },
-  modularizeImports: {
-    '@mui/icons-material': {
-      transform: '@mui/icons-material/{{member}}',
-    },
-  },
 });

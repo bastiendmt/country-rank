@@ -1,11 +1,8 @@
 'use client';
 
 import '@/styles/globals.css';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AppProps } from 'next/app';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-
-const theme = createTheme();
 
 interface ContextInterface {
   language: 'eng' | 'fra';
@@ -38,9 +35,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
   return (
     <LangContext.Provider value={value}>
-      <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <Component {...pageProps} />
     </LangContext.Provider>
   );
 };
