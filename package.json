@@ -9,7 +9,6 @@
     "lint": "yarn run eslint src -c .eslintrc.json --fix"
   },
   "dependencies": {
-    "eslint-config-airbnb": "^19.0.4",
     "lucide-react": "^0.263.0",
     "mapbox-gl": "^2.14.1",
     "next": "^13.4.6",
@@ -28,6 +27,7 @@
     "@typescript-eslint/eslint-plugin": "^6.1.0",
     "@typescript-eslint/parser": "^6.1.0",
     "eslint": "^8.34.0",
+    "eslint-config-airbnb": "^19.0.4",
     "eslint-config-next": "^13.4.1",
     "eslint-config-prettier": "^8.8.0",
     "eslint-import-resolver-typescript": "^3.5.5",
