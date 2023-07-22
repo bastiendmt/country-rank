@@ -14,19 +14,13 @@ export const HeaderButtons = () => {
   const { language, switchLanguage } = useContext(LangContext);
   const translate: TranslationType = translationsContent[language];
 
-  const saveTheme = (newTheme: Theme) => {
+  const switchTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme);
+    document.body.dataset.theme = newTheme;
   };
 
-  const switchTheme = () => {
-    if (theme === 'light') {
-      saveTheme('dark');
-    } else {
-      saveTheme('light');
-    }
-  };
   return (
     <>
       <button
