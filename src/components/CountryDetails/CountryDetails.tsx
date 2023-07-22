@@ -29,7 +29,7 @@ const CountryDetails = ({ country }: { country: Country }) => {
           throw new Error(err);
         });
     }
-  }, []);
+  }, [country.borders]);
 
   const hasBorders = borders?.length !== 0;
 

@@ -109,7 +109,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
     const filteredCountry = filterCountries(countries, keyword);
     const orderedCountry = orderBy(filteredCountry, sortKey, direction);
     setCurrentCountries(orderedCountry);
-  }, [keyword, sortKey, direction]);
+  }, [keyword, sortKey, direction, countries]);
 
   const randomCountry = () => {
     const randomIndex = Math.floor(Math.random() * countries.length);
