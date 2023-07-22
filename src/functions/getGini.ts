@@ -6,8 +6,9 @@
  */
 export const giniToString = (gini?: { [key: string]: number }): string => {
   if (!gini) return '-';
-
-  return `${gini[Object.keys(gini)[0]]} %`;
+  const latestYear = Object.keys(gini)[0] as string;
+  const value = gini[latestYear] as number;
+  return `${value} %`;
 };
 
 /** Format gini to sort */
@@ -16,7 +17,8 @@ export const formatGini = (gini?: { [key: string]: number }): number => {
 
   if (gini) {
     const key = Object.keys(gini)[0];
-    return gini[key];
+    if (!key) return 0;
+    return gini[key] as number;
   }
 
   return 0;
