@@ -1,14 +1,7 @@
 import { HeaderButtons } from '@/components/HeaderButtons';
 import { Logo } from '@/logo';
 import styles from '@/styles/layout.module.css';
-import type { Metadata } from 'next';
 import Link from 'next/link';
-
-export const metadata: Metadata = {
-  title: 'Country Rank',
-  description:
-    'A Next.js project that displays countries in list and details about a country such as its population, languages, neighbors.',
-};
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
   <html lang="fr">

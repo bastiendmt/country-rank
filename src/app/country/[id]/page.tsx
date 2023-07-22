@@ -1,7 +1,9 @@
 import { getCountry } from '@/api/getCountry';
+import { OG_DESCRIPTION, OG_TITLE } from '@/app/og';
 import CountryDetails from '@/components/CountryDetails/CountryDetails';
 import { API_URL } from '@/config';
 import { Countries } from '@/types/types';
+import { Metadata } from 'next';
 import NotFound from './not-found';
 
 export async function generateStaticParams(): Promise<{ id: string }[]> {
@@ -16,12 +18,16 @@ type PageProps = {
   params: { id: string };
 };
 
-export async function generateMetadata({ params: { id } }: PageProps) {
+export async function generateMetadata({
+  params: { id },
+}: PageProps): Promise<Metadata> {
   const country = await getCountry(id);
   return {
-    title: country?.name.common
-      ? `Country rank - ${country.name.common}`
-      : 'Country rank - Country page',
+    description: `Find more about ${country.name.common} by clicking on this link. ${OG_DESCRIPTION}`,
+    openGraph: {
+      images: [country.flags.png],
+    },
+    title: `${OG_TITLE} - ${country.name.common}`,
   };
 }
 
