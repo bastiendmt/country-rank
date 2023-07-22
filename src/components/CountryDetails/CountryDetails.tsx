@@ -7,6 +7,7 @@ import formatNumber from '@/functions/formatNumber';
 import { giniToString } from '@/functions/getGini';
 import translationsContent from '@/translations/translations';
 import { Countries, Country, TranslationType } from '@/types/types';
+import { MapPin } from 'lucide-react';
 import Image from 'next/image';
 import { useContext, useEffect, useState } from 'react';
 import styles from './CountryDetails.module.css';
@@ -100,7 +101,16 @@ const CountryDetails = ({ country }: { country: Country }) => {
 
       <div className={styles.container_botton}>
         <div className={styles.details_map}>
-          <h2 className={styles.details_panel_heading}>Map</h2>
+          <div className={styles.map_heading_container}>
+            <h2 className={styles.details_panel_heading}>Map</h2>
+            <button
+              type="button"
+              title="Google maps link"
+              onClick={() => window.open(country.maps.googleMaps)}
+            >
+              <MapPin />
+            </button>
+          </div>
           <Mapbox coordinates={country.latlng} />
         </div>
       </div>

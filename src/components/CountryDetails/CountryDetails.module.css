@@ -53,6 +53,33 @@
   aspect-ratio: 16 / 9;
 }
 
+.map_heading_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.map_heading_container h2 {
+  padding: 0;
+}
+.map_heading_container button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+
+  color: var(--text-color-secondary);
+  margin-left: 8px;
+  outline: 0;
+
+  display: flex;
+}
+
+.map_heading_container svg {
+  color: var(--text-color);
+}
+
 .details_panel_heading {
   padding: 20px;
   padding-bottom: 0;
