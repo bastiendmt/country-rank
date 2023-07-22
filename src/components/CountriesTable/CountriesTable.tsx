@@ -5,11 +5,7 @@ import formatNumber from '@/functions/formatNumber';
 import { formatGini, giniToString } from '@/functions/getGini';
 import translationsContent from '@/translations/translations';
 import { Countries, TranslationType } from '@/types/types';
-import {
-  KeyboardArrowDownRounded,
-  KeyboardArrowUpRounded,
-  ShuffleRounded,
-} from '@mui/icons-material';
+import { ChevronDown, ChevronUp, Shuffle } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -69,13 +65,13 @@ const SortArrow = ({ direction }: { direction: string }) => {
   if (direction === 'desc') {
     return (
       <div className={styles.heading_arrow}>
-        <KeyboardArrowDownRounded color="inherit" />
+        <ChevronDown strokeWidth={2.5} />
       </div>
     );
   }
   return (
     <div className={styles.heading_arrow}>
-      <KeyboardArrowUpRounded color="inherit" />
+      <ChevronUp strokeWidth={2.5} />
     </div>
   );
 };
@@ -136,7 +132,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
             onClick={randomCountry}
             disabled={countries.length === 0}
           >
-            <ShuffleRounded color="inherit" style={{ fontSize: '1.5rem' }} />
+            <Shuffle />
           </button>
         </div>
         <div className={styles.input}>

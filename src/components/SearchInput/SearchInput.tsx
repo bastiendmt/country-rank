@@ -1,4 +1,4 @@
-import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import { Search } from 'lucide-react';
 import styles from './SearchInput.module.css';
 
 const SearchInput = ({
@@ -9,10 +9,7 @@ const SearchInput = ({
   placeholder: string;
 }) => (
   <div className={styles.wrapper}>
-    <SearchRoundedIcon
-      color="inherit"
-      style={{ fontSize: '1.5rem', width: 24 }}
-    />
+    <Search />
     <input
       className={styles.input}
       placeholder={placeholder}

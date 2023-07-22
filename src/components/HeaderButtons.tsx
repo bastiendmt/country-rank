@@ -4,7 +4,7 @@ import { LangContext } from '@/app/_app';
 import styles from '@/styles/layout.module.css';
 import translationsContent from '@/translations/translations';
 import { TranslationType } from '@/types/types';
-import { Brightness6Rounded, LanguageRounded } from '@mui/icons-material';
+import { Globe2, Moon, Sun } from 'lucide-react';
 import { useContext, useState } from 'react';
 
 type Theme = 'light' | 'dark';
@@ -35,7 +35,7 @@ export const HeaderButtons = () => {
         onClick={switchTheme}
         title={translate.switchTheme}
       >
-        <Brightness6Rounded style={{ fontSize: '1.5rem' }} />
+        {theme === 'light' ? <Moon /> : <Sun />}
       </button>
       <button
         type="button"
@@ -43,7 +43,7 @@ export const HeaderButtons = () => {
         onClick={switchLanguage}
         title={translate.switchLanguage}
       >
-        <LanguageRounded style={{ fontSize: '1.5rem' }} />
+        <Globe2 />
       </button>
     </>
   );
