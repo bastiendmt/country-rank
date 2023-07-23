@@ -1,4 +1,5 @@
 import { API_URL } from '@/config';
+import { Country } from '@/types/types';
 
 /**
  * Get countries from https://restcountries.com/v3.1/alpha?codes=[alphaCodes]
@@ -8,9 +9,9 @@ import { API_URL } from '@/config';
  * @returns Country[]
  */
 export async function getBorders(alphaCodes: string[]) {
-  const res = await fetch(`${API_URL}/alpha?codes=${alphaCodes?.join(',')}`);
+  const res = await fetch(`${API_URL}/alpha?codes=${alphaCodes.join(',')}`);
   if (!res.ok) {
     throw new Error('Failed to fetch countries');
   }
-  return res.json();
+  return res.json() as Promise<Country[]>;
 }

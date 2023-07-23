@@ -14,20 +14,20 @@ export async function generateStaticParams(): Promise<{ id: string }[]> {
   }));
 }
 
-type PageProps = {
+interface PageProps {
   params: { id: string };
-};
+}
 
 export async function generateMetadata({
   params: { id },
 }: PageProps): Promise<Metadata> {
   const country = await getCountry(id);
   return {
-    description: `Find more about ${country.name.common} by clicking on this link. ${OG_DESCRIPTION}`,
+    description: `Find more about ${country?.name.common} by clicking on this link. ${OG_DESCRIPTION}`,
     openGraph: {
-      images: [country.flags.png],
+      images: [country?.flags.png ?? ''],
     },
-    title: `${OG_TITLE} - ${country.name.common}`,
+    title: `${OG_TITLE} - ${country?.name.common}`,
   };
 }
 

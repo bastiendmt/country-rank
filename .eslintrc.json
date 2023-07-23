@@ -15,14 +15,12 @@
   "overrides": [
     {
       "extends": [
-        "plugin:@typescript-eslint/recommended",
-        "plugin:@typescript-eslint/eslint-recommended", // Uses the recommended rules from @typescript-eslint/eslint-plugin
-        // This enables a lot of type checking
-        "plugin:@typescript-eslint/recommended-requiring-type-checking" // Uses the recommended rules from @typescript-eslint/eslint-plugin
+        "plugin:@typescript-eslint/strict-type-checked",
+        "plugin:@typescript-eslint/stylistic-type-checked"
       ],
       "files": ["**/*.{ts,tsx}"],
       "parserOptions": {
-        "project": ["./tsconfig.json"]
+        "project": true
       },
       "rules": {
         "@typescript-eslint/explicit-function-return-type": "off",

@@ -22,7 +22,7 @@ const CountryDetails = ({ country }: { country: Country }) => {
   useEffect(() => {
     if (country.borders?.length) {
       getBorders(country.borders)
-        .then((countries: Countries) => {
+        .then((countries) => {
           setBorders(countries);
           setBordersLoading(false);
         })
@@ -32,31 +32,23 @@ const CountryDetails = ({ country }: { country: Country }) => {
     }
   }, [country.borders]);
 
-  const hasBorders = borders?.length !== 0;
+  const hasBorders = borders.length !== 0;
 
-  const getCurrencies = () => {
-    if (!country.currencies) return '-';
-    return Object.keys(country.currencies)
+  const getCurrencies = () =>
+    Object.keys(country.currencies)
       .map((curr) => country.currencies[curr]?.name)
       .join(', ');
-  };
 
-  const getLanguages = () => {
-    if (!country.languages) return '-';
-    return Object.keys(country.languages)
+  const getLanguages = () =>
+    Object.keys(country.languages)
       .map((lang) => country.languages[lang])
       .join(', ');
-  };
 
-  const getNativeName = () => {
-    if (!country.name.nativeName) return '-';
-    return (
-      Object.keys(country.name.nativeName)
-        // first common native name
-        .map((native) => country.name.nativeName[native]?.common)
-        .join(', ')
-    );
-  };
+  const getNativeName = () =>
+    Object.keys(country.name.nativeName)
+      // first common native name
+      .map((native) => country.name.nativeName[native]?.common)
+      .join(', ');
 
   return (
     <div className={styles.container}>
@@ -72,7 +64,7 @@ const CountryDetails = ({ country }: { country: Country }) => {
           </div>
 
           <h1 className={styles.overview_name}>
-            {country.translations[language]?.common || country.name.common}
+            {country.translations[language]?.common ?? country.name.common}
           </h1>
           <div className={styles.overview_region}>{country.region}</div>
 
@@ -126,7 +118,7 @@ const CountryDetails = ({ country }: { country: Country }) => {
               {translate.country.capital}
             </div>
             <div className={styles.details_panel_value}>
-              {country.capital ? country.capital[0] : '-'}
+              {country.capital[0]}
             </div>
           </div>
 

@@ -15,7 +15,7 @@ const NeighboringCountry = ({ country }: { country: Country }) => {
           <Image src={flags.svg} alt={name.common} fill />
         </div>
         <div className={styles.details_panel_name}>
-          {translations[language]?.common || name.common}
+          {translations[language]?.common ?? name.common}
         </div>
       </div>
     </Link>
