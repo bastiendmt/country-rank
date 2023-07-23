@@ -2,7 +2,7 @@ export interface Country {
   altSpellings: string[];
   area: number;
   borders?: string[];
-  capital: string[];
+  capital?: string[];
   capitalInfo: {
     latlng: [number, number];
   };
@@ -19,7 +19,7 @@ export interface Country {
     svg: string;
   };
   continents: string[];
-  currencies: Record<
+  currencies?: Record<
     string,
     {
       name: string;
@@ -50,7 +50,7 @@ export interface Country {
   };
   independent: boolean;
   landlocked: boolean;
-  languages: Record<string, string>;
+  languages?: Record<string, string>;
   latlng: [number, number];
   maps: {
     googleMaps: string;
@@ -58,7 +58,7 @@ export interface Country {
   };
   name: {
     common: string;
-    nativeName: Record<
+    nativeName?: Record<
       string,
       {
         common: string;

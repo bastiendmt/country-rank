@@ -34,21 +34,29 @@ const CountryDetails = ({ country }: { country: Country }) => {
 
   const hasBorders = borders.length !== 0;
 
-  const getCurrencies = () =>
-    Object.keys(country.currencies)
-      .map((curr) => country.currencies[curr]?.name)
+  const getCurrencies = () => {
+    if (!country.currencies) return '-';
+    return Object.keys(country.currencies)
+      .map((curr) => country.currencies?.[curr]?.name)
       .join(', ');
+  };
 
-  const getLanguages = () =>
-    Object.keys(country.languages)
-      .map((lang) => country.languages[lang])
+  const getLanguages = () => {
+    if (!country.languages) return '-';
+    return Object.keys(country.languages)
+      .map((lang) => country.languages?.[lang])
       .join(', ');
+  };
 
-  const getNativeName = () =>
-    Object.keys(country.name.nativeName)
-      // first common native name
-      .map((native) => country.name.nativeName[native]?.common)
-      .join(', ');
+  const getNativeName = () => {
+    if (!country.name.nativeName) return '-';
+    return (
+      Object.keys(country.name.nativeName)
+        // first common native name
+        .map((native) => country.name.nativeName?.[native]?.common)
+        .join(', ')
+    );
+  };
 
   return (
     <div className={styles.container}>
@@ -118,7 +126,7 @@ const CountryDetails = ({ country }: { country: Country }) => {
               {translate.country.capital}
             </div>
             <div className={styles.details_panel_value}>
-              {country.capital[0]}
+              {country.capital?.[0] ?? '-'}
             </div>
           </div>
 

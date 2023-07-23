@@ -8,16 +8,12 @@ import { Country } from '@/types/types';
  * // https://restcountries.com/v3.1/alpha/fra
  * @returns Country
  */
-export async function getCountry(
-  alphaCode: string,
-): Promise<Country | undefined> {
+export async function getCountry(alphaCode: string): Promise<Country> {
   try {
     const res = await fetch(`${API_URL}/alpha/${alphaCode}`, {
       cache: 'force-cache',
     });
-    if (!res.ok) {
-      throw new Error(`Failed to fetch country: ${alphaCode}`);
-    }
+    if (!res.ok) throw new Error(`Failed to fetch country: ${alphaCode}`);
     const countryData = (await res.json()) as [Country];
     return countryData[0];
   } catch (error) {

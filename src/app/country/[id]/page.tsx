@@ -4,7 +4,6 @@ import CountryDetails from '@/components/CountryDetails/CountryDetails';
 import { API_URL } from '@/config';
 import { Countries } from '@/types/types';
 import { Metadata } from 'next';
-import NotFound from './not-found';
 
 export async function generateStaticParams(): Promise<{ id: string }[]> {
   const res = await fetch(`${API_URL}/all`);
@@ -22,18 +21,19 @@ export async function generateMetadata({
   params: { id },
 }: PageProps): Promise<Metadata> {
   const country = await getCountry(id);
+
   return {
-    description: `Find more about ${country?.name.common} by clicking on this link. ${OG_DESCRIPTION}`,
+    description: `Find more about ${country.name.common} by clicking on this link. ${OG_DESCRIPTION}`,
     openGraph: {
-      images: [country?.flags.png ?? ''],
+      images: [country.flags.png],
     },
-    title: `${OG_TITLE} - ${country?.name.common}`,
+    title: `${OG_TITLE} - ${country.name.common}`,
   };
 }
 
 const Country = async ({ params: { id } }: PageProps) => {
   const country = await getCountry(id);
-  if (!country) return NotFound();
+  // if (!country) return NotFound();
   return <CountryDetails country={country} />;
 };
 
