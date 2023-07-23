@@ -34,7 +34,8 @@
         "@typescript-eslint/member-ordering": [
           "error",
           { "default": { "memberTypes": "never", "order": "alphabetically" } }
-        ]
+        ],
+        "@typescript-eslint/no-confusing-void-expression": "off"
       }
     }
   ],

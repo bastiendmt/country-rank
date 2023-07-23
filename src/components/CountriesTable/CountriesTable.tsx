@@ -148,9 +148,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
           <button
             type="button"
             className={styles.heading_name}
-            onClick={() => {
-              setValueAndDirection('name');
-            }}
+            onClick={() => setValueAndDirection('name')}
           >
             <div>{translate.sort.name}</div>
             {sortKey === 'name' && <SortArrow direction={direction} />}
@@ -159,9 +157,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
           <button
             type="button"
             className={styles.heading_population}
-            onClick={() => {
-              setValueAndDirection('population');
-            }}
+            onClick={() => setValueAndDirection('population')}
           >
             <div>{translate.sort.population}</div>
             {sortKey === 'population' && <SortArrow direction={direction} />}
@@ -170,9 +166,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
           <button
             type="button"
             className={styles.heading_area}
-            onClick={() => {
-              setValueAndDirection('area');
-            }}
+            onClick={() => setValueAndDirection('area')}
           >
             <div>
               {translate.sort.area} (km
@@ -184,9 +178,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
           <button
             type="button"
             className={styles.heading_gini}
-            onClick={() => {
-              setValueAndDirection('gini');
-            }}
+            onClick={() => setValueAndDirection('gini')}
           >
             <div>{translate.sort.gini}</div>
             {sortKey === 'gini' && <SortArrow direction={direction} />}
