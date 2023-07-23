@@ -10,7 +10,8 @@
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "airbnb/hooks",
-    "plugin:import/typescript"
+    "plugin:import/typescript",
+    "plugin:@next/next/recommended"
   ],
   "overrides": [
     {
