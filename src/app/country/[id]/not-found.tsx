@@ -2,7 +2,8 @@ import Link from 'next/link';
 
 const NotFound = () => (
   <div>
-    Country not found, <Link href="/">go to home page</Link>
+    An error has occurred, please try again later or{' '}
+    <Link href="/">go to home page</Link>
   </div>
 );
 

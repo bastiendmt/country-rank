@@ -1,8 +1,8 @@
-export type Country = {
+export interface Country {
   altSpellings: string[];
   area: number;
   borders?: string[];
-  capital: string[];
+  capital?: string[];
   capitalInfo: {
     latlng: [number, number];
   };
@@ -19,12 +19,13 @@ export type Country = {
     svg: string;
   };
   continents: string[];
-  currencies: {
-    [key: string]: {
+  currencies?: Record<
+    string,
+    {
       name: string;
       symbol: string;
-    };
-  };
+    }
+  >;
   demonyms: {
     eng: {
       f: string;
@@ -38,22 +39,18 @@ export type Country = {
   fifa: string;
   flag: string;
   flags: {
-    alt: string;
+    alt?: string;
     png: string;
     svg: string;
   };
-  gini?: {
-    [key: string]: number;
-  };
+  gini?: Record<string, number>;
   idd: {
     root: string;
     suffixes: string[];
   };
   independent: boolean;
   landlocked: boolean;
-  languages: {
-    [key: string]: string;
-  };
+  languages?: Record<string, string>;
   latlng: [number, number];
   maps: {
     googleMaps: string;
@@ -61,12 +58,13 @@ export type Country = {
   };
   name: {
     common: string;
-    nativeName: {
-      [key: string]: {
+    nativeName?: Record<
+      string,
+      {
         common: string;
         official: string;
-      };
-    };
+      }
+    >;
     official: string;
   };
   population: number;
@@ -80,18 +78,19 @@ export type Country = {
   subregion: string;
   timezones: string[];
   tld: string[];
-  translations: {
-    [key: string]: {
+  translations: Record<
+    string,
+    {
       common: string;
       official: string;
-    };
-  };
+    }
+  >;
   unMember: boolean;
-};
+}
 
 export type Countries = Country[];
 
-export type TranslationType = {
+export interface TranslationType {
   country: {
     area: string;
     capital: string;
@@ -118,4 +117,4 @@ export type TranslationType = {
   };
   switchLanguage: string;
   switchTheme: string;
-};
+}
