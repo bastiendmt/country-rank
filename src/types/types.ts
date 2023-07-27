@@ -75,7 +75,7 @@ export interface Country {
   region: string;
   startOfWeek: string;
   status: string;
-  subregion: string;
+  subregion?: string;
   timezones: string[];
   tld: string[];
   translations: Record<

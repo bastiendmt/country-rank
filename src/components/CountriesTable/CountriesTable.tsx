@@ -21,7 +21,7 @@ const filterCountries = (countries: Countries, keyword: string): Countries =>
     (country) =>
       country.name.common.toLowerCase().includes(keyword) ||
       country.region.toLowerCase().includes(keyword) ||
-      country.subregion.toLowerCase().includes(keyword),
+      country.subregion?.toLowerCase().includes(keyword),
   );
 
 const orderBy = (
