@@ -2,18 +2,17 @@
 
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=bastiendmt_country-rank&metric=bugs)](https://sonarcloud.io/summary/new_code?id=bastiendmt_country-rank)[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=bastiendmt_country-rank&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=bastiendmt_country-rank)[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=bastiendmt_country-rank&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=bastiendmt_country-rank)
 
-This website is displays countries in list and details about a country such as its population, languages, neighbors...
+This website displays countries in list and details about a country such as its population, languages, neighbors...
 
 ## Features
 
-- getting countries from an API
+- fetching countries from an [API](https://restcountries.com)
 - responsive layout
-- search information
+- search
 - filter by country, region
 - dark mode
-- [random country](https://country-rank.bastiendmt.vercel.app/country/random)
+- [random country](https://country-rank.bastiendmt.vercel.app/country/random) *using middleware or button*
 - language switch (en & fr)
-- select a random country
 
 ## Preview
 
