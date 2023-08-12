@@ -20,6 +20,7 @@ jobs:
 
       - name: Prettify code
         uses: creyD/prettier_action@master
+        # Configuration options https://github.com/creyD/prettier_action#github-prettier-action
         with:
           # This part is also where you can pass other options, for example:
           prettier_options: --write **/*.{js,ts,md,tsx,css,scss}
