@@ -11,7 +11,7 @@ This website displays countries in list and details about a country such as its 
 - search
 - filter by country, region
 - dark mode
-- [random country](https://country-rank.bastiendmt.vercel.app/country/random) *using middleware or button*
+- [random country](https://country-rank.bastiendmt.vercel.app/country/random) _using middleware or button_
 - language switch (en & fr)
 
 ## Preview
