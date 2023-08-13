@@ -90,7 +90,7 @@ export interface Country {
 
 export type Countries = Country[];
 
-export interface TranslationType {
+export interface Translation {
   country: {
     area: string;
     capital: string;
@@ -118,3 +118,5 @@ export interface TranslationType {
   switchLanguage: string;
   switchTheme: string;
 }
+
+export type Language = 'eng' | 'fra';

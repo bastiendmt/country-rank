@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useContext } from 'react';
-import { Country } from '@/types/types';
+import { Country } from '@/types';
 import { LanguageContext } from '@/components/LanguageProvider';
 import styles from './CountryDetails.module.css';
 

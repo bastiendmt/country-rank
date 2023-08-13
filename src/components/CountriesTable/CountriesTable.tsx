@@ -8,8 +8,8 @@ import { useContext, useEffect, useState } from 'react';
 import { LanguageContext } from '@/components/LanguageProvider';
 import formatNumber from '@/functions/formatNumber';
 import { formatGini, giniToString } from '@/functions/getGini';
-import translationsContent from '@/translations/translations';
-import { Countries } from '@/types/types';
+import { useTranslate } from '@/translations/translations';
+import { Countries } from '@/types';
 import SearchInput from '../SearchInput/SearchInput';
 import styles from './CountriesTable.module.css';
 
@@ -79,7 +79,7 @@ const SortArrow = ({ direction }: { direction: string }) => {
 const CountriesTable = ({ countries }: { countries: Countries }) => {
   const router = useRouter();
   const { language } = useContext(LanguageContext);
-  const translate = translationsContent[language];
+  const translate = useTranslate(language);
   const [keyword, setKeyword] = useState('');
   const [direction, setDirection] = useState<DirectionType>('');
   const [sortKey, setSortKey] = useState<SortKeys>('');

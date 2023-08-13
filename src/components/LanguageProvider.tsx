@@ -8,11 +8,10 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-
-type Lang = 'eng' | 'fra';
+import { Language } from '@/types';
 
 interface ContextInterface {
-  language: Lang;
+  language: Language;
   switchLanguage: () => void;
 }
 
@@ -22,7 +21,7 @@ export const LanguageContext = createContext<ContextInterface>({
 });
 
 const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLang] = useState<Lang>('eng');
+  const [language, setLang] = useState<Language>('eng');
 
   const switchLanguage = useCallback(() => {
     const newLang = language === 'eng' ? 'fra' : 'eng';

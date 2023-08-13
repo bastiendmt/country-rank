@@ -8,14 +8,14 @@ import { LanguageContext } from '@/components/LanguageProvider';
 import Mapbox from '@/components/MapboxMap/MapboxMap';
 import formatNumber from '@/functions/formatNumber';
 import { giniToString } from '@/functions/getGini';
-import translationsContent from '@/translations/translations';
-import { Countries, Country } from '@/types/types';
+import { useTranslate } from '@/translations/translations';
+import { Countries, Country } from '@/types';
 import styles from './CountryDetails.module.css';
 import NeighboringCountry from './NeighboringCountry';
 
 const CountryDetails = ({ country }: { country: Country }) => {
   const { language } = useContext(LanguageContext);
-  const translate = translationsContent[language];
+  const translate = useTranslate(language);
   const [bordersLoading, setBordersLoading] = useState(true);
   const [borders, setBorders] = useState<Countries>([]);
 
