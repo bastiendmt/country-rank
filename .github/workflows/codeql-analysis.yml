@@ -1,30 +1,26 @@
-name: Action checks
+# For most projects, this workflow file will not need changing; you simply need
+# to commit it to your repository.
+#
+# You may wish to alter this file to override the set of languages analyzed,
+# or to provide custom queries or build logic.
+#
+# ******** NOTE ********
+# We have attempted to detect the languages in your repository. Please check
+# the `language` matrix defined below to confirm you have the correct set of
+# supported CodeQL languages.
+#
+name: 'CodeQL'
+
 on:
   push:
-    branches:
-      - main
+    branches: ['main']
   pull_request:
-    branches: [main]
+    # The branches below must be a subset of the branches above
+    branches: ['main']
+  schedule:
+    - cron: '24 23 * * 5'
 
 jobs:
-  prettier:
-    name: Prettier
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          # Make sure the actual branch is checked out when running on pull requests
-          ref: ${{ github.head_ref }}
-
-      - name: Prettify code
-        uses: creyD/prettier_action@master
-        # Configuration options https://github.com/creyD/prettier_action#github-prettier-action
-        with:
-          # This part is also where you can pass other options, for example:
-          prettier_options: --write **/*.{js,ts,md,tsx,css,scss}
-
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
@@ -73,16 +69,3 @@ jobs:
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
-
-  sonarcloud:
-    name: SonarCloud
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
