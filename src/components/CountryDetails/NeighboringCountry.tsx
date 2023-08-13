@@ -2,11 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useContext } from 'react';
 import { Country } from '@/types/types';
-import { LangContext } from '@/app/_app';
+import { LanguageContext } from '@/components/LanguageProvider';
 import styles from './CountryDetails.module.css';
 
 const NeighboringCountry = ({ country }: { country: Country }) => {
-  const { language } = useContext(LangContext);
+  const { language } = useContext(LanguageContext);
   const { flags, name, cca3, translations } = country;
   return (
     <Link href={`/country/${cca3}`} key={name.common} passHref>

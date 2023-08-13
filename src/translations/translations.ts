@@ -1,9 +1,6 @@
 import { TranslationType } from '@/types/types';
 
-const translationsContent: {
-  eng: TranslationType;
-  fra: TranslationType;
-} = {
+const translationsContent: Record<'eng' | 'fra', TranslationType> = {
   eng: {
     country: {
       area: 'Area',
@@ -13,7 +10,7 @@ const translationsContent: {
       gini: 'Gini',
       languages: 'Languages',
       nativeName: 'Native name',
-      neighboringCountries: 'Neihbouring Countries',
+      neighboringCountries: 'Neighboring Countries',
       noNeighbors: 'No neighbors',
       population: 'Population',
       subregion: 'Subregion',
