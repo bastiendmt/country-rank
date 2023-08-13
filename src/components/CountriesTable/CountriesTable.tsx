@@ -1,15 +1,15 @@
 'use client';
 
-import { LangContext } from '@/app/_app';
-import formatNumber from '@/functions/formatNumber';
-import { formatGini, giniToString } from '@/functions/getGini';
-import translationsContent from '@/translations/translations';
-import { Countries, TranslationType } from '@/types/types';
 import { ChevronDown, ChevronUp, Shuffle } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
+import { LangContext } from '@/app/_app';
+import formatNumber from '@/functions/formatNumber';
+import { formatGini, giniToString } from '@/functions/getGini';
+import translationsContent from '@/translations/translations';
+import { Countries, TranslationType } from '@/types/types';
 import SearchInput from '../SearchInput/SearchInput';
 import styles from './CountriesTable.module.css';
 

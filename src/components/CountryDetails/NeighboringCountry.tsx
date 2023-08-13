@@ -1,8 +1,8 @@
-import { LangContext } from '@/app/_app';
-import { Country } from '@/types/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useContext } from 'react';
+import { Country } from '@/types/types';
+import { LangContext } from '@/app/_app';
 import styles from './CountryDetails.module.css';
 
 const NeighboringCountry = ({ country }: { country: Country }) => {

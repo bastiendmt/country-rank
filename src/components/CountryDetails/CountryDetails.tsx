@@ -1,5 +1,8 @@
 'use client';
 
+import { MapPin } from 'lucide-react';
+import Image from 'next/image';
+import { useContext, useEffect, useState } from 'react';
 import { getBorders } from '@/api/getBorders';
 import { LangContext } from '@/app/_app';
 import Mapbox from '@/components/MapboxMap/MapboxMap';
@@ -7,9 +10,6 @@ import formatNumber from '@/functions/formatNumber';
 import { giniToString } from '@/functions/getGini';
 import translationsContent from '@/translations/translations';
 import { Countries, Country, TranslationType } from '@/types/types';
-import { MapPin } from 'lucide-react';
-import Image from 'next/image';
-import { useContext, useEffect, useState } from 'react';
 import styles from './CountryDetails.module.css';
 import NeighboringCountry from './NeighboringCountry';
 

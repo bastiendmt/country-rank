@@ -1,6 +1,6 @@
+import { Metadata } from 'next';
 import { getCountries } from '@/api/getCountries';
 import CountriesTable from '@/components/CountriesTable/CountriesTable';
-import { Metadata } from 'next';
 import NotFound from './not-found';
 import { OG_DESCRIPTION, OG_TITLE } from './og';
 

@@ -1,11 +1,11 @@
 'use client';
 
+import { Globe2, Moon, Sun } from 'lucide-react';
+import { useContext, useState } from 'react';
 import { LangContext } from '@/app/_app';
 import styles from '@/styles/layout.module.css';
 import translationsContent from '@/translations/translations';
 import { TranslationType } from '@/types/types';
-import { Globe2, Moon, Sun } from 'lucide-react';
-import { useContext, useState } from 'react';
 
 type Theme = 'light' | 'dark';
 
