@@ -9,7 +9,7 @@ import { LanguageContext } from '@/components/LanguageProvider';
 import formatNumber from '@/functions/formatNumber';
 import { formatGini, giniToString } from '@/functions/getGini';
 import translationsContent from '@/translations/translations';
-import { Countries, TranslationType } from '@/types/types';
+import { Countries } from '@/types/types';
 import SearchInput from '../SearchInput/SearchInput';
 import styles from './CountriesTable.module.css';
 
