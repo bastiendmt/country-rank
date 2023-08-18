@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { HeaderButtons } from '@/components/HeaderButtons';
 import { Logo } from '@/logo';
-import styles from '@/styles/layout.module.css';
+import styles from './layout.module.css';
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
   <html lang="fr">

@@ -1,4 +1,4 @@
-import { API_URL } from '@/config';
+import { API_URL } from '@/api-url';
 import { Country } from '@/types/types';
 
 /**
