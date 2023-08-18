@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useContext, useEffect, useState } from 'react';
 import { getBorders } from '@/api/getBorders';
 import { LanguageContext } from '@/components/LanguageProvider';
-import Mapbox from '@/components/MapboxMap/MapboxMap';
+import Mapbox from '@/components/CountryDetails/MapboxMap/MapboxMap';
 import formatNumber from '@/functions/formatNumber';
 import { giniToString } from '@/functions/getGini';
 import { useTranslate } from '@/translations/translations';
