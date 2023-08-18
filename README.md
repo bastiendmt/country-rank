@@ -14,6 +14,18 @@ This website displays countries in list and details about a country such as its 
 - [random country](https://country-rank.bastiendmt.vercel.app/country/random) _using middleware or button_
 - language switch (en & fr)
 
+## Tech stack
+
+This project is using NextJS with app router and the following :
+
+- Lucide icons
+- Mapbox
+- Eslint
+
+Data is coming from https://restcountries.com
+
+The site is deployed on vercel
+
 ## Preview
 
 **Countries list**
