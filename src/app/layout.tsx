@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { HeaderButtons } from '@/components/HeaderButtons';
+import LanguageProvider from '@/components/LanguageProvider';
 import { Logo } from '@/logo';
 import styles from '@/styles/layout.module.css';
-import LanguageProvider from '@/components/LanguageProvider';
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
   <html lang="fr">
