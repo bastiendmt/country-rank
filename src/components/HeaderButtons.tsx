@@ -2,17 +2,16 @@
 
 import { Globe2, Moon, Sun } from 'lucide-react';
 import { useContext, useState } from 'react';
-import { LangContext } from '@/app/_app';
+import { LanguageContext } from '@/components/LanguageProvider';
 import styles from '@/styles/layout.module.css';
-import translationsContent from '@/translations/translations';
-import { TranslationType } from '@/types/types';
+import { useTranslate } from '@/translations/translations';
 
 type Theme = 'light' | 'dark';
 
 export const HeaderButtons = () => {
+  const { language, switchLanguage } = useContext(LanguageContext);
+  const translate = useTranslate(language);
   const [theme, setTheme] = useState<Theme>('light');
-  const { language, switchLanguage } = useContext(LangContext);
-  const translate: TranslationType = translationsContent[language];
 
   const switchTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';

@@ -1,5 +1,5 @@
 import { API_URL } from '@/config';
-import { Country } from '@/types/types';
+import { Country } from '@/types';
 
 /**
  * Get countries from https://restcountries.com/v3.1/alpha?codes=[alphaCodes]
