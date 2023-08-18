@@ -1,4 +1,4 @@
-import { API_URL } from '@/api-url';
+import { API_URL } from '@/api/url';
 import { Countries } from '@/types';
 
 /**
