@@ -1,14 +1,13 @@
 import { Metadata } from 'next';
+import { getCountries } from '@/api/getCountries';
 import { getCountry } from '@/api/getCountry';
 import { OG_DESCRIPTION, OG_TITLE } from '@/app/og';
 import CountryDetails from '@/components/CountryDetails/CountryDetails';
-import { API_URL } from '@/api/url';
-import { Countries } from '@/types';
 import NotFound from './not-found';
 
 export async function generateStaticParams(): Promise<{ id: string }[]> {
-  const res = await fetch(`${API_URL}/all`);
-  const countries = (await res.json()) as Countries;
+  const countries = await getCountries();
+  if (!countries) return [];
   return countries.map((country) => ({
     id: country.cca3,
   }));
