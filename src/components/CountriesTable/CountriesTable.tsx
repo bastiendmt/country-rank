@@ -5,11 +5,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
-import { LangContext } from '@/app/_app';
+import { LanguageContext } from '@/components/LanguageProvider';
 import formatNumber from '@/functions/formatNumber';
 import { formatGini, giniToString } from '@/functions/getGini';
-import translationsContent from '@/translations/translations';
-import { Countries, TranslationType } from '@/types/types';
+import { useTranslate } from '@/translations/translations';
+import { Countries } from '@/types';
 import SearchInput from '../SearchInput/SearchInput';
 import styles from './CountriesTable.module.css';
 
@@ -77,12 +77,12 @@ const SortArrow = ({ direction }: { direction: string }) => {
 };
 
 const CountriesTable = ({ countries }: { countries: Countries }) => {
-  const [keyword, setKeyword] = useState('');
   const router = useRouter();
+  const { language } = useContext(LanguageContext);
+  const translate = useTranslate(language);
+  const [keyword, setKeyword] = useState('');
   const [direction, setDirection] = useState<DirectionType>('');
   const [sortKey, setSortKey] = useState<SortKeys>('');
-  const { language } = useContext(LangContext);
-  const translate: TranslationType = translationsContent[language];
   const [currentCountries, setCurrentCountries] = useState(countries);
 
   const switchDirection = () => {

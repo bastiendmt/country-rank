@@ -1,5 +1,5 @@
 import { API_URL } from '@/api-url';
-import { Countries } from '@/types/types';
+import { Countries } from '@/types';
 
 /**
  * Get countries from https://restcountries.com/v3.1/all

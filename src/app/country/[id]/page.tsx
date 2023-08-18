@@ -3,7 +3,7 @@ import { getCountry } from '@/api/getCountry';
 import { OG_DESCRIPTION, OG_TITLE } from '@/app/og';
 import CountryDetails from '@/components/CountryDetails/CountryDetails';
 import { API_URL } from '@/api-url';
-import { Countries } from '@/types/types';
+import { Countries } from '@/types';
 import NotFound from './not-found';
 
 export async function generateStaticParams(): Promise<{ id: string }[]> {
