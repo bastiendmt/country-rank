@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "yarn lint && next build",
+    "build": "bun lint && next build",
     "start": "next start",
-    "lint": "yarn run eslint src -c .eslintrc.json --fix"
+    "lint": "bun run eslint src -c .eslintrc.json --fix"
   },
   "dependencies": {
     "lucide-react": "^0.265.0",
