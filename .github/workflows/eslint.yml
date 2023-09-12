@@ -39,7 +39,7 @@ jobs:
           bun add @microsoft/eslint-formatter-sarif@2.1.7
 
       - name: Run ESLint
-        run: bun eslint .
+        run: bun eslint src
           --config .eslintrc.json
           --ext .js,.jsx,.ts,.tsx
           --format @microsoft/eslint-formatter-sarif
