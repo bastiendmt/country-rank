@@ -51,7 +51,7 @@ To run the project locally, run the development server as following:
 npm run dev
 # or
 yarn dev
-# or 
+# or
 bun dev
 ```
 
