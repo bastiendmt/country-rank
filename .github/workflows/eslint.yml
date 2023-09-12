@@ -31,15 +31,15 @@ jobs:
       contents: read
     steps:
       - name: Checkout code
-        uses: oven-sh/setup-bun@v1
+        uses: actions/checkout@v3
 
       - name: Install ESLint
         run: |
-          bun add eslint@8.10.0
-          bun add @microsoft/eslint-formatter-sarif@2.1.7
+          yarn add eslint@8.10.0
+          yarn add @microsoft/eslint-formatter-sarif@2.1.7
 
       - name: Run ESLint
-        run: bun eslint src
+        run: yarn eslint src
           --config .eslintrc.json
           --ext .js,.jsx,.ts,.tsx
           --format @microsoft/eslint-formatter-sarif
