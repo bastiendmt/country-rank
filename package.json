@@ -2,6 +2,9 @@
   "name": "country-ranks",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "18"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "bun lint && next build",
