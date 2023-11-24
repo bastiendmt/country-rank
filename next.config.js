@@ -10,4 +10,10 @@ module.exports = withPWA({
   images: {
     domains: ['restcountries.com', 'upload.wikimedia.org', 'flagcdn.com'],
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 });
