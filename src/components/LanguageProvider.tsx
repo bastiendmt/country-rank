@@ -21,12 +21,12 @@ export const LanguageContext = createContext<ContextInterface>({
 });
 
 const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLang] = useState<Language>('eng');
+  const [language, setLanguage] = useState<Language>('eng');
 
   const switchLanguage = useCallback(() => {
     const newLang = language === 'eng' ? 'fra' : 'eng';
     document.documentElement.lang = newLang; // not used
-    setLang(newLang);
+    setLanguage(newLang);
   }, [language]);
 
   const value = useMemo(
