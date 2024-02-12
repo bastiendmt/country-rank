@@ -3,7 +3,7 @@
 import { ChevronDown, ChevronUp, Shuffle } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
 import { LanguageContext } from '@/components/LanguageProvider';
 import formatNumber from '@/functions/formatNumber';
@@ -78,12 +78,14 @@ const SortArrow = ({ direction }: { direction: string }) => {
 
 const CountriesTable = ({ countries }: { countries: Countries }) => {
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const { language } = useContext(LanguageContext);
   const translate = useTranslate(language);
-  const [keyword, setKeyword] = useState('');
   const [direction, setDirection] = useState<DirectionType>('');
   const [sortKey, setSortKey] = useState<SortKeys>('');
   const [currentCountries, setCurrentCountries] = useState(countries);
+  const search = searchParams.get('search')?.toString() ?? '';
 
   const switchDirection = () => {
     if (!direction) {
@@ -100,16 +102,21 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
     setSortKey(key);
   };
 
-  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setKeyword(e.target.value.toLowerCase());
+  const onInputChange = (term: string) => {
+    const params = new URLSearchParams(searchParams);
+    if (term) {
+      params.set('search', term);
+    } else {
+      params.delete('search');
+    }
+    router.replace(`${pathname}?${params.toString()}`);
   };
 
   useEffect(() => {
-    const filteredCountry = filterCountries(countries, keyword);
+    const filteredCountry = filterCountries(countries, search);
     const orderedCountry = orderBy(filteredCountry, sortKey, direction);
     setCurrentCountries(orderedCountry);
-  }, [keyword, sortKey, direction, countries]);
+  }, [sortKey, direction, countries, search]);
 
   const randomCountry = () => {
     const randomIndex = Math.floor(Math.random() * countries.length);
@@ -139,6 +146,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
           <SearchInput
             placeholder={translate.filter}
             onChange={onInputChange}
+            defaultValue={searchParams.get('search')?.toString()}
           />
         </div>
       </div>
