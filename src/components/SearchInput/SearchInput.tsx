@@ -4,8 +4,10 @@ import styles from './SearchInput.module.css';
 const SearchInput = ({
   onChange,
   placeholder,
+  defaultValue,
 }: {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  defaultValue: string | undefined;
+  onChange: (e: string) => void;
   placeholder: string;
 }) => (
   <div className={styles.wrapper}>
@@ -13,7 +15,8 @@ const SearchInput = ({
     <input
       className={styles.input}
       placeholder={placeholder}
-      onChange={onChange}
+      onChange={(e) => onChange(e.target.value)}
+      defaultValue={defaultValue}
     />
   </div>
 );
