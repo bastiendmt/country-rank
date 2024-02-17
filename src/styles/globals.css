@@ -29,7 +29,9 @@ body {
   margin: 0;
   font-family: var(--font-family);
   background-color: var(--background-color);
+  transition: background 350ms ease 0s;
   color: var(--text-color);
+  height: 100%;
 }
 
 a {

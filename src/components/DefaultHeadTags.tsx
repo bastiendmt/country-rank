@@ -13,7 +13,6 @@ const DefaultHeadTags = () => (
     <meta name="author" content="Bastien Dumont" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="apple-touch-icon" href="/apple-icon.png" />
-    <title>TEST</title>
   </>
 );
 
