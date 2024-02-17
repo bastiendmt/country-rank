@@ -1,7 +1,7 @@
 'use client';
 
 import { Globe2, Moon, Sun } from 'lucide-react';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { LanguageContext } from '@/components/LanguageProvider';
 import styles from '@/styles/layout.module.css';
 import { useTranslate } from '@/translations/translations';
@@ -14,11 +14,21 @@ export const HeaderButtons = () => {
   const [theme, setTheme] = useState<Theme>('light');
 
   const switchTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
+    const newTheme =
+      localStorage.getItem('theme') === 'light' ? 'dark' : 'light';
     localStorage.setItem('theme', newTheme);
     document.body.dataset.theme = newTheme;
+    setTheme(newTheme);
   };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const localTheme = localStorage.getItem('theme') as Theme | null;
+      const targetTheme = localTheme ?? 'light';
+      setTheme(targetTheme);
+      document.body.dataset.theme = targetTheme;
+    }
+  }, []);
 
   return (
     <>

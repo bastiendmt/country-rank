@@ -5,7 +5,7 @@
   --text-color-secondary: #636363;
   --primary-color: #21b6b7;
 
-  --background-color: #f9f9f9;
+  /* --background-color: #f9f9f9; */
   --background-color-dark: #eef3f6;
   --background-color-light: white;
 
@@ -14,6 +14,7 @@
 }
 
 [data-theme='dark'] {
+  color-scheme: dark;
   --text-color: #f0f0f0;
   --text-color-secondary: #b3c5cd;
   --primary-color: #21b6b7;
@@ -29,7 +30,9 @@ body {
   margin: 0;
   font-family: var(--font-family);
   background-color: var(--background-color);
+  transition: background 350ms ease 0s;
   color: var(--text-color);
+  height: 100%;
 }
 
 a {
