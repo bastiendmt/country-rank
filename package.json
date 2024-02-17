@@ -10,6 +10,7 @@
     "build": "bun lint && next build",
     "start": "next start",
     "lint": "bun run eslint src -c .eslintrc.json --fix",
+    "format": "bun run prettier --write src/**/*.{html,js,ts,json,tsx}",
     "typecheck": "bun run tsc -p ./tsconfig.json"
   },
   "dependencies": {
@@ -40,6 +41,6 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-prettier": "^5",
     "eslint-plugin-react": "^7.33.1",
-    "prettier": "^3.0.3"
+    "prettier": "^3.2.5"
   }
 }
