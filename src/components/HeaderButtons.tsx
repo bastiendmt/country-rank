@@ -1,23 +1,44 @@
 'use client';
 
 import { Globe2, Moon, Sun } from 'lucide-react';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { LanguageContext } from '@/components/LanguageProvider';
 import styles from '@/styles/layout.module.css';
 import { useTranslate } from '@/translations/translations';
-
-type Theme = 'light' | 'dark';
+import { useTheme } from 'next-themes';
 
 export const HeaderButtons = () => {
   const { language, switchLanguage } = useContext(LanguageContext);
   const translate = useTranslate(language);
-  const [theme, setTheme] = useState<Theme>('light');
+
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme, setTheme } = useTheme();
+
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted)
+    return (
+      <>
+        <button
+          type="button"
+          className={styles.theme_switcher}
+          title={translate.switchTheme}
+        >
+          <Moon />
+        </button>
+        <button
+          type="button"
+          className={styles.language_switcher}
+          title={translate.switchLanguage}
+        >
+          <Globe2 />
+        </button>
+      </>
+    );
 
   const switchTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
+    const newTheme = resolvedTheme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-    document.body.dataset.theme = newTheme;
   };
 
   return (
@@ -28,7 +49,7 @@ export const HeaderButtons = () => {
         onClick={switchTheme}
         title={translate.switchTheme}
       >
-        {theme === 'light' ? <Moon /> : <Sun />}
+        {resolvedTheme === 'light' ? <Moon /> : <Sun />}
       </button>
       <button
         type="button"
