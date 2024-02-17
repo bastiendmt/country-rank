@@ -7,8 +7,6 @@ import styles from '@/styles/layout.module.css';
 import { useTranslate } from '@/translations/translations';
 import { useTheme } from 'next-themes';
 
-type Theme = 'light' | 'dark';
-
 export const HeaderButtons = () => {
   const { language, switchLanguage } = useContext(LanguageContext);
   const translate = useTranslate(language);
