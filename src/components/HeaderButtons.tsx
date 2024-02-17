@@ -5,30 +5,43 @@ import { useContext, useEffect, useState } from 'react';
 import { LanguageContext } from '@/components/LanguageProvider';
 import styles from '@/styles/layout.module.css';
 import { useTranslate } from '@/translations/translations';
+import { useTheme } from 'next-themes';
 
 type Theme = 'light' | 'dark';
 
 export const HeaderButtons = () => {
   const { language, switchLanguage } = useContext(LanguageContext);
   const translate = useTranslate(language);
-  const [theme, setTheme] = useState<Theme>('light');
+
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme, setTheme } = useTheme();
+
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted)
+    return (
+      <>
+        <button
+          type="button"
+          className={styles.theme_switcher}
+          title={translate.switchTheme}
+        >
+          <Moon />
+        </button>
+        <button
+          type="button"
+          className={styles.language_switcher}
+          title={translate.switchLanguage}
+        >
+          <Globe2 />
+        </button>
+      </>
+    );
 
   const switchTheme = () => {
-    const newTheme =
-      localStorage.getItem('theme') === 'light' ? 'dark' : 'light';
-    localStorage.setItem('theme', newTheme);
-    document.body.dataset.theme = newTheme;
+    const newTheme = resolvedTheme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
   };
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const localTheme = localStorage.getItem('theme') as Theme | null;
-      const targetTheme = localTheme ?? 'light';
-      setTheme(targetTheme);
-      document.body.dataset.theme = targetTheme;
-    }
-  }, []);
 
   return (
     <>
@@ -38,7 +51,7 @@ export const HeaderButtons = () => {
         onClick={switchTheme}
         title={translate.switchTheme}
       >
-        {theme === 'light' ? <Moon /> : <Sun />}
+        {resolvedTheme === 'light' ? <Moon /> : <Sun />}
       </button>
       <button
         type="button"

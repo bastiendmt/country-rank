@@ -14,7 +14,6 @@
 }
 
 [data-theme='dark'] {
-  color-scheme: dark;
   --text-color: #f0f0f0;
   --text-color-secondary: #b3c5cd;
   --primary-color: #21b6b7;
