@@ -27,7 +27,7 @@ const CountryDetails = ({ country }: { country: Country }) => {
           setBordersLoading(false);
         })
         .catch((err: unknown) => {
-          throw new Error(err);
+          console.error('Could not fetch borders', err);
         });
     }
   }, [country.borders]);
