@@ -26,7 +26,7 @@ const CountryDetails = ({ country }: { country: Country }) => {
           setBorders(countries);
           setBordersLoading(false);
         })
-        .catch((err: string) => {
+        .catch((err: unknown) => {
           throw new Error(err);
         });
     }

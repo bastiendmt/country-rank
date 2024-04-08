@@ -8,8 +8,8 @@
 export const giniToString = (gini?: Record<string, number>): string => {
   if (!gini) return '-';
   const latestYear = Object.keys(gini)[0] as string;
-  const value = gini[latestYear] as number;
-  return `${value} %`;
+  const value = gini[latestYear] ?? 0;
+  return `${value.toString()} %`;
 };
 
 /** Format gini to sort */
