@@ -10,6 +10,7 @@ export async function middleware(req: NextRequest) {
     const randomIndex = Math.floor(Math.random() * countries.length);
     const countryCode = countries[randomIndex]?.cca3;
     if (!countryCode) return NextResponse.next();
+    // rewriting the url doesn't seen to work
     return NextResponse.rewrite(`${origin}/country/${countryCode}`);
   }
   return NextResponse.next();
