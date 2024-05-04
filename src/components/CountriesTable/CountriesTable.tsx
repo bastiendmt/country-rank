@@ -16,6 +16,12 @@ import styles from './CountriesTable.module.css';
 type DirectionType = 'asc' | 'desc' | '';
 type SortKeys = 'name' | 'population' | 'area' | 'gini' | '';
 
+const getNewDirection = (direction: DirectionType): DirectionType => {
+  if (!direction) return 'desc';
+  if (direction === 'desc') return 'asc';
+  return '';
+};
+
 const filterCountries = (countries: Countries, keyword: string): Countries =>
   countries.filter(
     (country) =>
@@ -88,18 +94,9 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
   const filteredCountry = filterCountries(countries, search);
   const orderedCountry = orderBy(filteredCountry, sortKey, direction);
 
-  const switchDirection = () => {
-    if (!direction) {
-      setDirection('desc');
-    } else if (direction === 'desc') {
-      setDirection('asc');
-    } else {
-      setDirection('');
-    }
-  };
-
   const setValueAndDirection = (key: SortKeys) => {
-    switchDirection();
+    // Only change direction if the key is different
+    if (key === sortKey) setDirection(getNewDirection(direction));
     setSortKey(key);
   };
 
