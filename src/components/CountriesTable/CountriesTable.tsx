@@ -1,20 +1,26 @@
 'use client';
 
-import { ChevronDown, ChevronUp, Shuffle } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useContext, useEffect, useState } from 'react';
 import { LanguageContext } from '@/components/LanguageProvider';
 import formatNumber from '@/functions/formatNumber';
 import { formatGini, giniToString } from '@/functions/getGini';
 import { useTranslate } from '@/translations/translations';
 import { Countries } from '@/types';
+import { ChevronDown, ChevronUp, Shuffle } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useContext, useState } from 'react';
 import SearchInput from '../SearchInput/SearchInput';
 import styles from './CountriesTable.module.css';
 
 type DirectionType = 'asc' | 'desc' | '';
 type SortKeys = 'name' | 'population' | 'area' | 'gini' | '';
+
+const getNewDirection = (direction: DirectionType): DirectionType => {
+  if (!direction) return 'desc';
+  if (direction === 'desc') return 'asc';
+  return '';
+};
 
 const filterCountries = (countries: Countries, keyword: string): Countries =>
   countries.filter(
@@ -84,21 +90,13 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
   const translate = useTranslate(language);
   const [direction, setDirection] = useState<DirectionType>('');
   const [sortKey, setSortKey] = useState<SortKeys>('');
-  const [currentCountries, setCurrentCountries] = useState(countries);
   const search = searchParams.get('search')?.toString() ?? '';
-
-  const switchDirection = () => {
-    if (!direction) {
-      setDirection('desc');
-    } else if (direction === 'desc') {
-      setDirection('asc');
-    } else {
-      setDirection('');
-    }
-  };
+  const filteredCountry = filterCountries(countries, search);
+  const orderedCountry = orderBy(filteredCountry, sortKey, direction);
 
   const setValueAndDirection = (key: SortKeys) => {
-    switchDirection();
+    // Only change direction if the key is different
+    if (key === sortKey) setDirection(getNewDirection(direction));
     setSortKey(key);
   };
 
@@ -112,12 +110,10 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
     router.replace(`${pathname}?${params.toString()}`);
   };
 
-  useEffect(() => {
-    const filteredCountry = filterCountries(countries, search);
-    const orderedCountry = orderBy(filteredCountry, sortKey, direction);
-    setCurrentCountries(orderedCountry);
-  }, [sortKey, direction, countries, search]);
-
+  /**
+   * Getting random index instead of redirecting to /country/random to avoid refetching all countries
+   * See middleware.ts for more details
+   */
   const randomCountry = () => {
     const randomIndex = Math.floor(Math.random() * countries.length);
     const countryCode = countries[randomIndex]?.cca3;
@@ -192,7 +188,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
             {sortKey === 'gini' && <SortArrow direction={direction} />}
           </button>
         </div>
-        {currentCountries.map((country) => (
+        {orderedCountry.map((country) => (
           <Link
             href={`/country/${country.cca3}`}
             key={country.name.common}
