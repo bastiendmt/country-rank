@@ -27,7 +27,7 @@
     "@next/eslint-plugin-next": "^14.2.15",
     "@types/jest": "^29.5.13",
     "@types/mapbox-gl": "^3.4.0",
-    "@types/node": "^20.16.14",
+    "@types/node": "^22.7.8",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.1",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
