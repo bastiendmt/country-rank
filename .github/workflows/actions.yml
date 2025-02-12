@@ -1,4 +1,4 @@
-name: Action checks
+name: Quality checks
 on:
   push:
     branches:
