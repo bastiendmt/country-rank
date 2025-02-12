@@ -3,21 +3,30 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  build:
+  install:
+    name: Install dependencies
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - uses: oven-sh/setup-bun@v1
+      - run: bun install
 
-      - name: Install bun
-        uses: oven-sh/setup-bun@v1
+  typecheck:
+    name: Run Typecheck
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: oven-sh/setup-bun@v1
+      - run: bun install
+      - run: bun run typecheck
 
-      - name: Install Dependencies
-        run: bun install
-
-      - name: Typecheck
-        run: bun run typecheck
-
-      - name: Lint
-        run: bun run lint
+  lint:
+    name: Run Lint
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: oven-sh/setup-bun@v1
+      - run: bun install
+      - run: bun run lint
