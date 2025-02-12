@@ -1,3 +1,5 @@
-const Loading = () => <div>Loading...</div>;
+import { Loader } from '@/components/Loader/Loader';
+
+const Loading = () => <Loader />;
 
 export default Loading;
