@@ -21,13 +21,13 @@
     "next-themes": "^0.3.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "typescript": "^5.7.3"
+    "typescript": "^5.8.2"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.2.24",
     "@types/jest": "^29.5.14",
     "@types/mapbox-gl": "^3.4.1",
-    "@types/node": "^20.17.19",
+    "@types/node": "^20.17.24",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
@@ -36,11 +36,11 @@
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-next": "^14.2.24",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-import-resolver-typescript": "^3.8.3",
+    "eslint-import-resolver-typescript": "^3.8.4",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-react": "^7.37.4",
-    "prettier": "^3.5.2"
+    "prettier": "^3.5.3"
   }
 }
