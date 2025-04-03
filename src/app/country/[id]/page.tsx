@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { getCountries } from '@/api/getCountries';
 import { getCountry } from '@/api/getCountry';
 import { OG_DESCRIPTION, OG_TITLE } from '@/app/og';

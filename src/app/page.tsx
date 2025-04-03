@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { getCountries } from '@/api/getCountries';
 import CountriesTable from '@/components/CountriesTable/CountriesTable';
 import NotFound from './not-found';
