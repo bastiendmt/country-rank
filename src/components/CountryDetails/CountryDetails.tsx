@@ -68,6 +68,7 @@ const CountryDetails = ({ country }: { country: Country }) => {
               alt={country.flags.alt ?? country.name.common}
               title={country.flags.alt ?? country.name.common}
               fill
+              priority
             />
           </div>
 

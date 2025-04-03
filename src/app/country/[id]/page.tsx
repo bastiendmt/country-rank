@@ -20,6 +20,7 @@ interface PageProps {
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
+  // eslint-disable-next-line @typescript-eslint/await-thenable
   const { id } = await params;
   const country = await getCountry(id);
 
@@ -39,6 +40,7 @@ export async function generateMetadata({
 }
 
 const Country = async ({ params }: PageProps) => {
+  // eslint-disable-next-line @typescript-eslint/await-thenable
   const { id } = await params;
   const country = await getCountry(id);
   if (!country) return NotFound();
