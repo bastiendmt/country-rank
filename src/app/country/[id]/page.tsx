@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { getCountries } from '@/api/getCountries';
 import { getCountry } from '@/api/getCountry';
 import { OG_DESCRIPTION, OG_TITLE } from '@/app/og';
@@ -18,8 +18,9 @@ interface PageProps {
 }
 
 export async function generateMetadata({
-  params: { id },
+  params,
 }: PageProps): Promise<Metadata> {
+  const { id } = await params;
   const country = await getCountry(id);
 
   if (!country)
@@ -37,7 +38,8 @@ export async function generateMetadata({
   };
 }
 
-const Country = async ({ params: { id } }: PageProps) => {
+const Country = async ({ params }: PageProps) => {
+  const { id } = await params;
   const country = await getCountry(id);
   if (!country) return NotFound();
   return <CountryDetails country={country} />;
