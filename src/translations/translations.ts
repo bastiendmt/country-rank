@@ -1,4 +1,4 @@
-import { Language, Translation } from '@/types';
+import type { Language, Translation } from '@/types';
 import { FrenchTranslation } from './french';
 import { EnglishTranslation } from './english';
 
