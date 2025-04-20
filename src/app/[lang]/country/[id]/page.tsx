@@ -4,7 +4,7 @@ import { getCountry } from '@/api/getCountry';
 import { OG_DESCRIPTION, OG_TITLE } from '@/app/[lang]/og';
 import CountryDetails from '@/components/CountryDetails/CountryDetails';
 import NotFound from './not-found';
-import { getDictionary } from '../dictionaries';
+import { getDictionary } from '../../dictionaries';
 
 export async function generateStaticParams(): Promise<
   { id: string; lang: 'en' }[]
