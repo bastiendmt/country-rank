@@ -2,13 +2,13 @@
 
 import '@/styles/globals.css';
 import React, {
-  ReactNode,
+  type ReactNode,
   createContext,
   useCallback,
   useMemo,
   useState,
 } from 'react';
-import { Language } from '@/types';
+import type { Language } from '@/types';
 
 interface ContextInterface {
   language: Language;

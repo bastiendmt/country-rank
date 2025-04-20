@@ -1,15 +1,34 @@
 'use client';
 
-import { Globe2, Moon, Sun } from 'lucide-react';
-import { useContext, useEffect, useState } from 'react';
-import { LanguageContext } from '@/components/LanguageProvider';
+import type { getDictionary } from '@/app/[lang]/dictionaries';
 import styles from '@/styles/layout.module.css';
-import { useTranslate } from '@/translations/translations';
+import { type Locale, i18n } from 'i18n-config';
+import { Globe2, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
+import Link from 'next/link';
+import { useParams, usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-export const HeaderButtons = () => {
-  const { language, switchLanguage } = useContext(LanguageContext);
-  const translate = useTranslate(language);
+export const HeaderButtons = ({
+  dictionary,
+}: {
+  dictionary: Awaited<ReturnType<typeof getDictionary>>;
+}) => {
+  const pathname = usePathname();
+  const params = useParams();
+  const currentLanguage = params.lang;
+
+  const oppositeLanguage = i18n.locales.find(
+    (lang) => lang !== currentLanguage,
+  ) as Locale;
+  console.log('🚀 ~ oppositeLanguage:', oppositeLanguage);
+
+  const redirectedPathname = (locale: Locale) => {
+    if (!pathname) return '/';
+    const segments = pathname.split('/');
+    segments[1] = locale;
+    return segments.join('/');
+  };
 
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
@@ -22,17 +41,19 @@ export const HeaderButtons = () => {
         <button
           type="button"
           className={styles.theme_switcher}
-          title={translate.switchTheme}
+          title={dictionary.switchTheme}
         >
           <Moon />
         </button>
-        <button
-          type="button"
-          className={styles.language_switcher}
-          title={translate.switchLanguage}
-        >
-          <Globe2 />
-        </button>
+        <Link href={redirectedPathname(oppositeLanguage)}>
+          <button
+            type="button"
+            className={styles.language_switcher}
+            title={dictionary.switchLanguage}
+          >
+            <Globe2 />
+          </button>
+        </Link>
       </>
     );
 
@@ -47,18 +68,19 @@ export const HeaderButtons = () => {
         type="button"
         className={styles.theme_switcher}
         onClick={switchTheme}
-        title={translate.switchTheme}
+        title={dictionary.switchTheme}
       >
         {resolvedTheme === 'light' ? <Moon /> : <Sun />}
       </button>
-      <button
-        type="button"
-        className={styles.language_switcher}
-        onClick={switchLanguage}
-        title={translate.switchLanguage}
-      >
-        <Globe2 />
-      </button>
+      <Link href={redirectedPathname(oppositeLanguage)}>
+        <button
+          type="button"
+          className={styles.language_switcher}
+          title={dictionary.switchLanguage}
+        >
+          <Globe2 />
+        </button>
+      </Link>
     </>
   );
 };
