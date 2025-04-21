@@ -9,11 +9,11 @@ const compat = new FlatCompat({
 const eslintConfig = [
   ...compat.config({
     extends: [
-      'eslint:recommended',
-      'prettier',
+      // 'eslint:recommended',
       'next',
       'next/core-web-vitals',
       'next/typescript',
+      'prettier',
     ],
   }),
 ];
