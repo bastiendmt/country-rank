@@ -1,15 +1,15 @@
 'use client';
 
 import { getBorders } from '@/api/getBorders';
-import type { getDictionary } from '@/app/[lang]/dictionaries';
+import type { Dictionary } from '@/app/[lang]/dictionaries';
 import Mapbox from '@/components/CountryDetails/MapboxMap/MapboxMap';
 import formatNumber from '@/functions/formatNumber';
 import { giniToString } from '@/functions/getGini';
 import type { Countries, Country } from '@/types';
 import { MapPin } from 'lucide-react';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import styles from './CountryDetails.module.css';
 import NeighboringCountry from './NeighboringCountry';
 
@@ -18,7 +18,7 @@ const CountryDetails = ({
   dictionary,
 }: {
   country: Country;
-  dictionary: Awaited<ReturnType<typeof getDictionary>>;
+  dictionary: Dictionary;
 }) => {
   const [bordersLoading, setBordersLoading] = useState(true);
   const [borders, setBorders] = useState<Countries>([]);

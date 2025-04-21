@@ -1,6 +1,6 @@
 'use client';
 
-import type { getDictionary } from '@/app/[lang]/dictionaries';
+import type { Dictionary } from '@/app/[lang]/dictionaries';
 import formatNumber from '@/functions/formatNumber';
 import { formatGini, giniToString } from '@/functions/getGini';
 import type { Countries } from '@/types';
@@ -91,7 +91,7 @@ const CountriesTable = ({
   dictionary,
 }: {
   countries: Countries;
-  dictionary: Awaited<ReturnType<typeof getDictionary>>;
+  dictionary: Dictionary;
 }) => {
   const router = useRouter();
   const pathname = usePathname();

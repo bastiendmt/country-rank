@@ -1,6 +1,6 @@
 'use client';
 
-import { getDictionary } from '@/app/[lang]/dictionaries';
+import type { Dictionary } from '@/app/[lang]/dictionaries';
 import styles from '@/styles/layout.module.css';
 import { type Locale, i18n } from 'i18n-config';
 import { Globe2, Moon, Sun } from 'lucide-react';
@@ -9,11 +9,7 @@ import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-export const HeaderButtons = ({
-  dictionary,
-}: {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>;
-}) => {
+export const HeaderButtons = ({ dictionary }: { dictionary: Dictionary }) => {
   const pathname = usePathname();
   const params = useParams();
   const currentLanguage = params.lang;
