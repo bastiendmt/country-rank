@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/non-nullable-type-assertion-style */
 /**
  * Returns gini from latest year value
  * @param "gini" : { "20XX" : YY }
