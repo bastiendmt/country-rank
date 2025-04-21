@@ -1,5 +1,6 @@
 import { HeaderButtons } from '@/components/HeaderButtons';
 import { Logo } from '@/logo';
+import '@/styles/globals.css';
 import styles from '@/styles/layout.module.css';
 import Link from 'next/link';
 import TProvider from '../../components/ThemeProvider';
