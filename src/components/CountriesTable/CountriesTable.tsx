@@ -1,17 +1,21 @@
 'use client';
 
-import { LanguageContext } from '@/components/LanguageProvider';
+import type { getDictionary } from '@/app/[lang]/dictionaries';
 import formatNumber from '@/functions/formatNumber';
 import { formatGini, giniToString } from '@/functions/getGini';
 import type { Countries } from '@/types';
 import { ChevronDown, ChevronUp, Shuffle } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useContext, useState } from 'react';
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from 'next/navigation';
+import { useState } from 'react';
 import SearchInput from '../SearchInput/SearchInput';
 import styles from './CountriesTable.module.css';
-import type { getDictionary } from '@/app/[lang]/dictionaries';
 
 type DirectionType = 'asc' | 'desc' | '';
 type SortKeys = 'name' | 'population' | 'area' | 'gini' | '';
@@ -91,9 +95,9 @@ const CountriesTable = ({
 }) => {
   const router = useRouter();
   const pathname = usePathname();
+  const { lang } = useParams();
+  const countryTranslationKey = lang === 'fr' ? 'fra' : 'eng';
   const searchParams = useSearchParams();
-  const { language } = useContext(LanguageContext);
-  // const translate = useTranslate(language);
   const [direction, setDirection] = useState<DirectionType>('');
   const [sortKey, setSortKey] = useState<SortKeys>('');
   const search = searchParams.get('search')?.toString() ?? '';
@@ -206,7 +210,8 @@ const CountriesTable = ({
               </div>
               <div className={styles.mobileFlag}>{country.flag}</div>
               <div className={styles.name}>
-                {country.translations[language]?.common ?? country.name.common}
+                {country.translations[countryTranslationKey]?.common ??
+                  country.name.common}
               </div>
               <div className={styles.population}>
                 {formatNumber(country.population)}

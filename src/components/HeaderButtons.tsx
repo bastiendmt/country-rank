@@ -1,6 +1,6 @@
 'use client';
 
-import type { getDictionary } from '@/app/[lang]/dictionaries';
+import { getDictionary } from '@/app/[lang]/dictionaries';
 import styles from '@/styles/layout.module.css';
 import { type Locale, i18n } from 'i18n-config';
 import { Globe2, Moon, Sun } from 'lucide-react';
@@ -18,10 +18,8 @@ export const HeaderButtons = ({
   const params = useParams();
   const currentLanguage = params.lang;
 
-  const oppositeLanguage = i18n.locales.find(
-    (lang) => lang !== currentLanguage,
-  ) as Locale;
-  console.log('🚀 ~ oppositeLanguage:', oppositeLanguage);
+  const oppositeLanguage =
+    i18n.locales.find((lang) => lang !== currentLanguage) ?? i18n.defaultLocale;
 
   const redirectedPathname = (locale: Locale) => {
     if (!pathname) return '/';

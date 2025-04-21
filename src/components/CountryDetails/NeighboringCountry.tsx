@@ -1,12 +1,12 @@
+import type { Country } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useContext } from 'react';
-import type { Country } from '@/types';
-import { LanguageContext } from '@/components/LanguageProvider';
+import { useParams } from 'next/navigation';
 import styles from './CountryDetails.module.css';
 
 const NeighboringCountry = ({ country }: { country: Country }) => {
-  const { language } = useContext(LanguageContext);
+  const { lang } = useParams();
+  const countryTranslationKey = lang === 'fr' ? 'fra' : 'eng';
   const { flags, name, cca3, translations } = country;
   return (
     <Link href={`/country/${cca3}`} key={name.common} passHref>
@@ -15,7 +15,7 @@ const NeighboringCountry = ({ country }: { country: Country }) => {
           <Image src={flags.svg} alt={name.common} fill />
         </div>
         <div className={styles.details_panel_name}>
-          {translations[language]?.common ?? name.common}
+          {translations[countryTranslationKey]?.common ?? name.common}
         </div>
       </div>
     </Link>

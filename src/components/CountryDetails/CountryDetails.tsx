@@ -1,17 +1,17 @@
 'use client';
 
-import { MapPin } from 'lucide-react';
-import Image from 'next/image';
-import { useContext, useEffect, useState } from 'react';
 import { getBorders } from '@/api/getBorders';
-import { LanguageContext } from '@/components/LanguageProvider';
+import type { getDictionary } from '@/app/[lang]/dictionaries';
 import Mapbox from '@/components/CountryDetails/MapboxMap/MapboxMap';
 import formatNumber from '@/functions/formatNumber';
 import { giniToString } from '@/functions/getGini';
 import type { Countries, Country } from '@/types';
+import { MapPin } from 'lucide-react';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
 import styles from './CountryDetails.module.css';
 import NeighboringCountry from './NeighboringCountry';
-import type { getDictionary } from '@/app/[lang]/dictionaries';
 
 const CountryDetails = ({
   country,
@@ -20,9 +20,10 @@ const CountryDetails = ({
   country: Country;
   dictionary: Awaited<ReturnType<typeof getDictionary>>;
 }) => {
-  const { language } = useContext(LanguageContext);
   const [bordersLoading, setBordersLoading] = useState(true);
   const [borders, setBorders] = useState<Countries>([]);
+  const { lang } = useParams();
+  const countryTranslationKey = lang === 'fr' ? 'fra' : 'eng';
 
   useEffect(() => {
     if (country.borders?.length) {
@@ -49,7 +50,7 @@ const CountryDetails = ({
   const getLanguages = () => {
     if (!country.languages) return '-';
     return Object.keys(country.languages)
-      .map((lang) => country.languages?.[lang])
+      .map((countryLang) => country.languages?.[countryLang])
       .join(', ');
   };
 
@@ -78,7 +79,8 @@ const CountryDetails = ({
           </div>
 
           <h1 className={styles.overview_name}>
-            {country.translations[language]?.common ?? country.name.common}
+            {country.translations[countryTranslationKey]?.common ??
+              country.name.common}
           </h1>
           <div className={styles.overview_region}>{country.region}</div>
 
@@ -167,7 +169,7 @@ const CountryDetails = ({
           </div>
 
           <div className={styles.details_panel_row}>
-            <div className={styles.details_panel_label} title={'FIXME'}>
+            <div className={styles.details_panel_label} title="FIXME">
               {dictionary.country.gini}
             </div>
             <div className={styles.details_panel_value}>
