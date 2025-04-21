@@ -17,6 +17,7 @@ export async function getCountry(alphaCode: string) {
     const countryData = (await res.json()) as [Country];
     return countryData[0];
   } catch (error) {
+    console.error('Error fetching country:', error);
     return null;
   }
 }
