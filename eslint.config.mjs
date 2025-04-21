@@ -1,5 +1,6 @@
 import js from '@eslint/js';
 import { FlatCompat } from '@eslint/eslintrc';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
 const compat = new FlatCompat({
   baseDirectory: import.meta.dirname,
@@ -9,13 +10,14 @@ const compat = new FlatCompat({
 const eslintConfig = [
   ...compat.config({
     extends: [
-      // 'eslint:recommended',
+      'eslint:recommended',
       'next',
       'next/core-web-vitals',
       'next/typescript',
       'prettier',
     ],
   }),
+  eslintPluginPrettierRecommended,
 ];
 
 export default eslintConfig;
