@@ -200,7 +200,7 @@ const CountriesTable = ({
         </div>
         {orderedCountry.map((country) => (
           <Link
-            href={`/country/${country.cca3}`}
+            href={`${pathname}/country/${country.cca3}`}
             key={country.name.common}
             passHref
           >
