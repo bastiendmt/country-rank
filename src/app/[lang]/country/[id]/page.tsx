@@ -24,7 +24,7 @@ interface PageProps {
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { id, lang } = await params;
+  const { id } = await params;
   const country = await getCountry(id);
 
   // TODO: use locale for metadata
