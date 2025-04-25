@@ -22,7 +22,7 @@ const RootLayout = async ({
           <div className={styles.container}>
             <header className={styles.header}>
               <div>
-                <Link href="/" passHref>
+                <Link href={`/${lang}`} passHref>
                   <Logo />
                 </Link>
               </div>
