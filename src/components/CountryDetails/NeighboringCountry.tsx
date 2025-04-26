@@ -9,7 +9,7 @@ const NeighboringCountry = ({ country }: { country: Country }) => {
   const countryTranslationKey = lang === 'fr' ? 'fra' : 'eng';
   const { flags, name, cca3, translations } = country;
   return (
-    <Link href={`/country/${cca3}`} key={name.common} passHref>
+    <Link href={`/${lang}/country/${cca3}`} key={name.common}>
       <div className={styles.details_panel_borders_country}>
         <div className={styles.details_panel_image_container}>
           <Image src={flags.svg} alt={name.common} fill />
