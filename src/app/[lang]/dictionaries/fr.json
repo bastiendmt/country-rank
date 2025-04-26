@@ -13,6 +13,10 @@
     "population": "Population",
     "subregion": "Continent"
   },
+  "error": {
+    "generic": "Une erreur s'est produite. Veuillez réessayer ultérieurement ou",
+    "linkHome": "retour à la page d'accueil"
+  },
   "filter": "Filtrer par nom ou par continent",
   "foundCountries": "pays trouvés",
   "giniDefinition": "Le coefficient de Gini, ou indice de Gini, est une mesure statistique permettant de rendre compte de la répartition d'une variable (salaire, revenus, patrimoine) au sein d'une population. Autrement dit, il mesure le niveau d'inégalité de la répartition d'une variable dans la population.",

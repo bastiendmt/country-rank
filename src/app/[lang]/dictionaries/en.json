@@ -13,6 +13,10 @@
     "population": "Population",
     "subregion": "Subregion"
   },
+  "error": {
+    "generic": "An error has occurred, please try again later or",
+    "linkHome": "go back to the home page"
+  },
   "filter": "Filter by name, Region or SubRegion",
   "foundCountries": "countries found",
   "giniDefinition": "The Gini coefficient measures the inequality among values of a frequency distribution (for example, levels of income). A Gini coefficient of zero expresses perfect equality, where all values.",
