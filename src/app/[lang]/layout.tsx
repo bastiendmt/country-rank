@@ -1,8 +1,8 @@
 import { HeaderButtons } from '@/components/HeaderButtons';
+import { LinkHome } from '@/components/link-home';
 import { Logo } from '@/logo';
 import '@/styles/globals.css';
 import styles from '@/styles/layout.module.css';
-import Link from 'next/link';
 import TProvider from '../../components/ThemeProvider';
 import { getDictionary } from './dictionaries';
 
@@ -22,9 +22,9 @@ const RootLayout = async ({
           <div className={styles.container}>
             <header className={styles.header}>
               <div>
-                <Link href={`/${lang}`} passHref>
+                <LinkHome>
                   <Logo />
-                </Link>
+                </LinkHome>
               </div>
               <HeaderButtons dictionary={dictionary} />
             </header>

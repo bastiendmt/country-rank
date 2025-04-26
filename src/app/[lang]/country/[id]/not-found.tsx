@@ -1,10 +1,12 @@
-import Link from 'next/link';
+import { LinkHome } from '@/components/link-home';
 
-const NotFound = () => (
-  <div>
-    An error has occurred, please try again later or{' '}
-    <Link href="/">go to home page</Link>
-  </div>
-);
+const NotFound = () => {
+  return (
+    <div>
+      An error has occurred, please try again later or{' '}
+      <LinkHome>go to home page</LinkHome>
+    </div>
+  );
+};
 
 export default NotFound;
