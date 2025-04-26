@@ -5,10 +5,10 @@ import type { Dictionary } from '@/app/[lang]/dictionaries';
 import Mapbox from '@/components/CountryDetails/MapboxMap/MapboxMap';
 import formatNumber from '@/functions/formatNumber';
 import { giniToString } from '@/functions/getGini';
+import { useLocale } from '@/hooks/useLocale';
 import type { Countries, Country } from '@/types';
 import { MapPin } from 'lucide-react';
 import Image from 'next/image';
-import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styles from './CountryDetails.module.css';
 import NeighboringCountry from './NeighboringCountry';
@@ -22,11 +22,11 @@ const CountryDetails = ({
 }) => {
   const [bordersLoading, setBordersLoading] = useState(true);
   const [borders, setBorders] = useState<Countries>([]);
-  const { lang } = useParams();
-  const countryTranslationKey = lang === 'fr' ? 'fra' : 'eng';
+  const { countryTranslationKey } = useLocale();
 
   useEffect(() => {
     if (country.borders?.length) {
+      setBordersLoading(true);
       getBorders(country.borders)
         .then((countries) => {
           setBorders(countries);

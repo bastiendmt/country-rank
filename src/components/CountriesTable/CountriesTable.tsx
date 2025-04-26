@@ -3,16 +3,12 @@
 import type { Dictionary } from '@/app/[lang]/dictionaries';
 import formatNumber from '@/functions/formatNumber';
 import { formatGini, giniToString } from '@/functions/getGini';
+import { useLocale } from '@/hooks/useLocale';
 import type { Countries } from '@/types';
 import { ChevronDown, ChevronUp, Shuffle } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import {
-  useParams,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import SearchInput from '../SearchInput/SearchInput';
 import styles from './CountriesTable.module.css';
@@ -95,8 +91,7 @@ const CountriesTable = ({
 }) => {
   const router = useRouter();
   const pathname = usePathname();
-  const { lang } = useParams();
-  const countryTranslationKey = lang === 'fr' ? 'fra' : 'eng';
+  const { countryTranslationKey } = useLocale();
   const searchParams = useSearchParams();
   const [direction, setDirection] = useState<DirectionType>('');
   const [sortKey, setSortKey] = useState<SortKeys>('');

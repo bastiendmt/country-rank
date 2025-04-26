@@ -1,21 +1,21 @@
 'use client';
 
 import type { Dictionary } from '@/app/[lang]/dictionaries';
+import { useLocale } from '@/hooks/useLocale';
 import styles from '@/styles/layout.module.css';
 import { type Locale, i18n } from 'i18n-config';
 import { Globe2, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
-import { useParams, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export const HeaderButtons = ({ dictionary }: { dictionary: Dictionary }) => {
   const pathname = usePathname();
-  const params = useParams();
-  const currentLanguage = params.lang;
+  const { lang } = useLocale();
 
   const oppositeLanguage =
-    i18n.locales.find((lang) => lang !== currentLanguage) ?? i18n.defaultLocale;
+    i18n.locales.find((l) => l !== lang) ?? i18n.defaultLocale;
 
   const redirectedPathname = (locale: Locale) => {
     if (!pathname) return '/';

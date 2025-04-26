@@ -1,12 +1,11 @@
+import { useLocale } from '@/hooks/useLocale';
 import type { Country } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
 import styles from './CountryDetails.module.css';
 
 const NeighboringCountry = ({ country }: { country: Country }) => {
-  const { lang } = useParams();
-  const countryTranslationKey = lang === 'fr' ? 'fra' : 'eng';
+  const { lang, countryTranslationKey } = useLocale();
   const { flags, name, cca3, translations } = country;
   return (
     <Link href={`/${lang}/country/${cca3}`} key={name.common}>
