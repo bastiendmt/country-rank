@@ -5,16 +5,20 @@ import { OG_DESCRIPTION, OG_TITLE } from '@/app/[lang]/og';
 import CountryDetails from '@/components/CountryDetails/CountryDetails';
 import NotFound from './not-found';
 import { getDictionary } from '../../dictionaries';
+import { i18n } from 'i18n-config';
 
 export async function generateStaticParams(): Promise<
-  { id: string; lang: 'en' }[]
+  { id: string; lang: 'en' | 'fr' }[]
 > {
   const countries = await getCountries();
   if (!countries) return [];
-  return countries.map((country) => ({
-    id: country.cca3,
-    lang: 'en',
-  }));
+
+  return i18n.locales.flatMap((locale) =>
+    countries.map((country) => ({
+      id: country.cca3,
+      lang: locale,
+    })),
+  );
 }
 
 interface PageProps {
