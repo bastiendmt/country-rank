@@ -14,8 +14,8 @@
     "subregion": "Subregion"
   },
   "error": {
-    "generic": "An error has occurred, please try again later or",
-    "linkHome": "go back to the home page"
+    "generic": "An error has occurred, please try again later",
+    "linkHome": "or go back to the home page"
   },
   "filter": "Filter by name, Region or SubRegion",
   "foundCountries": "countries found",

@@ -14,8 +14,8 @@
     "subregion": "Continent"
   },
   "error": {
-    "generic": "Une erreur s'est produite. Veuillez réessayer ultérieurement ou",
-    "linkHome": "retour à la page d'accueil"
+    "generic": "Une erreur s'est produite. Veuillez réessayer ultérieurement",
+    "linkHome": "ou retour à la page d'accueil"
   },
   "filter": "Filtrer par nom ou par continent",
   "foundCountries": "pays trouvés",
