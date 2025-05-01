@@ -46,7 +46,7 @@ export async function generateMetadata({
 const Country = async ({ params }: PageProps) => {
   const { id, lang } = await params;
   const country = await getCountry(id);
-  if (!country) return NotFound({ lang });
+  if (!country) return NotFound();
   const dictionary = await getDictionary(lang);
   return <CountryDetails country={country} dictionary={dictionary} />;
 };
