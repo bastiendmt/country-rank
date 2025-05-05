@@ -1,26 +1,32 @@
 'use client';
 
-import { MapPin } from 'lucide-react';
-import Image from 'next/image';
-import { useContext, useEffect, useState } from 'react';
 import { getBorders } from '@/api/getBorders';
-import { LanguageContext } from '@/components/LanguageProvider';
+import type { Dictionary } from '@/app/[lang]/dictionaries';
 import Mapbox from '@/components/CountryDetails/MapboxMap/MapboxMap';
 import formatNumber from '@/functions/formatNumber';
 import { giniToString } from '@/functions/getGini';
-import { useTranslate } from '@/translations/translations';
-import { Countries, Country } from '@/types';
+import { useLocale } from '@/hooks/useLocale';
+import type { Countries, Country } from '@/types';
+import { MapPin } from 'lucide-react';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import styles from './CountryDetails.module.css';
 import NeighboringCountry from './NeighboringCountry';
 
-const CountryDetails = ({ country }: { country: Country }) => {
-  const { language } = useContext(LanguageContext);
-  const translate = useTranslate(language);
+const CountryDetails = ({
+  country,
+  dictionary,
+}: {
+  country: Country;
+  dictionary: Dictionary;
+}) => {
   const [bordersLoading, setBordersLoading] = useState(true);
   const [borders, setBorders] = useState<Countries>([]);
+  const { countryTranslationKey } = useLocale();
 
   useEffect(() => {
     if (country.borders?.length) {
+      setBordersLoading(true);
       getBorders(country.borders)
         .then((countries) => {
           setBorders(countries);
@@ -44,7 +50,7 @@ const CountryDetails = ({ country }: { country: Country }) => {
   const getLanguages = () => {
     if (!country.languages) return '-';
     return Object.keys(country.languages)
-      .map((lang) => country.languages?.[lang])
+      .map((countryLang) => country.languages?.[countryLang])
       .join(', ');
   };
 
@@ -73,7 +79,8 @@ const CountryDetails = ({ country }: { country: Country }) => {
           </div>
 
           <h1 className={styles.overview_name}>
-            {country.translations[language]?.common ?? country.name.common}
+            {country.translations[countryTranslationKey]?.common ??
+              country.name.common}
           </h1>
           <div className={styles.overview_region}>{country.region}</div>
 
@@ -83,7 +90,7 @@ const CountryDetails = ({ country }: { country: Country }) => {
                 {formatNumber(country.population)}
               </div>
               <div className={styles.overview_label}>
-                {translate.country.population}
+                {dictionary.country.population}
               </div>
             </div>
 
@@ -93,7 +100,7 @@ const CountryDetails = ({ country }: { country: Country }) => {
                 <sup style={{ fontSize: '0.5rem' }}>2</sup>)
               </div>
               <div className={styles.overview_label}>
-                {translate.country.area}
+                {dictionary.country.area}
               </div>
             </div>
           </div>
@@ -119,12 +126,12 @@ const CountryDetails = ({ country }: { country: Country }) => {
       <div className={styles.container_right}>
         <div className={styles.details_panel}>
           <h2 className={styles.details_panel_heading}>
-            {translate.country.details}
+            {dictionary.country.details}
           </h2>
 
           <div className={styles.details_panel_row}>
             <div className={styles.details_panel_label}>
-              {translate.country.capital}
+              {dictionary.country.capital}
             </div>
             <div className={styles.details_panel_value}>
               {country.capital?.[0] ?? '-'}
@@ -133,7 +140,7 @@ const CountryDetails = ({ country }: { country: Country }) => {
 
           <div className={styles.details_panel_row}>
             <div className={styles.details_panel_label}>
-              {translate.country.subregion}
+              {dictionary.country.subregion}
             </div>
             <div className={styles.details_panel_value}>
               {country.subregion}
@@ -142,31 +149,28 @@ const CountryDetails = ({ country }: { country: Country }) => {
 
           <div className={styles.details_panel_row}>
             <div className={styles.details_panel_label}>
-              {translate.country.languages}
+              {dictionary.country.languages}
             </div>
             <div className={styles.details_panel_value}>{getLanguages()}</div>
           </div>
 
           <div className={styles.details_panel_row}>
             <div className={styles.details_panel_label}>
-              {translate.country.currencies}
+              {dictionary.country.currencies}
             </div>
             <div className={styles.details_panel_value}>{getCurrencies()}</div>
           </div>
 
           <div className={styles.details_panel_row}>
             <div className={styles.details_panel_label}>
-              {translate.country.nativeName}
+              {dictionary.country.nativeName}
             </div>
             <div className={styles.details_panel_value}>{getNativeName()}</div>
           </div>
 
           <div className={styles.details_panel_row}>
-            <div
-              className={styles.details_panel_label}
-              title={translate.giniDefinition}
-            >
-              {translate.country.gini}
+            <div className={styles.details_panel_label} title="FIXME">
+              {dictionary.country.gini}
             </div>
             <div className={styles.details_panel_value}>
               {giniToString(country.gini)}
@@ -176,19 +180,19 @@ const CountryDetails = ({ country }: { country: Country }) => {
           {!hasBorders ? (
             <div className={styles.details_panel_no_borders}>
               <div className={styles.details_panel_borders_label}>
-                {translate.country.neighboringCountries}
+                {dictionary.country.neighboringCountries}
               </div>
               <div className={styles.details_panel_value}>
-                {translate.country.noNeighbors}
+                {dictionary.country.noNeighbors}
               </div>
             </div>
           ) : (
             <div className={styles.details_panel_borders}>
               <div className={styles.details_panel_borders_label}>
-                {translate.country.neighboringCountries}
+                {dictionary.country.neighboringCountries}
               </div>
               <div className={styles.details_panel_borders_container}>
-                {bordersLoading && translate.loading}
+                {bordersLoading && dictionary.country['neighbors-loading']}
                 {!bordersLoading &&
                   borders.map((border) => (
                     <NeighboringCountry key={border.cca3} country={border} />
