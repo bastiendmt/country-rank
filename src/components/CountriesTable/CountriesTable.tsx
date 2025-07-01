@@ -1,15 +1,15 @@
 'use client';
 
-import { LanguageContext } from '@/components/LanguageProvider';
+import type { Dictionary } from '@/app/[lang]/dictionaries';
 import formatNumber from '@/functions/formatNumber';
 import { formatGini, giniToString } from '@/functions/getGini';
-import { useTranslate } from '@/translations/translations';
-import { Countries } from '@/types';
+import { useLocale } from '@/hooks/useLocale';
+import type { Countries } from '@/types';
 import { ChevronDown, ChevronUp, Shuffle } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import SearchInput from '../SearchInput/SearchInput';
 import styles from './CountriesTable.module.css';
 
@@ -82,12 +82,17 @@ const SortArrow = ({ direction }: { direction: string }) => {
   );
 };
 
-const CountriesTable = ({ countries }: { countries: Countries }) => {
+const CountriesTable = ({
+  countries,
+  dictionary,
+}: {
+  countries: Countries;
+  dictionary: Dictionary;
+}) => {
   const router = useRouter();
   const pathname = usePathname();
+  const { countryTranslationKey } = useLocale();
   const searchParams = useSearchParams();
-  const { language } = useContext(LanguageContext);
-  const translate = useTranslate(language);
   const [direction, setDirection] = useState<DirectionType>('');
   const [sortKey, setSortKey] = useState<SortKeys>('');
   const search = searchParams.get('search')?.toString() ?? '';
@@ -126,12 +131,12 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
       <div className={styles.input_container}>
         <div className={styles.counts}>
           <div>
-            {countries.length} {translate.foundCountries}
+            {countries.length} {dictionary.foundCountries}
           </div>
           <button
             type="button"
             className={styles.shuffleButton}
-            title={translate.randomCountry}
+            title={dictionary.randomCountry}
             onClick={randomCountry}
             disabled={countries.length === 0}
           >
@@ -140,7 +145,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
         </div>
         <div className={styles.input}>
           <SearchInput
-            placeholder={translate.filter}
+            placeholder={dictionary.filter}
             onChange={onInputChange}
             defaultValue={searchParams.get('search')?.toString()}
           />
@@ -154,7 +159,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
             className={styles.heading_name}
             onClick={() => setValueAndDirection('name')}
           >
-            <div>{translate.sort.name}</div>
+            <div>{dictionary.sort.name}</div>
             {sortKey === 'name' && <SortArrow direction={direction} />}
           </button>
 
@@ -163,7 +168,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
             className={styles.heading_population}
             onClick={() => setValueAndDirection('population')}
           >
-            <div>{translate.sort.population}</div>
+            <div>{dictionary.sort.population}</div>
             {sortKey === 'population' && <SortArrow direction={direction} />}
           </button>
 
@@ -173,7 +178,7 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
             onClick={() => setValueAndDirection('area')}
           >
             <div>
-              {translate.sort.area} (km
+              {dictionary.sort.area} (km
               <sup style={{ fontSize: '0.5rem' }}>2</sup>)
             </div>
             {sortKey === 'area' && <SortArrow direction={direction} />}
@@ -184,13 +189,13 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
             className={styles.heading_gini}
             onClick={() => setValueAndDirection('gini')}
           >
-            <div>{translate.sort.gini}</div>
+            <div>{dictionary.sort.gini}</div>
             {sortKey === 'gini' && <SortArrow direction={direction} />}
           </button>
         </div>
         {orderedCountry.map((country) => (
           <Link
-            href={`/country/${country.cca3}`}
+            href={`${pathname}/country/${country.cca3}`}
             key={country.name.common}
             passHref
           >
@@ -200,7 +205,8 @@ const CountriesTable = ({ countries }: { countries: Countries }) => {
               </div>
               <div className={styles.mobileFlag}>{country.flag}</div>
               <div className={styles.name}>
-                {country.translations[language]?.common ?? country.name.common}
+                {country.translations[countryTranslationKey]?.common ??
+                  country.name.common}
               </div>
               <div className={styles.population}>
                 {formatNumber(country.population)}
