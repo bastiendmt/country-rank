@@ -21,13 +21,9 @@ export async function generateStaticParams(): Promise<
   );
 }
 
-interface PageProps {
-  params: Promise<{ id: string; lang: 'en' | 'fr' }>;
-}
-
 export async function generateMetadata({
   params,
-}: PageProps): Promise<Metadata> {
+}: PageProps<'/[lang]/country/[id]'>): Promise<Metadata> {
   const { id } = await params;
   const country = await getCountry(id);
 
@@ -47,11 +43,11 @@ export async function generateMetadata({
   };
 }
 
-const Country = async ({ params }: PageProps) => {
+const Country = async ({ params }: PageProps<'/[lang]/country/[id]'>) => {
   const { id, lang } = await params;
   const country = await getCountry(id);
   if (!country) return NotFound();
-  const dictionary = await getDictionary(lang);
+  const dictionary = await getDictionary(lang as 'en' | 'fr');
   return <CountryDetails country={country} dictionary={dictionary} />;
 };
 

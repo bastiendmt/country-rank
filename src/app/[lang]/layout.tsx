@@ -6,15 +6,9 @@ import styles from '@/styles/layout.module.css';
 import TProvider from '../../components/ThemeProvider';
 import { getDictionary } from './dictionaries';
 
-const RootLayout = async ({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: Promise<{ lang: 'en' | 'fr' }>;
-}) => {
+const RootLayout = async ({ children, params }: LayoutProps<'/[lang]'>) => {
   const { lang } = await params;
-  const dictionary = await getDictionary(lang);
+  const dictionary = await getDictionary(lang as 'en' | 'fr');
   return (
     <html lang={lang}>
       <body>

@@ -10,18 +10,11 @@ export const metadata: Metadata = {
   description: OG_DESCRIPTION,
 };
 
-interface PageProps {
-  params: Promise<{
-    lang: 'en' | 'fr';
-  }>;
-}
-
-const Index = async ({ params }: PageProps) => {
+const Index = async ({ params }: PageProps<'/[lang]'>) => {
   const { lang } = await params;
-  console.log('index page', lang);
   const countries = await getCountries();
   if (!countries) return NotFound();
-  const dict = await getDictionary(lang);
+  const dict = await getDictionary(lang as 'en' | 'fr');
   return <CountriesTable countries={countries} dictionary={dict} />;
 };
 
