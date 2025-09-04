@@ -11,7 +11,7 @@
     "start": "next start",
     "lint": "next lint",
     "format": "bun run prettier --write src/**/*.{html,js,ts,json,tsx}",
-    "typecheck": "bun run tsc -p ./tsconfig.json"
+    "typecheck": "bun run next typegen && bun run tsc -p ./tsconfig.json"
   },
   "dependencies": {
     "lucide-react": "^0.542.0",
