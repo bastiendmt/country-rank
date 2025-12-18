@@ -8,7 +8,6 @@ import { Globe2, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
 
 export const HeaderButtons = ({ dictionary }: { dictionary: Dictionary }) => {
   const pathname = usePathname();
@@ -24,32 +23,7 @@ export const HeaderButtons = ({ dictionary }: { dictionary: Dictionary }) => {
     return segments.join('/');
   };
 
-  const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
-
-  useEffect(() => setMounted(true), []);
-
-  if (!mounted)
-    return (
-      <>
-        <button
-          type="button"
-          className={styles.theme_switcher}
-          title={dictionary.switchTheme}
-        >
-          <Moon />
-        </button>
-        <Link href={redirectedPathname(oppositeLanguage)}>
-          <button
-            type="button"
-            className={styles.language_switcher}
-            title={dictionary.switchLanguage}
-          >
-            <Globe2 />
-          </button>
-        </Link>
-      </>
-    );
 
   const switchTheme = () => {
     const newTheme = resolvedTheme === 'light' ? 'dark' : 'light';

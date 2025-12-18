@@ -6,6 +6,7 @@ import styles from '@/styles/layout.module.css';
 import TProvider from '../../components/ThemeProvider';
 import { getDictionary } from './dictionaries';
 
+// eslint-disable-next-line no-undef
 const RootLayout = async ({ children, params }: LayoutProps<'/[lang]'>) => {
   const { lang } = await params;
   const dictionary = await getDictionary(lang as 'en' | 'fr');

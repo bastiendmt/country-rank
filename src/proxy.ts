@@ -5,7 +5,7 @@ import { i18n } from 'i18n-config';
 
 const { defaultLocale, locales } = i18n;
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname, origin } = request.nextUrl;
 
   const localeCountryRandom = locales.find(

@@ -26,6 +26,7 @@ const CountryDetails = ({
 
   useEffect(() => {
     if (country.borders?.length) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setBordersLoading(true);
       getBorders(country.borders)
         .then((countries) => {
