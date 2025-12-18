@@ -9,7 +9,7 @@
     "dev": "next dev",
     "build": "bun lint && next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "format": "bun run prettier --write src/**/*.{html,js,ts,json,tsx}",
     "typecheck": "bun run next typegen && bun run tsc -p ./tsconfig.json"
   },

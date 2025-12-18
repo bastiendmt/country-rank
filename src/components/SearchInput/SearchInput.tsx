@@ -7,6 +7,7 @@ const SearchInput = ({
   defaultValue,
 }: {
   defaultValue: string | undefined;
+  // eslint-disable-next-line no-unused-vars
   onChange: (e: string) => void;
   placeholder: string;
 }) => (
