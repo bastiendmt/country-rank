@@ -1,11 +1,5 @@
-const runtimeCaching = require('next-pwa/cache');
-const withPWA = require('next-pwa')({
-  dest: 'public',
-  runtimeCaching,
-});
-
 /** @type {import('next').NextConfig} */
-module.exports = withPWA({
+module.exports = {
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -15,4 +9,4 @@ module.exports = withPWA({
   typescript: {
     ignoreBuildErrors: true,
   },
-});
+};
