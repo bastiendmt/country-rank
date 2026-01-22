@@ -21,6 +21,7 @@ This website displays countries in list and details about a country such as its 
 
 This project is using NextJS with app router and the following :
 
+- Bun (package manager and runtime)
 - Lucide icons
 - Mapbox
 - Eslint
@@ -53,7 +54,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ### Prerequisites
 
 - Node.js 22 (see `.node-version`)
-- npm, yarn, or bun
+- Bun (recommended package manager for this project)
+
+> **Note:** This project uses Bun as its package manager and runtime. While npm and yarn may work, Bun is the recommended tool for the best development experience.
 
 ### Installation
 
@@ -65,10 +68,6 @@ cd country-rank
 
 2. Install dependencies:
 ```bash
-npm install --legacy-peer-deps
-# or
-yarn install
-# or
 bun install
 ```
 
@@ -80,10 +79,6 @@ cp .env.example .env.local
 4. Run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 bun dev
 ```
 
@@ -91,12 +86,12 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Available Scripts
 
-- `npm run dev` - Starts the development server
-- `npm run build` - Builds the application for production
-- `npm run start` - Starts the production server
-- `npm run lint` - Runs ESLint to check code quality
-- `npm run format` - Formats code using Prettier
-- `npm run typecheck` - Runs TypeScript type checking
+- `bun dev` - Starts the development server
+- `bun run build` - Builds the application for production
+- `bun start` - Starts the production server
+- `bun lint` - Runs ESLint to check code quality
+- `bun run format` - Formats code using Prettier
+- `bun run typecheck` - Runs TypeScript type checking
 
 ## Project Structure
 
