@@ -13,6 +13,9 @@ This website displays countries in list and details about a country such as its 
 - dark mode
 - [random country](https://country-rank.bastiendmt.vercel.app/country/random) _using middleware or button_
 - language switch (en & fr)
+- SEO optimized with metadata
+- Incremental Static Regeneration (ISR) for better performance
+- Accessibility features (ARIA labels, semantic HTML)
 
 ## Tech stack
 
@@ -21,6 +24,8 @@ This project is using NextJS with app router and the following :
 - Lucide icons
 - Mapbox
 - Eslint
+- TypeScript
+- Next Themes (dark mode)
 
 Data is coming from https://restcountries.com
 
@@ -45,7 +50,34 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-To run the project locally, run the development server as following:
+### Prerequisites
+
+- Node.js 22 (see `.node-version`)
+- npm, yarn, or bun
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/bastiendmt/country-rank.git
+cd country-rank
+```
+
+2. Install dependencies:
+```bash
+npm install --legacy-peer-deps
+# or
+yarn install
+# or
+bun install
+```
+
+3. (Optional) Copy the environment example file:
+```bash
+cp .env.example .env.local
+```
+
+4. Run the development server:
 
 ```bash
 npm run dev
@@ -56,3 +88,40 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Available Scripts
+
+- `npm run dev` - Starts the development server
+- `npm run build` - Builds the application for production
+- `npm run start` - Starts the production server
+- `npm run lint` - Runs ESLint to check code quality
+- `npm run format` - Formats code using Prettier
+- `npm run typecheck` - Runs TypeScript type checking
+
+## Project Structure
+
+```
+src/
+├── api/              # API functions for fetching data
+├── app/              # Next.js app router pages
+│   └── [lang]/       # Internationalized routes
+├── components/       # React components
+├── functions/        # Utility functions
+├── hooks/            # Custom React hooks
+├── styles/           # CSS modules
+└── types/            # TypeScript type definitions
+```
+
+## Environment Variables
+
+See `.env.example` for available environment variables. Currently supports:
+
+- `NEXT_PUBLIC_API_URL` - Override the REST Countries API URL (optional)
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is open source and available under the MIT License.
