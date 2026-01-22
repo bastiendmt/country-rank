@@ -7,11 +7,11 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "bun lint && next build",
+    "build": "npm run lint && next build",
     "start": "next start",
     "lint": "eslint .",
-    "format": "bun run prettier --write src/**/*.{html,js,ts,json,tsx}",
-    "typecheck": "bun run next typegen && bun run tsc -p ./tsconfig.json"
+    "format": "prettier --write \"src/**/*.{html,js,ts,json,tsx}\"",
+    "typecheck": "npx next typegen && npx tsc -p ./tsconfig.json"
   },
   "dependencies": {
     "lucide-react": "^0.562.0",
