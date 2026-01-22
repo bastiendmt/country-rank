@@ -24,6 +24,7 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: { componentStack?: string }) {
+    // TODO: Send error to logging service (e.g., Sentry, LogRocket) in production
     console.error('Error caught by boundary:', error, errorInfo);
   }
 
@@ -45,6 +46,7 @@ class ErrorBoundary extends Component<Props, State> {
               type="button"
               className={styles.button}
               onClick={() => this.setState({ hasError: false })}
+              aria-label="Retry loading the page"
             >
               Try again
             </button>
