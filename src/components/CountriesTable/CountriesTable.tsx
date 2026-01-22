@@ -137,10 +137,11 @@ const CountriesTable = ({
             type="button"
             className={styles.shuffleButton}
             title={dictionary.randomCountry}
+            aria-label={dictionary.randomCountry}
             onClick={randomCountry}
             disabled={countries.length === 0}
           >
-            <Shuffle />
+            <Shuffle aria-hidden="true" />
           </button>
         </div>
         <div className={styles.input}>
@@ -153,11 +154,12 @@ const CountriesTable = ({
       </div>
       <div>
         <div className={styles.heading}>
-          <div className={styles.heading_flag} />
+          <div className={styles.heading_flag} aria-hidden="true" />
           <button
             type="button"
             className={styles.heading_name}
             onClick={() => setValueAndDirection('name')}
+            aria-label={`Sort by ${dictionary.sort.name}`}
           >
             <div>{dictionary.sort.name}</div>
             {sortKey === 'name' && <SortArrow direction={direction} />}
@@ -167,6 +169,7 @@ const CountriesTable = ({
             type="button"
             className={styles.heading_population}
             onClick={() => setValueAndDirection('population')}
+            aria-label={`Sort by ${dictionary.sort.population}`}
           >
             <div>{dictionary.sort.population}</div>
             {sortKey === 'population' && <SortArrow direction={direction} />}
@@ -176,6 +179,7 @@ const CountriesTable = ({
             type="button"
             className={styles.heading_area}
             onClick={() => setValueAndDirection('area')}
+            aria-label={`Sort by ${dictionary.sort.area}`}
           >
             <div>
               {dictionary.sort.area} (km
@@ -188,6 +192,7 @@ const CountriesTable = ({
             type="button"
             className={styles.heading_gini}
             onClick={() => setValueAndDirection('gini')}
+            aria-label={`Sort by ${dictionary.sort.gini}`}
           >
             <div>{dictionary.sort.gini}</div>
             {sortKey === 'gini' && <SortArrow direction={direction} />}

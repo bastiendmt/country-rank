@@ -6,11 +6,21 @@ import { Countries } from '@/types';
  * @returns Country[]
  */
 export async function getCountries(): Promise<Countries | undefined> {
-  const res = await fetch(
-    `${API_URL}/all?fields=name,flags,area,gini,population,translations,cca3`,
-  );
-  if (!res.ok) {
-    throw new Error('Failed to fetch countries');
+  try {
+    const res = await fetch(
+      `${API_URL}/all?fields=name,flags,area,gini,population,translations,cca3`,
+      {
+        next: { revalidate: 86400 }, // Revalidate once per day (24 hours)
+      },
+    );
+    if (!res.ok) {
+      throw new Error(
+        `Failed to fetch countries: ${res.status} ${res.statusText}`,
+      );
+    }
+    return res.json() as Promise<Countries>;
+  } catch (error) {
+    console.error('Error fetching countries:', error);
+    return undefined;
   }
-  return res.json() as Promise<Countries>;
 }
