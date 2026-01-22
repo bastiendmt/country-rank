@@ -12,12 +12,15 @@ const SearchInput = ({
   placeholder: string;
 }) => (
   <div className={styles.wrapper}>
-    <Search />
+    <Search aria-hidden="true" />
     <input
+      type="search"
       className={styles.input}
       placeholder={placeholder}
       onChange={(e) => onChange(e.target.value)}
       defaultValue={defaultValue}
+      aria-label={placeholder}
+      autoComplete="off"
     />
   </div>
 );
