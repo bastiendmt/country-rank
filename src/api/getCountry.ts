@@ -11,9 +11,10 @@ import { Country } from '@/types';
 export async function getCountry(alphaCode: string) {
   try {
     const res = await fetch(`${API_URL}/alpha/${alphaCode}`, {
-      cache: 'force-cache',
+      next: { revalidate: 86400 }, // Revalidate once per day (24 hours)
     });
-    if (!res.ok) throw new Error(`Failed to fetch country: ${alphaCode}`);
+    if (!res.ok)
+      throw new Error(`Failed to fetch country: ${alphaCode} (${res.status})`);
     const countryData = (await res.json()) as [Country];
     return countryData[0];
   } catch (error) {
