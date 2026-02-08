@@ -4,6 +4,13 @@
 
 This application uses Next.js App Router's built-in error handling with `error.tsx` files.
 
+## Quick Start
+
+Run the test script to see testing instructions:
+```bash
+./test-error-boundary.sh
+```
+
 ## Error Boundary Structure
 
 We use a single `error.tsx` file at the root language level (`src/app/[lang]/error.tsx`) which:
