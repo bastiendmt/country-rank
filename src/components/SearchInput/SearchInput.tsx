@@ -14,10 +14,13 @@ const SearchInput = ({
   <div className={styles.wrapper}>
     <Search />
     <input
+      type="search"
       className={styles.input}
       placeholder={placeholder}
       onChange={(e) => onChange(e.target.value)}
       defaultValue={defaultValue}
+      aria-label={placeholder}
+      autoComplete="off"
     />
   </div>
 );

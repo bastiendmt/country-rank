@@ -1,7 +1,20 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   images: {
-    domains: ['restcountries.com', 'upload.wikimedia.org', 'flagcdn.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'restcountries.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'upload.wikimedia.org',
+      },
+      {
+        protocol: 'https',
+        hostname: 'flagcdn.com',
+      },
+    ],
   },
   typescript: {
     ignoreBuildErrors: true,
