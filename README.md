@@ -13,6 +13,11 @@ This website displays countries in list and details about a country such as its 
 - dark mode
 - [random country](https://country-rank.bastiendmt.vercel.app/country/random) _using middleware or button_
 - language switch (en & fr)
+- Error handling with Next.js error boundaries
+
+## Error Handling
+
+This application uses Next.js App Router's built-in error handling. See [ERROR_TESTING.md](./ERROR_TESTING.md) for details on how to test error boundaries.
 
 ## Tech stack
 
