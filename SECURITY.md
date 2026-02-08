@@ -4,10 +4,10 @@
 
 This project is currently in active development. Security updates are provided for the latest version deployed on production.
 
-| Version | Supported          |
-| ------- | ------------------ |
+| Version              | Supported          |
+| -------------------- | ------------------ |
 | Latest (main branch) | :white_check_mark: |
-| Older versions | :x:                |
+| Older versions       | :x:                |
 
 ## Reporting a Vulnerability
 
@@ -18,6 +18,7 @@ If you discover a security vulnerability in this project, please report it by:
 3. Or email the maintainer directly (see GitHub profile)
 
 You can expect:
+
 - An initial response within 48 hours
 - Regular updates on the progress every 5-7 days
 - A coordinated disclosure timeline if the vulnerability is confirmed
@@ -26,6 +27,7 @@ You can expect:
 ## Security Best Practices
 
 This project follows these security practices:
+
 - Regular dependency updates to patch known vulnerabilities
 - Input validation and sanitization
 - Secure API communication with external services
