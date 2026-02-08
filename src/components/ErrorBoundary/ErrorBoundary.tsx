@@ -24,7 +24,6 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: { componentStack?: string }) {
-    // TODO: Send error to logging service (e.g., Sentry, LogRocket) in production
     console.error('Error caught by boundary:', error, errorInfo);
   }
 

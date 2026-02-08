@@ -51,34 +51,10 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js 22 (see `.node-version`)
-- Bun (recommended package manager for this project)
-
-> **Note:** This project uses Bun as its package manager and runtime. While npm and yarn may work, Bun is the recommended tool for the best development experience.
-
-### Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/bastiendmt/country-rank.git
-cd country-rank
-```
-
-2. Install dependencies:
-```bash
-bun install
-```
-
-3. (Optional) Copy the environment example file:
-```bash
-cp .env.example .env.local
-```
-
-4. Run the development server:
+To run the project locally, run the development server as following:
 
 ```bash
+bun i
 bun dev
 ```
 

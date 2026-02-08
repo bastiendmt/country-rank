@@ -141,7 +141,7 @@ const CountriesTable = ({
             onClick={randomCountry}
             disabled={countries.length === 0}
           >
-            <Shuffle aria-hidden="true" />
+            <Shuffle />
           </button>
         </div>
         <div className={styles.input}>
@@ -154,7 +154,7 @@ const CountriesTable = ({
       </div>
       <div>
         <div className={styles.heading}>
-          <div className={styles.heading_flag} aria-hidden="true" />
+          <div className={styles.heading_flag} />
           <button
             type="button"
             className={styles.heading_name}

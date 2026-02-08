@@ -59,6 +59,11 @@
   cursor: pointer;
 }
 
+.heading button:focus-visible {
+  outline: 2px solid var(--primary-color);
+  border-radius: 4px;
+}
+
 .heading_flag {
   flex: 1;
   margin-right: 16px;

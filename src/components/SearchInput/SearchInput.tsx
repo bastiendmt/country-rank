@@ -12,7 +12,7 @@ const SearchInput = ({
   placeholder: string;
 }) => (
   <div className={styles.wrapper}>
-    <Search aria-hidden="true" />
+    <Search />
     <input
       type="search"
       className={styles.input}
