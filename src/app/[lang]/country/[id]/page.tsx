@@ -1,11 +1,11 @@
-import type { Metadata } from 'next';
 import { getCountries } from '@/api/getCountries';
 import { getCountry } from '@/api/getCountry';
 import { OG_DESCRIPTION, OG_TITLE } from '@/app/[lang]/og';
 import CountryDetails from '@/components/CountryDetails/CountryDetails';
-import NotFound from './not-found';
-import { getDictionary } from '../../dictionaries';
 import { i18n } from 'i18n-config';
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { getDictionary } from '../../dictionaries';
 
 export async function generateStaticParams(): Promise<
   { id: string; lang: 'en' | 'fr' }[]
@@ -48,7 +48,7 @@ export async function generateMetadata({
 const Country = async ({ params }: PageProps<'/[lang]/country/[id]'>) => {
   const { id, lang } = await params;
   const country = await getCountry(id);
-  if (!country) return NotFound();
+  if (!country) return notFound();
   const dictionary = await getDictionary(lang as 'en' | 'fr');
   return <CountryDetails country={country} dictionary={dictionary} />;
 };

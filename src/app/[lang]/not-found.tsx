@@ -1,5 +1,5 @@
 const NotFound = () => (
-  <div>Oops, an error has occurred, plase come back later.</div>
+  <div>Oops, an error has occurred, please come back later.</div>
 );
 
 export default NotFound;
