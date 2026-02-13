@@ -33,6 +33,7 @@ export const HeaderButtons = ({ dictionary }: { dictionary: Dictionary }) => {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 
@@ -44,15 +45,7 @@ export const HeaderButtons = ({ dictionary }: { dictionary: Dictionary }) => {
         onClick={switchTheme}
         title={dictionary.switchTheme}
       >
-        {mounted ? (
-          resolvedTheme === 'light' ? (
-            <Moon />
-          ) : (
-            <Sun />
-          )
-        ) : (
-          <Moon />
-        )}
+        {mounted ? resolvedTheme === 'light' ? <Moon /> : <Sun /> : <Moon />}
       </button>
       <Link href={redirectedPathname(oppositeLanguage)}>
         <button
