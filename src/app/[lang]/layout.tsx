@@ -49,7 +49,7 @@ const RootLayout = async ({ children, params }: LayoutProps<'/[lang]'>) => {
   const { lang } = await params;
   const dictionary = await getDictionary(lang as 'en' | 'fr');
   return (
-    <html lang={lang}>
+    <html lang={lang} suppressHydrationWarning>
       <body>
         <TProvider>
           <div className={styles.container}>

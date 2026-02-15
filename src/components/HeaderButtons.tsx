@@ -8,10 +8,12 @@ import { Globe2, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export const HeaderButtons = ({ dictionary }: { dictionary: Dictionary }) => {
   const pathname = usePathname();
   const { lang } = useLocale();
+  const [mounted, setMounted] = useState(false);
 
   const oppositeLanguage =
     i18n.locales.find((l) => l !== lang) ?? i18n.defaultLocale;
@@ -30,6 +32,11 @@ export const HeaderButtons = ({ dictionary }: { dictionary: Dictionary }) => {
     setTheme(newTheme);
   };
 
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
+
   return (
     <>
       <button
@@ -38,7 +45,7 @@ export const HeaderButtons = ({ dictionary }: { dictionary: Dictionary }) => {
         onClick={switchTheme}
         title={dictionary.switchTheme}
       >
-        {resolvedTheme === 'light' ? <Moon /> : <Sun />}
+        {mounted ? resolvedTheme === 'light' ? <Moon /> : <Sun /> : <Moon />}
       </button>
       <Link href={redirectedPathname(oppositeLanguage)}>
         <button
