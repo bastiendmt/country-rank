@@ -71,19 +71,29 @@ const CountryDetails = ({
         <ViewTransition name={`country-bg-${country.cca3}`} share="morph">
           <div className={styles.overview_panel}>
             <div className={styles.overview_image_container}>
-              <Image
-                src={country.flags.svg}
-                alt={country.flags.alt ?? country.name.common}
-                title={country.flags.alt ?? country.name.common}
-                fill
-                priority
-              />
+              <ViewTransition
+                name={`country-flag-${country.cca3}`}
+                share="morph"
+              >
+                <Image
+                  src={country.flags.svg}
+                  alt={country.flags.alt ?? country.name.common}
+                  title={country.flags.alt ?? country.name.common}
+                  fill
+                  priority
+                />
+              </ViewTransition>
             </div>
 
-            <h1 className={styles.overview_name}>
-              {country.translations[countryTranslationKey]?.common ??
-                country.name.common}
-            </h1>
+            <ViewTransition
+              name={`country-name-${country.cca3}`}
+              share="text-morph"
+            >
+              <h1 className={styles.overview_name}>
+                {country.translations[countryTranslationKey]?.common ??
+                  country.name.common}
+              </h1>
+            </ViewTransition>
             <div className={styles.overview_region}>{country.region}</div>
 
             <div className={styles.overview_numbers}>

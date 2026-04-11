@@ -209,17 +209,27 @@ const CountriesTable = ({
             <ViewTransition name={`country-bg-${country.cca3}`} share="morph">
               <div className={styles.row}>
                 <div className={styles.flag}>
-                  <Image
-                    src={country.flags.svg}
-                    alt={country.name.common}
-                    fill
-                  />
+                  <ViewTransition
+                    name={`country-flag-${country.cca3}`}
+                    share="morph"
+                  >
+                    <Image
+                      src={country.flags.svg}
+                      alt={country.name.common}
+                      fill
+                    />
+                  </ViewTransition>
                 </div>
                 <div className={styles.mobileFlag}>{country.flag}</div>
-                <div className={styles.name}>
-                  {country.translations[countryTranslationKey]?.common ??
-                    country.name.common}
-                </div>
+                <ViewTransition
+                  name={`country-name-${country.cca3}`}
+                  share="text-morph"
+                >
+                  <div className={styles.name}>
+                    {country.translations[countryTranslationKey]?.common ??
+                      country.name.common}
+                  </div>
+                </ViewTransition>
                 <div className={styles.population}>
                   {formatNumber(country.population)}
                 </div>
