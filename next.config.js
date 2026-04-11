@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
+  reactCompiler: true,
   images: {
     remotePatterns: [
       {
