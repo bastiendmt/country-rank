@@ -8,7 +8,7 @@ import { Countries } from '@/types';
 export async function getCountries(): Promise<Countries | undefined> {
   try {
     const res = await fetch(
-      `${API_URL}/all?fields=name,flags,area,gini,population,translations,cca3`,
+      `${API_URL}/all?fields=name,flags,area,gini,population,translations,cca3,region,subregion`,
       {
         next: { revalidate: 86400 }, // Revalidate once per day (24 hours)
       },
