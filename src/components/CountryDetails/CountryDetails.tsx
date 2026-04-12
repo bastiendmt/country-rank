@@ -98,19 +98,29 @@ const CountryDetails = ({
 
             <div className={styles.overview_numbers}>
               <div className={styles.overview_population}>
-                <div className={styles.overview_value}>
-                  {formatNumber(country.population)}
-                </div>
+                <ViewTransition
+                  name={`country-population-${country.cca3}`}
+                  share="text-morph"
+                >
+                  <div className={styles.overview_value}>
+                    {formatNumber(country.population)}
+                  </div>
+                </ViewTransition>
                 <div className={styles.overview_label}>
                   {dictionary.country.population}
                 </div>
               </div>
 
               <div className={styles.overview_area}>
-                <div className={styles.overview_value}>
-                  {formatNumber(country.area)} (km
-                  <sup style={{ fontSize: '0.5rem' }}>2</sup>)
-                </div>
+                <ViewTransition
+                  name={`country-area-${country.cca3}`}
+                  share="text-morph"
+                >
+                  <div className={styles.overview_value}>
+                    {formatNumber(country.area)} (km
+                    <sup style={{ fontSize: '0.5rem' }}>2</sup>)
+                  </div>
+                </ViewTransition>
                 <div className={styles.overview_label}>
                   {dictionary.country.area}
                 </div>

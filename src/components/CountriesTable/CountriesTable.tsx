@@ -206,7 +206,10 @@ const CountriesTable = ({
             passHref
             transitionTypes={['nav-forward']}
           >
-            <ViewTransition name={`country-bg-${country.cca3}`} share="morph">
+            <div className={styles.rowWrapper}>
+              <ViewTransition name={`country-bg-${country.cca3}`} share="morph">
+                <div className={styles.rowBg} />
+              </ViewTransition>
               <div className={styles.row}>
                 <div className={styles.flag}>
                   <ViewTransition
@@ -230,15 +233,25 @@ const CountriesTable = ({
                       country.name.common}
                   </div>
                 </ViewTransition>
-                <div className={styles.population}>
-                  {formatNumber(country.population)}
-                </div>
-                <div className={styles.area}>
-                  {formatNumber(country.area) || 0}
-                </div>
+                <ViewTransition
+                  name={`country-population-${country.cca3}`}
+                  share="text-morph"
+                >
+                  <div className={styles.population}>
+                    {formatNumber(country.population)}
+                  </div>
+                </ViewTransition>
+                <ViewTransition
+                  name={`country-area-${country.cca3}`}
+                  share="text-morph"
+                >
+                  <div className={styles.area}>
+                    {formatNumber(country.area) || 0}
+                  </div>
+                </ViewTransition>
                 <div className={styles.gini}>{giniToString(country.gini)}</div>
               </div>
-            </ViewTransition>
+            </div>
           </Link>
         ))}
       </div>

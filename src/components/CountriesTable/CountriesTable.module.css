@@ -94,25 +94,38 @@
   margin-left: 2px;
 }
 
+.rowWrapper {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.rowBg {
+  position: absolute;
+  inset: 0;
+  background-color: var(--background-color-light);
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  transition: box-shadow 200ms ease-in-out;
+}
+
 .row {
+  position: relative;
   display: flex;
   padding: 20px;
 
   text-align: center;
-  background-color: var(--background-color-light);
   border-radius: 8px;
-  margin-bottom: 16px;
-
-  box-shadow: var(--box-shadow);
   font-weight: 500;
-  transition:
-    transform 200ms ease-in-out,
-    box-shadow 200ms ease-in-out;
+  transition: transform 200ms ease-in-out;
 }
 
 .row:hover {
   cursor: pointer;
   transform: translateY(-4px);
+}
+
+.row:hover ~ .rowBg,
+.rowWrapper:has(.row:hover) .rowBg {
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
 }
 
