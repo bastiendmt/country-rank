@@ -9,7 +9,7 @@ import { useLocale } from '@/hooks/useLocale';
 import type { Countries, Country } from '@/types';
 import { MapPin } from 'lucide-react';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { ViewTransition, useEffect, useState } from 'react';
 import styles from './CountryDetails.module.css';
 import NeighboringCountry from './NeighboringCountry';
 
@@ -68,44 +68,66 @@ const CountryDetails = ({
   return (
     <div className={styles.container}>
       <div className={styles.container_left}>
-        <div className={styles.overview_panel}>
-          <div className={styles.overview_image_container}>
-            <Image
-              src={country.flags.svg}
-              alt={country.flags.alt ?? country.name.common}
-              title={country.flags.alt ?? country.name.common}
-              fill
-              priority
-            />
-          </div>
-
-          <h1 className={styles.overview_name}>
-            {country.translations[countryTranslationKey]?.common ??
-              country.name.common}
-          </h1>
-          <div className={styles.overview_region}>{country.region}</div>
-
-          <div className={styles.overview_numbers}>
-            <div className={styles.overview_population}>
-              <div className={styles.overview_value}>
-                {formatNumber(country.population)}
-              </div>
-              <div className={styles.overview_label}>
-                {dictionary.country.population}
-              </div>
+        <ViewTransition name={`country-bg-${country.cca3}`} share="morph">
+          <div className={styles.overview_panel}>
+            <div className={styles.overview_image_container}>
+              <ViewTransition
+                name={`country-flag-${country.cca3}`}
+                share="morph"
+              >
+                <Image
+                  src={country.flags.svg}
+                  alt={country.flags.alt ?? country.name.common}
+                  title={country.flags.alt ?? country.name.common}
+                  fill
+                  priority
+                />
+              </ViewTransition>
             </div>
 
-            <div className={styles.overview_area}>
-              <div className={styles.overview_value}>
-                {formatNumber(country.area)} (km
-                <sup style={{ fontSize: '0.5rem' }}>2</sup>)
+            <ViewTransition
+              name={`country-name-${country.cca3}`}
+              share="text-morph"
+            >
+              <h1 className={styles.overview_name}>
+                {country.translations[countryTranslationKey]?.common ??
+                  country.name.common}
+              </h1>
+            </ViewTransition>
+            <div className={styles.overview_region}>{country.region}</div>
+
+            <div className={styles.overview_numbers}>
+              <div className={styles.overview_population}>
+                <ViewTransition
+                  name={`country-population-${country.cca3}`}
+                  share="text-morph"
+                >
+                  <div className={styles.overview_value}>
+                    {formatNumber(country.population)}
+                  </div>
+                </ViewTransition>
+                <div className={styles.overview_label}>
+                  {dictionary.country.population}
+                </div>
               </div>
-              <div className={styles.overview_label}>
-                {dictionary.country.area}
+
+              <div className={styles.overview_area}>
+                <ViewTransition
+                  name={`country-area-${country.cca3}`}
+                  share="text-morph"
+                >
+                  <div className={styles.overview_value}>
+                    {formatNumber(country.area)} (km
+                    <sup style={{ fontSize: '0.5rem' }}>2</sup>)
+                  </div>
+                </ViewTransition>
+                <div className={styles.overview_label}>
+                  {dictionary.country.area}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </ViewTransition>
       </div>
 
       <div className={styles.container_botton}>

@@ -9,6 +9,7 @@ import { ChevronDown, ChevronUp, Shuffle } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { ViewTransition } from 'react';
 import { useState } from 'react';
 import SearchInput from '../SearchInput/SearchInput';
 import styles from './CountriesTable.module.css';
@@ -203,23 +204,53 @@ const CountriesTable = ({
             href={`${pathname}/country/${country.cca3}`}
             key={country.name.common}
             passHref
+            transitionTypes={['nav-forward']}
           >
-            <div className={styles.row}>
-              <div className={styles.flag}>
-                <Image src={country.flags.svg} alt={country.name.common} fill />
+            <div className={styles.rowWrapper}>
+              <ViewTransition name={`country-bg-${country.cca3}`} share="morph">
+                <div className={styles.rowBg} />
+              </ViewTransition>
+              <div className={styles.row}>
+                <div className={styles.flag}>
+                  <ViewTransition
+                    name={`country-flag-${country.cca3}`}
+                    share="morph"
+                  >
+                    <Image
+                      src={country.flags.svg}
+                      alt={country.name.common}
+                      fill
+                    />
+                  </ViewTransition>
+                </div>
+                <div className={styles.mobileFlag}>{country.flag}</div>
+                <ViewTransition
+                  name={`country-name-${country.cca3}`}
+                  share="text-morph"
+                >
+                  <div className={styles.name}>
+                    {country.translations[countryTranslationKey]?.common ??
+                      country.name.common}
+                  </div>
+                </ViewTransition>
+                <ViewTransition
+                  name={`country-population-${country.cca3}`}
+                  share="text-morph"
+                >
+                  <div className={styles.population}>
+                    {formatNumber(country.population)}
+                  </div>
+                </ViewTransition>
+                <ViewTransition
+                  name={`country-area-${country.cca3}`}
+                  share="text-morph"
+                >
+                  <div className={styles.area}>
+                    {formatNumber(country.area) || 0}
+                  </div>
+                </ViewTransition>
+                <div className={styles.gini}>{giniToString(country.gini)}</div>
               </div>
-              <div className={styles.mobileFlag}>{country.flag}</div>
-              <div className={styles.name}>
-                {country.translations[countryTranslationKey]?.common ??
-                  country.name.common}
-              </div>
-              <div className={styles.population}>
-                {formatNumber(country.population)}
-              </div>
-              <div className={styles.area}>
-                {formatNumber(country.area) || 0}
-              </div>
-              <div className={styles.gini}>{giniToString(country.gini)}</div>
             </div>
           </Link>
         ))}
