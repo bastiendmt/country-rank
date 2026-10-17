@@ -22,7 +22,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const countryRoutes: MetadataRoute.Sitemap = countries
     ? i18n.locales.flatMap((locale) =>
         countries.map((country) => ({
-          url: `${baseUrl}/${locale}/country/${country.cca3}`,
+          url: `${baseUrl}/${locale}/country/${country.codes.alpha_3}`,
           lastModified: new Date(),
           changeFrequency: 'weekly' as const,
           priority: 0.8,

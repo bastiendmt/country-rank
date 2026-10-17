@@ -1,17 +1,16 @@
-import { API_URL } from '@/api/url';
-import { Country } from '@/types';
+import { getCountries } from '@/api/getCountries';
+import type { Countries } from '@/types';
 
 /**
- * Get countries from https://restcountries.com/v3.1/alpha?codes=[alphaCodes]
+ * Get the neighboring countries from the cached countries list
  * @param {string[]} alphaCodes - an array of 3 character alpha code of the desired countries
- * @example
- * // https://restcountries.com/v3.1/alpha?codes=fra,bel
  * @returns Country[]
  */
-export async function getBorders(alphaCodes: string[]) {
-  const res = await fetch(`${API_URL}/alpha?codes=${alphaCodes.join(',')}`);
-  if (!res.ok) {
-    throw new Error('Failed to fetch countries');
-  }
-  return res.json() as Promise<Country[]>;
+export async function getBorders(alphaCodes: string[]): Promise<Countries> {
+  const countries = await getCountries();
+  if (!countries) throw new Error('Failed to fetch countries');
+  const codes = new Set(alphaCodes.map((code) => code.toLowerCase()));
+  return countries.filter((country) =>
+    codes.has(country.codes.alpha_3.toLowerCase()),
+  );
 }

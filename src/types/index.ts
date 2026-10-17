@@ -1,94 +1,34 @@
-export interface Country {
-  altSpellings: string[];
-  area: number;
-  borders?: string[];
-  capital?: string[];
-  capitalInfo: {
-    latlng: [number, number];
-  };
-  car: {
-    side: string;
-    signs: string[];
-  };
-  cca2: string;
-  cca3: string;
-  ccn3: string;
-  cioc: string;
-  coatOfArms: {
-    png: string;
-    svg: string;
-  };
-  continents: string[];
-  currencies?: Record<
-    string,
-    {
-      name: string;
-      symbol: string;
-    }
-  >;
-  demonyms: {
-    eng: {
-      f: string;
-      m: string;
-    };
-    fra: {
-      f: string;
-      m: string;
-    };
-  };
-  fifa: string;
-  flag: string;
-  flags: {
-    alt?: string;
-    png: string;
-    svg: string;
-  };
-  gini?: Record<string, number>;
-  idd: {
-    root: string;
-    suffixes: string[];
-  };
-  independent: boolean;
-  landlocked: boolean;
-  languages?: Record<string, string>;
-  latlng: [number, number];
-  maps: {
-    googleMaps: string;
-    openStreetMaps: string;
-  };
-  name: {
+/**
+ * REST Countries v5 country, limited to the properties requested through
+ * `response_fields` in `getCountries`
+ */
+export interface CountryV5 {
+  names: {
     common: string;
-    nativeName?: Record<
-      string,
-      {
-        common: string;
-        official: string;
-      }
-    >;
-    official: string;
+    native?: Record<string, { common: string; official: string }>;
+    translations: Record<string, { common: string; official: string }>;
   };
-  population: number;
-  postalCode: {
-    format: string;
-    regex: string;
+  codes: { alpha_3: string };
+  capitals?: { name: string }[];
+  flag: {
+    emoji: string;
+    description?: string;
+    url_png: string;
+    url_svg: string;
   };
   region: string;
-  startOfWeek: string;
-  status: string;
   subregion?: string;
-  timezones: string[];
-  tld: string[];
-  translations: Record<
-    string,
-    {
-      common: string;
-      official: string;
-    }
-  >;
-  unMember: boolean;
+  area: { kilometers: number };
+  borders?: string[];
+  coordinates: { lat: number; lng: number };
+  currencies?: { code: string; name: string; symbol: string }[];
+  economy?: { gini_coefficient?: Record<string, number> };
+  languages?: { iso639_3: string; name: string }[];
+  links: { google_maps: string };
+  population: number;
 }
 
-export type Countries = Country[];
+export type Countries = CountryV5[];
 
 export interface Translation {
   country: {

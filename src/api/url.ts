@@ -1,2 +1,3 @@
 export const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || 'https://restcountries.com/v3.1';
+  process.env.NEXT_PUBLIC_API_URL ||
+  'https://api.restcountries.com/countries/v5';

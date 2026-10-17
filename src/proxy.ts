@@ -19,7 +19,7 @@ export async function proxy(request: NextRequest) {
     const countries = await getCountries();
     if (!countries) return NotFound();
     const randomIndex = Math.floor(Math.random() * countries.length);
-    const countryCode = countries[randomIndex]?.cca3;
+    const countryCode = countries[randomIndex]?.codes.alpha_3;
     if (!countryCode) return NextResponse.next();
     return NextResponse.redirect(`${origin}/${locale}/country/${countryCode}`);
   }

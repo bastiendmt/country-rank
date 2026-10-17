@@ -26,7 +26,7 @@ const getNewDirection = (direction: DirectionType): DirectionType => {
 const filterCountries = (countries: Countries, keyword: string): Countries =>
   countries.filter(
     (country) =>
-      country.name.common.toLowerCase().includes(keyword) ||
+      country.names.common.toLowerCase().includes(keyword) ||
       country.region.toLowerCase().includes(keyword) ||
       country.subregion?.toLowerCase().includes(keyword),
   );
@@ -45,7 +45,7 @@ const orderBy = (
   switch (value) {
     case 'name':
       return [...countries].sort((a, b) =>
-        a.name.common > b.name.common ? sortDirection : -sortDirection,
+        a.names.common > b.names.common ? sortDirection : -sortDirection,
       );
     case 'population':
       return [...countries].sort((a, b) =>
@@ -53,13 +53,14 @@ const orderBy = (
       );
     case 'gini':
       return [...countries].sort((a, b) =>
-        formatGini(a.gini) > formatGini(b.gini)
+        formatGini(a.economy?.gini_coefficient) >
+        formatGini(b.economy?.gini_coefficient)
           ? sortDirection
           : -sortDirection,
       );
     case 'area':
       return [...countries].sort((a, b) =>
-        a.area > b.area ? sortDirection : -sortDirection,
+        a.area.kilometers > b.area.kilometers ? sortDirection : -sortDirection,
       );
     default:
       return countries;
@@ -122,7 +123,7 @@ const CountriesTable = ({
    */
   const randomCountry = () => {
     const randomIndex = Math.floor(Math.random() * countries.length);
-    const countryCode = countries[randomIndex]?.cca3;
+    const countryCode = countries[randomIndex]?.codes.alpha_3;
     if (!countryCode) return;
     router.push(`/country/${countryCode}`);
   };
@@ -201,40 +202,43 @@ const CountriesTable = ({
         </div>
         {orderedCountry.map((country) => (
           <Link
-            href={`${pathname}/country/${country.cca3}`}
-            key={country.name.common}
+            href={`${pathname}/country/${country.codes.alpha_3}`}
+            key={country.names.common}
             passHref
             transitionTypes={['nav-forward']}
           >
             <div className={styles.rowWrapper}>
-              <ViewTransition name={`country-bg-${country.cca3}`} share="morph">
+              <ViewTransition
+                name={`country-bg-${country.codes.alpha_3}`}
+                share="morph"
+              >
                 <div className={styles.rowBg} />
               </ViewTransition>
               <div className={styles.row}>
                 <div className={styles.flag}>
                   <ViewTransition
-                    name={`country-flag-${country.cca3}`}
+                    name={`country-flag-${country.codes.alpha_3}`}
                     share="morph"
                   >
                     <Image
-                      src={country.flags.svg}
-                      alt={country.name.common}
+                      src={country.flag.url_svg}
+                      alt={country.names.common}
                       fill
                     />
                   </ViewTransition>
                 </div>
-                <div className={styles.mobileFlag}>{country.flag}</div>
+                <div className={styles.mobileFlag}>{country.flag.emoji}</div>
                 <ViewTransition
-                  name={`country-name-${country.cca3}`}
+                  name={`country-name-${country.codes.alpha_3}`}
                   share="text-morph"
                 >
                   <div className={styles.name}>
-                    {country.translations[countryTranslationKey]?.common ??
-                      country.name.common}
+                    {country.names.translations[countryTranslationKey]
+                      ?.common ?? country.names.common}
                   </div>
                 </ViewTransition>
                 <ViewTransition
-                  name={`country-population-${country.cca3}`}
+                  name={`country-population-${country.codes.alpha_3}`}
                   share="text-morph"
                 >
                   <div className={styles.population}>
@@ -242,14 +246,16 @@ const CountriesTable = ({
                   </div>
                 </ViewTransition>
                 <ViewTransition
-                  name={`country-area-${country.cca3}`}
+                  name={`country-area-${country.codes.alpha_3}`}
                   share="text-morph"
                 >
                   <div className={styles.area}>
-                    {formatNumber(country.area) || 0}
+                    {formatNumber(country.area.kilometers) || 0}
                   </div>
                 </ViewTransition>
-                <div className={styles.gini}>{giniToString(country.gini)}</div>
+                <div className={styles.gini}>
+                  {giniToString(country.economy?.gini_coefficient)}
+                </div>
               </div>
             </div>
           </Link>

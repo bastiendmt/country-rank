@@ -6,7 +6,11 @@ import styles from './MapboxMap.module.css';
 mapboxgl.accessToken =
   'pk.eyJ1Ijoic3RhcnJ4cyIsImEiOiJjam9lZGppdGsxaDgxM2ttcmpncXNtMnpoIn0.7SJLcJzoWrgNDktWnAmTbQ';
 
-const MapboxMap = ({ coordinates }: { coordinates: [number, number] }) => {
+const MapboxMap = ({
+  coordinates,
+}: {
+  coordinates: { lat: number; lng: number };
+}) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
 
@@ -14,7 +18,7 @@ const MapboxMap = ({ coordinates }: { coordinates: [number, number] }) => {
     if (map.current) return; // initialize map only once
     if (!mapContainer.current) return;
     map.current = new mapboxgl.Map({
-      center: [coordinates[1], coordinates[0]],
+      center: [coordinates.lng, coordinates.lat],
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v11',
       zoom: 3,
@@ -23,7 +27,7 @@ const MapboxMap = ({ coordinates }: { coordinates: [number, number] }) => {
 
   useEffect(() => {
     map.current?.flyTo({
-      center: [coordinates[1], coordinates[0]],
+      center: [coordinates.lng, coordinates.lat],
       essential: true,
     });
   }, [coordinates]);

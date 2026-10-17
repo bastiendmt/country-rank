@@ -1,66 +1,46 @@
 'use client';
 
-import { getBorders } from '@/api/getBorders';
 import type { Dictionary } from '@/app/[lang]/dictionaries';
 import Mapbox from '@/components/CountryDetails/MapboxMap/MapboxMap';
 import formatNumber from '@/functions/formatNumber';
 import { giniToString } from '@/functions/getGini';
 import { useLocale } from '@/hooks/useLocale';
-import type { Countries, Country } from '@/types';
+import type { Countries, CountryV5 } from '@/types';
 import { MapPin } from 'lucide-react';
 import Image from 'next/image';
-import { ViewTransition, useEffect, useState } from 'react';
+import { ViewTransition } from 'react';
 import styles from './CountryDetails.module.css';
 import NeighboringCountry from './NeighboringCountry';
 
 const CountryDetails = ({
   country,
+  borders,
   dictionary,
 }: {
-  country: Country;
+  country: CountryV5;
+  borders: Countries;
   dictionary: Dictionary;
 }) => {
-  const [bordersLoading, setBordersLoading] = useState(true);
-  const [borders, setBorders] = useState<Countries>([]);
   const { countryTranslationKey } = useLocale();
-
-  useEffect(() => {
-    if (country.borders?.length) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setBordersLoading(true);
-      getBorders(country.borders)
-        .then((countries) => {
-          setBorders(countries);
-          setBordersLoading(false);
-        })
-        .catch((err: unknown) => {
-          console.error('Could not fetch borders', err);
-        });
-    }
-  }, [country.borders]);
 
   const hasBorders = borders.length !== 0;
 
   const getCurrencies = () => {
-    if (!country.currencies) return '-';
-    return Object.keys(country.currencies)
-      .map((curr) => country.currencies?.[curr]?.name)
-      .join(', ');
+    if (!country.currencies?.length) return '-';
+    return country.currencies.map((curr) => curr.name).join(', ');
   };
 
   const getLanguages = () => {
-    if (!country.languages) return '-';
-    return Object.keys(country.languages)
-      .map((countryLang) => country.languages?.[countryLang])
-      .join(', ');
+    if (!country.languages?.length) return '-';
+    return country.languages.map((lang) => lang.name).join(', ');
   };
 
   const getNativeName = () => {
-    if (!country.name.nativeName) return '-';
+    if (!country.names.native) return '-';
     return (
-      Object.keys(country.name.nativeName)
+      Object.keys(country.names.native)
         // first common native name
-        .map((native) => country.name.nativeName?.[native]?.common)
+        .map((native) => country.names.native?.[native]?.common)
         .join(', ')
     );
   };
@@ -68,17 +48,20 @@ const CountryDetails = ({
   return (
     <div className={styles.container}>
       <div className={styles.container_left}>
-        <ViewTransition name={`country-bg-${country.cca3}`} share="morph">
+        <ViewTransition
+          name={`country-bg-${country.codes.alpha_3}`}
+          share="morph"
+        >
           <div className={styles.overview_panel}>
             <div className={styles.overview_image_container}>
               <ViewTransition
-                name={`country-flag-${country.cca3}`}
+                name={`country-flag-${country.codes.alpha_3}`}
                 share="morph"
               >
                 <Image
-                  src={country.flags.svg}
-                  alt={country.flags.alt ?? country.name.common}
-                  title={country.flags.alt ?? country.name.common}
+                  src={country.flag.url_svg}
+                  alt={country.flag.description ?? country.names.common}
+                  title={country.flag.description ?? country.names.common}
                   fill
                   priority
                 />
@@ -86,12 +69,12 @@ const CountryDetails = ({
             </div>
 
             <ViewTransition
-              name={`country-name-${country.cca3}`}
+              name={`country-name-${country.codes.alpha_3}`}
               share="text-morph"
             >
               <h1 className={styles.overview_name}>
-                {country.translations[countryTranslationKey]?.common ??
-                  country.name.common}
+                {country.names.translations[countryTranslationKey]?.common ??
+                  country.names.common}
               </h1>
             </ViewTransition>
             <div className={styles.overview_region}>{country.region}</div>
@@ -99,7 +82,7 @@ const CountryDetails = ({
             <div className={styles.overview_numbers}>
               <div className={styles.overview_population}>
                 <ViewTransition
-                  name={`country-population-${country.cca3}`}
+                  name={`country-population-${country.codes.alpha_3}`}
                   share="text-morph"
                 >
                   <div className={styles.overview_value}>
@@ -113,11 +96,11 @@ const CountryDetails = ({
 
               <div className={styles.overview_area}>
                 <ViewTransition
-                  name={`country-area-${country.cca3}`}
+                  name={`country-area-${country.codes.alpha_3}`}
                   share="text-morph"
                 >
                   <div className={styles.overview_value}>
-                    {formatNumber(country.area)} (km
+                    {formatNumber(country.area.kilometers)} (km
                     <sup style={{ fontSize: '0.5rem' }}>2</sup>)
                   </div>
                 </ViewTransition>
@@ -137,12 +120,12 @@ const CountryDetails = ({
             <button
               type="button"
               title="Google maps link"
-              onClick={() => window.open(country.maps.googleMaps)}
+              onClick={() => window.open(country.links.google_maps)}
             >
               <MapPin />
             </button>
           </div>
-          <Mapbox coordinates={country.latlng} />
+          <Mapbox coordinates={country.coordinates} />
         </div>
       </div>
 
@@ -157,7 +140,7 @@ const CountryDetails = ({
               {dictionary.country.capital}
             </div>
             <div className={styles.details_panel_value}>
-              {country.capital?.[0] ?? '-'}
+              {country.capitals?.[0]?.name ?? '-'}
             </div>
           </div>
 
@@ -196,7 +179,7 @@ const CountryDetails = ({
               {dictionary.country.gini}
             </div>
             <div className={styles.details_panel_value}>
-              {giniToString(country.gini)}
+              {giniToString(country.economy?.gini_coefficient)}
             </div>
           </div>
 
@@ -215,11 +198,12 @@ const CountryDetails = ({
                 {dictionary.country.neighboringCountries}
               </div>
               <div className={styles.details_panel_borders_container}>
-                {bordersLoading && dictionary.country['neighbors-loading']}
-                {!bordersLoading &&
-                  borders.map((border) => (
-                    <NeighboringCountry key={border.cca3} country={border} />
-                  ))}
+                {borders.map((border) => (
+                  <NeighboringCountry
+                    key={border.codes.alpha_3}
+                    country={border}
+                  />
+                ))}
               </div>
             </div>
           )}

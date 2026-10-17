@@ -1,3 +1,4 @@
+import { getBorders } from '@/api/getBorders';
 import { getCountries } from '@/api/getCountries';
 import { getCountry } from '@/api/getCountry';
 import { OG_DESCRIPTION, OG_TITLE } from '@/app/[lang]/og';
@@ -15,7 +16,7 @@ export async function generateStaticParams(): Promise<
 
   return i18n.locales.flatMap((locale) =>
     countries.map((country) => ({
-      id: country.cca3,
+      id: country.codes.alpha_3,
       lang: locale,
     })),
   );
@@ -36,11 +37,11 @@ export async function generateMetadata({
     };
 
   return {
-    description: `Find more about ${country.name.common} by clicking on this link. ${OG_DESCRIPTION}`,
+    description: `Find more about ${country.names.common} by clicking on this link. ${OG_DESCRIPTION}`,
     openGraph: {
-      images: [country.flags.png],
+      images: [country.flag.url_png],
     },
-    title: `${OG_TITLE} - ${country.name.common}`,
+    title: `${OG_TITLE} - ${country.names.common}`,
   };
 }
 
@@ -50,7 +51,19 @@ const Country = async ({ params }: PageProps<'/[lang]/country/[id]'>) => {
   const country = await getCountry(id);
   if (!country) return notFound();
   const dictionary = await getDictionary(lang as 'en' | 'fr');
-  return <CountryDetails country={country} dictionary={dictionary} />;
+  const borders = country.borders?.length
+    ? await getBorders(country.borders).catch((err: unknown) => {
+        console.error('Could not fetch borders', err);
+        return [];
+      })
+    : [];
+  return (
+    <CountryDetails
+      country={country}
+      borders={borders}
+      dictionary={dictionary}
+    />
+  );
 };
 
 export default Country;
