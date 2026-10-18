@@ -4,6 +4,10 @@ import type { Countries, CountryV5 } from '@/types';
 // Revalidate once per week (7 days)
 const REVALIDATE_SECONDS = 60 * 60 * 24 * 7;
 
+// Only officially assigned ISO codes: the API also lists unrecognized
+// territories (e.g. Abkhazia) that have no country code to link a page to
+const ISO_STATUS = 'official';
+
 // Maximum page size allowed by the current plan
 const PAGE_SIZE = 100;
 
@@ -45,7 +49,7 @@ export async function getCountries(): Promise<Countries | undefined> {
     const countries: CountryV5[] = [];
     for (let offset = 0, more = true; more; offset += PAGE_SIZE) {
       const res = await apiFetch(
-        `?limit=${PAGE_SIZE}&offset=${offset}&response_fields=${RESPONSE_FIELDS}`,
+        `?limit=${PAGE_SIZE}&offset=${offset}&classification.iso_status=${ISO_STATUS}&response_fields=${RESPONSE_FIELDS}`,
         {
           next: { revalidate: REVALIDATE_SECONDS },
         },
