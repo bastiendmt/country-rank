@@ -9,9 +9,6 @@ const nextConfig: NextConfig = {
       hmrRefreshes: true,
     },
   },
-  experimental: {
-    viewTransition: true,
-  },
   images: {
     remotePatterns: [
       {
