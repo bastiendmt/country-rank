@@ -15,7 +15,6 @@ export function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
-// eslint-disable-next-line no-undef
 const Index = async ({ params }: PageProps<'/[lang]'>) => {
   const { lang } = await params;
   const countries = await getCountries();

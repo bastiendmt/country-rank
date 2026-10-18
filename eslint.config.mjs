@@ -19,6 +19,12 @@ const eslintConfig = [
   }),
   eslintPluginPrettierRecommended,
   {
+    // TypeScript already reports undefined names, and `no-undef` flags Next's
+    // global `PageProps` / `LayoutProps` types.
+    files: ['**/*.{ts,tsx}'],
+    rules: { 'no-undef': 'off' },
+  },
+  {
     ignores: [
       'node_modules/**',
       '.next/**',
