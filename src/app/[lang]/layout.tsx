@@ -44,7 +44,6 @@ export const metadata: Metadata = {
   },
 };
 
-// eslint-disable-next-line no-undef
 const RootLayout = async ({ children, params }: LayoutProps<'/[lang]'>) => {
   const { lang } = await params;
   const dictionary = await getDictionary(lang as 'en' | 'fr');

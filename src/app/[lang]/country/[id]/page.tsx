@@ -21,7 +21,6 @@ export async function generateStaticParams(): Promise<
 
 export async function generateMetadata({
   params,
-  // eslint-disable-next-line no-undef
 }: PageProps<'/[lang]/country/[id]'>): Promise<Metadata> {
   const { id } = await params;
   const country = await getCountryByCode(id);
@@ -42,7 +41,6 @@ export async function generateMetadata({
   };
 }
 
-// eslint-disable-next-line no-undef
 const Country = async ({ params }: PageProps<'/[lang]/country/[id]'>) => {
   const { id, lang } = await params;
   const country = await getCountryByCode(id);
