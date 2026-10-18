@@ -3,7 +3,6 @@ import { Suspense } from 'react';
 import { getCountries } from '@/api/countries';
 import CountriesTable from '@/components/CountriesTable/CountriesTable';
 import { i18n } from 'i18n-config';
-import NotFound from './not-found';
 import { OG_DESCRIPTION, OG_TITLE } from './og';
 import { getDictionary } from './dictionaries';
 
@@ -20,7 +19,6 @@ export function generateStaticParams() {
 const Index = async ({ params }: PageProps<'/[lang]'>) => {
   const { lang } = await params;
   const countries = await getCountries();
-  if (!countries) return NotFound();
   const dict = await getDictionary(lang as 'en' | 'fr');
   return (
     <Suspense>

@@ -10,7 +10,6 @@ export async function generateStaticParams(): Promise<
   { id: string; lang: 'en' | 'fr' }[]
 > {
   const countries = await getCountries();
-  if (!countries) return [];
 
   return i18n.locales.flatMap((locale) =>
     countries.map((country) => ({
@@ -50,10 +49,7 @@ const Country = async ({ params }: PageProps<'/[lang]/country/[id]'>) => {
   if (!country) return notFound();
   const dictionary = await getDictionary(lang as 'en' | 'fr');
   const borders = country.borders?.length
-    ? await getNeighbors(country.borders).catch((err: unknown) => {
-        console.error('Could not fetch borders', err);
-        return [];
-      })
+    ? await getNeighbors(country.borders)
     : [];
   return (
     <CountryDetails

@@ -5,7 +5,7 @@ import Mapbox from '@/components/CountryDetails/MapboxMap/MapboxMap';
 import formatNumber from '@/functions/formatNumber';
 import { giniToString } from '@/functions/getGini';
 import { useLocale } from '@/hooks/useLocale';
-import type { Countries, CountryV5 } from '@/types';
+import type { Countries, CountryV5 } from '@/api/countries';
 import { MapPin } from 'lucide-react';
 import Image from 'next/image';
 import { ViewTransition } from 'react';

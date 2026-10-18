@@ -1,5 +1,36 @@
 import { apiFetch } from '@/api/apiFetch';
-import type { Countries, CountryV5 } from '@/types';
+
+/**
+ * REST Countries v5 country, limited to the properties requested through
+ * `RESPONSE_FIELDS` below: keep both in sync
+ */
+export interface CountryV5 {
+  names: {
+    common: string;
+    native?: Record<string, { common: string; official: string }>;
+    translations: Record<string, { common: string; official: string }>;
+  };
+  codes: { alpha_3: string };
+  capitals?: { name: string }[];
+  flag: {
+    emoji: string;
+    description?: string;
+    url_png: string;
+    url_svg: string;
+  };
+  region: string;
+  subregion?: string;
+  area: { kilometers: number };
+  borders?: string[];
+  coordinates: { lat: number; lng: number };
+  currencies?: { code: string; name: string; symbol: string }[];
+  economy?: { gini_coefficient?: Record<string, number> };
+  languages?: { iso639_3: string; name: string }[];
+  links: { google_maps: string };
+  population: number;
+}
+
+export type Countries = CountryV5[];
 
 // Revalidate once per week (7 days)
 const REVALIDATE_SECONDS = 60 * 60 * 24 * 7;
@@ -42,32 +73,28 @@ interface CountriesPage {
 /**
  * Get all countries from https://api.restcountries.com/countries/v5?limit=100&offset=[offset]
  * The API is paginated, so pages are fetched until `meta.more` is false.
- * @returns Country[]
+ * @throws if a page could not be fetched, so a broken API fails loudly
+ * instead of producing an empty site
  */
-export async function getCountries(): Promise<Countries | undefined> {
-  try {
-    const countries: CountryV5[] = [];
-    for (let offset = 0, more = true; more; offset += PAGE_SIZE) {
-      const res = await apiFetch(
-        `?limit=${PAGE_SIZE}&offset=${offset}&classification.iso_status=${ISO_STATUS}&response_fields=${RESPONSE_FIELDS}`,
-        {
-          next: { revalidate: REVALIDATE_SECONDS },
-        },
+export async function getCountries(): Promise<Countries> {
+  const countries: CountryV5[] = [];
+  for (let offset = 0, more = true; more; offset += PAGE_SIZE) {
+    const res = await apiFetch(
+      `?limit=${PAGE_SIZE}&offset=${offset}&classification.iso_status=${ISO_STATUS}&response_fields=${RESPONSE_FIELDS}`,
+      {
+        next: { revalidate: REVALIDATE_SECONDS },
+      },
+    );
+    if (!res.ok) {
+      throw new Error(
+        `Failed to fetch countries: ${res.status} ${res.statusText}`,
       );
-      if (!res.ok) {
-        throw new Error(
-          `Failed to fetch countries: ${res.status} ${res.statusText}`,
-        );
-      }
-      const { data } = (await res.json()) as CountriesPage;
-      countries.push(...data.objects);
-      more = data.meta.more;
     }
-    return countries;
-  } catch (error) {
-    console.error('Error fetching countries:', error);
-    return undefined;
+    const { data } = (await res.json()) as CountriesPage;
+    countries.push(...data.objects);
+    more = data.meta.more;
   }
+  return countries;
 }
 
 /**
@@ -77,6 +104,7 @@ export async function getCountries(): Promise<Countries | undefined> {
  * during static generation).
  * @param {string} alphaCode - 3 character alpha code of the desired country
  * @returns Country, or null if it does not exist
+ * @throws if the countries list could not be fetched
  */
 export async function getCountryByCode(
   alphaCode: string,
@@ -84,9 +112,8 @@ export async function getCountryByCode(
   const countries = await getCountries();
   const code = alphaCode.toLowerCase();
   return (
-    countries?.find(
-      (country) => country.codes.alpha_3.toLowerCase() === code,
-    ) ?? null
+    countries.find((country) => country.codes.alpha_3.toLowerCase() === code) ??
+    null
   );
 }
 
@@ -97,7 +124,6 @@ export async function getCountryByCode(
  */
 export async function getNeighbors(alphaCodes: string[]): Promise<Countries> {
   const countries = await getCountries();
-  if (!countries) throw new Error('Failed to fetch countries');
   const codes = new Set(alphaCodes.map((code) => code.toLowerCase()));
   return countries.filter((country) =>
     codes.has(country.codes.alpha_3.toLowerCase()),

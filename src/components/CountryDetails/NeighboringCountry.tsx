@@ -1,5 +1,5 @@
 import { useLocale } from '@/hooks/useLocale';
-import type { CountryV5 } from '@/types';
+import type { CountryV5 } from '@/api/countries';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './CountryDetails.module.css';

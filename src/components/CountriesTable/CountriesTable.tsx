@@ -4,7 +4,7 @@ import type { Dictionary } from '@/app/[lang]/dictionaries';
 import formatNumber from '@/functions/formatNumber';
 import { formatGini, giniToString } from '@/functions/getGini';
 import { useLocale } from '@/hooks/useLocale';
-import type { Countries } from '@/types';
+import type { Countries } from '@/api/countries';
 import { ChevronDown, ChevronUp, Shuffle } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
