@@ -11,10 +11,10 @@ This website displays countries in list and details about a country such as its 
 - search
 - filter by country, region
 - dark mode
-- [random country](https://country-rank.bastiendmt.vercel.app/country/random) _using middleware or button_
+- [random country](https://country-rank.bastiendmt.vercel.app/country/random) _using the proxy or button_
 - language switch (en & fr)
 - SEO optimized with metadata
-- Incremental Static Regeneration (ISR) for better performance
+- Static pages with weekly revalidation (ISR) for better performance
 - Accessibility features (ARIA labels, semantic HTML)
 
 ## Tech stack
