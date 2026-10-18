@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from 'next/server';
-import { getCountries } from './api/getCountries';
+import { getCountries } from '@/api/countries';
 import NotFound from './app/[lang]/not-found';
 import { i18n } from 'i18n-config';
 

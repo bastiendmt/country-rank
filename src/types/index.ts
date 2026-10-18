@@ -1,6 +1,6 @@
 /**
  * REST Countries v5 country, limited to the properties requested through
- * `response_fields` in `getCountries`
+ * `response_fields` in `src/api/countries.ts`
  */
 export interface CountryV5 {
   names: {

@@ -1,6 +1,9 @@
 import { apiFetch } from '@/api/apiFetch';
 import type { Countries, CountryV5 } from '@/types';
 
+// Revalidate once per week (7 days)
+const REVALIDATE_SECONDS = 60 * 60 * 24 * 7;
+
 // Maximum page size allowed by the current plan
 const PAGE_SIZE = 100;
 
@@ -44,7 +47,7 @@ export async function getCountries(): Promise<Countries | undefined> {
       const res = await apiFetch(
         `?limit=${PAGE_SIZE}&offset=${offset}&response_fields=${RESPONSE_FIELDS}`,
         {
-          next: { revalidate: 86400 }, // Revalidate once per day (24 hours)
+          next: { revalidate: REVALIDATE_SECONDS },
         },
       );
       if (!res.ok) {
@@ -61,4 +64,38 @@ export async function getCountries(): Promise<Countries | undefined> {
     console.error('Error fetching countries:', error);
     return undefined;
   }
+}
+
+/**
+ * Get a country from the cached countries list.
+ * The list is fetched in 3 requests and cached, so looking a country up here
+ * costs no extra API request (one request per country page was rate limited
+ * during static generation).
+ * @param {string} alphaCode - 3 character alpha code of the desired country
+ * @returns Country, or null if it does not exist
+ */
+export async function getCountryByCode(
+  alphaCode: string,
+): Promise<CountryV5 | null> {
+  const countries = await getCountries();
+  const code = alphaCode.toLowerCase();
+  return (
+    countries?.find(
+      (country) => country.codes.alpha_3.toLowerCase() === code,
+    ) ?? null
+  );
+}
+
+/**
+ * Get the neighboring countries from the cached countries list
+ * @param {string[]} alphaCodes - 3 character alpha codes of the neighbors
+ * @throws if the countries list could not be fetched
+ */
+export async function getNeighbors(alphaCodes: string[]): Promise<Countries> {
+  const countries = await getCountries();
+  if (!countries) throw new Error('Failed to fetch countries');
+  const codes = new Set(alphaCodes.map((code) => code.toLowerCase()));
+  return countries.filter((country) =>
+    codes.has(country.codes.alpha_3.toLowerCase()),
+  );
 }

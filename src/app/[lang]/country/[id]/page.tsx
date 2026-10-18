@@ -1,6 +1,4 @@
-import { getBorders } from '@/api/getBorders';
-import { getCountries } from '@/api/getCountries';
-import { getCountry } from '@/api/getCountry';
+import { getCountries, getCountryByCode, getNeighbors } from '@/api/countries';
 import { OG_DESCRIPTION, OG_TITLE } from '@/app/[lang]/og';
 import CountryDetails from '@/components/CountryDetails/CountryDetails';
 import { i18n } from 'i18n-config';
@@ -27,7 +25,7 @@ export async function generateMetadata({
   // eslint-disable-next-line no-undef
 }: PageProps<'/[lang]/country/[id]'>): Promise<Metadata> {
   const { id } = await params;
-  const country = await getCountry(id);
+  const country = await getCountryByCode(id);
 
   // TODO: use locale for metadata
   if (!country)
@@ -48,11 +46,11 @@ export async function generateMetadata({
 // eslint-disable-next-line no-undef
 const Country = async ({ params }: PageProps<'/[lang]/country/[id]'>) => {
   const { id, lang } = await params;
-  const country = await getCountry(id);
+  const country = await getCountryByCode(id);
   if (!country) return notFound();
   const dictionary = await getDictionary(lang as 'en' | 'fr');
   const borders = country.borders?.length
-    ? await getBorders(country.borders).catch((err: unknown) => {
+    ? await getNeighbors(country.borders).catch((err: unknown) => {
         console.error('Could not fetch borders', err);
         return [];
       })

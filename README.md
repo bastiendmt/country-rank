@@ -87,7 +87,8 @@ src/
 
 See `.env.example` for available environment variables. Currently supports:
 
-- `NEXT_PUBLIC_API_URL` - Override the REST Countries API URL (optional)
+- `RESTCOUNTRIES_API_KEY` - REST Countries API key (required, server-only)
+- `RESTCOUNTRIES_API_URL` - REST Countries API URL (required, server-only)
 
 ## Contributing
 

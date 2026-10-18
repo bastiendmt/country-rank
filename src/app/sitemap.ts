@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { getCountries } from '@/api/getCountries';
+import { getCountries } from '@/api/countries';
 import { i18n } from 'i18n-config';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

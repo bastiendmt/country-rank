@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
-import { getCountries } from '@/api/getCountries';
+import { getCountries } from '@/api/countries';
 import CountriesTable from '@/components/CountriesTable/CountriesTable';
 import { i18n } from 'i18n-config';
 import NotFound from './not-found';
