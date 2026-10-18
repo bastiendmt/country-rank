@@ -1,6 +1,5 @@
 import { type NextRequest, NextResponse } from 'next/server';
-import { getCountries } from './api/getCountries';
-import NotFound from './app/[lang]/not-found';
+import { getCountries } from '@/api/countries';
 import { i18n } from 'i18n-config';
 
 const { defaultLocale, locales } = i18n;
@@ -17,9 +16,8 @@ export async function proxy(request: NextRequest) {
   // Handle random country
   if (localeCountryRandom) {
     const countries = await getCountries();
-    if (!countries) return NotFound();
     const randomIndex = Math.floor(Math.random() * countries.length);
-    const countryCode = countries[randomIndex]?.cca3;
+    const countryCode = countries[randomIndex]?.codes.alpha_3;
     if (!countryCode) return NextResponse.next();
     return NextResponse.redirect(`${origin}/${locale}/country/${countryCode}`);
   }

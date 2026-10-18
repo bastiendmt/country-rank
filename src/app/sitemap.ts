@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { getCountries } from '@/api/getCountries';
+import { getCountries } from '@/api/countries';
 import { i18n } from 'i18n-config';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -19,16 +19,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   // Country routes for each locale
-  const countryRoutes: MetadataRoute.Sitemap = countries
-    ? i18n.locales.flatMap((locale) =>
-        countries.map((country) => ({
-          url: `${baseUrl}/${locale}/country/${country.cca3}`,
-          lastModified: new Date(),
-          changeFrequency: 'weekly' as const,
-          priority: 0.8,
-        })),
-      )
-    : [];
+  const countryRoutes: MetadataRoute.Sitemap = i18n.locales.flatMap((locale) =>
+    countries.map((country) => ({
+      url: `${baseUrl}/${locale}/country/${country.codes.alpha_3}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    })),
+  );
 
   return [...localeRoutes, ...countryRoutes];
 }

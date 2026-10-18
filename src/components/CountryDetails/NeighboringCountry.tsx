@@ -1,20 +1,20 @@
 import { useLocale } from '@/hooks/useLocale';
-import type { Country } from '@/types';
+import type { CountryV5 } from '@/api/countries';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './CountryDetails.module.css';
 
-const NeighboringCountry = ({ country }: { country: Country }) => {
+const NeighboringCountry = ({ country }: { country: CountryV5 }) => {
   const { lang, countryTranslationKey } = useLocale();
-  const { flags, name, cca3, translations } = country;
+  const { flag, names, codes } = country;
   return (
-    <Link href={`/${lang}/country/${cca3}`} key={name.common}>
+    <Link href={`/${lang}/country/${codes.alpha_3}`} key={names.common}>
       <div className={styles.details_panel_borders_country}>
         <div className={styles.details_panel_image_container}>
-          <Image src={flags.svg} alt={name.common} fill />
+          <Image src={flag.url_svg} alt={names.common} fill />
         </div>
         <div className={styles.details_panel_name}>
-          {translations[countryTranslationKey]?.common ?? name.common}
+          {names.translations[countryTranslationKey]?.common ?? names.common}
         </div>
       </div>
     </Link>
