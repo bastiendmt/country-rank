@@ -34,12 +34,16 @@ export async function generateMetadata({
       title: `${OG_TITLE} - ${dictionary.og.countryPage}`,
     };
 
+  const name =
+    country.names.translations[lang === 'fr' ? 'fra' : 'eng']?.common ??
+    country.names.common;
+
   return {
-    description: `${dictionary.og.findMoreAbout.replace('{country}', country.names.common)} ${dictionary.og.description}`,
+    description: `${dictionary.og.findMoreAbout.replace('{country}', name)} ${dictionary.og.description}`,
     openGraph: {
       images: [country.flag.url_png],
     },
-    title: `${OG_TITLE} - ${country.names.common}`,
+    title: `${OG_TITLE} - ${name}`,
   };
 }
 
