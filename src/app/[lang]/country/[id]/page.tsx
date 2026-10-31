@@ -1,5 +1,5 @@
 import { getCountries, getCountryByCode, getNeighbors } from '@/api/countries';
-import { OG_DESCRIPTION, OG_TITLE } from '@/app/[lang]/og';
+import { OG_TITLE } from '@/app/[lang]/og';
 import CountryDetails from '@/components/CountryDetails/CountryDetails';
 import { i18n } from 'i18n-config';
 import type { Metadata } from 'next';
@@ -22,18 +22,20 @@ export async function generateStaticParams(): Promise<
 export async function generateMetadata({
   params,
 }: PageProps<'/[lang]/country/[id]'>): Promise<Metadata> {
-  const { id } = await params;
-  const country = await getCountryByCode(id);
+  const { id, lang } = await params;
+  const [country, dictionary] = await Promise.all([
+    getCountryByCode(id),
+    getDictionary(lang as 'en' | 'fr'),
+  ]);
 
-  // TODO: use locale for metadata
   if (!country)
     return {
-      description: `Find more about this country by clicking on this link. ${OG_DESCRIPTION}`,
-      title: `${OG_TITLE} - Country page`,
+      description: `${dictionary.og.findMoreAbout.replace('{country}', dictionary.og.countryPage)} ${dictionary.og.description}`,
+      title: `${OG_TITLE} - ${dictionary.og.countryPage}`,
     };
 
   return {
-    description: `Find more about ${country.names.common} by clicking on this link. ${OG_DESCRIPTION}`,
+    description: `${dictionary.og.findMoreAbout.replace('{country}', country.names.common)} ${dictionary.og.description}`,
     openGraph: {
       images: [country.flag.url_png],
     },

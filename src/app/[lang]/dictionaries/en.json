@@ -15,8 +15,13 @@
   },
   "filter": "Filter by name, Region or SubRegion",
   "foundCountries": "countries found",
-  "giniDefinition": "The Gini coefficient measures the inequality among values of a frequency distribution (for example, levels of income). A Gini coefficient of zero expresses perfect equality, where all values.",
+  "giniDefinition": "The Gini coefficient measures the inequality among values of a frequency distribution (for example, levels of income). A Gini coefficient of zero expresses perfect equality, where all values are the same, while a coefficient of 100 % expresses maximal inequality.",
   "loading": "Loading...",
+  "og": {
+    "countryPage": "Country page",
+    "description": "Country rank is a site that displays countries in list and details about a country such as its population, languages, neighbors.",
+    "findMoreAbout": "Find more about {country} by clicking on this link."
+  },
   "randomCountry": "Random country",
   "sort": {
     "area": "Area",
