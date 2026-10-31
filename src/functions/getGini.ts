@@ -11,11 +11,13 @@ export const giniToString = (gini?: Record<string, number>): string => {
   return `${value.toString()} %`;
 };
 
-/** Format gini to sort */
-export const formatGini = (gini?: Record<string, number>): number => {
-  if (!gini) return 0;
+/** Latest gini value to sort on, `undefined` when the country has no data */
+export const formatGini = (
+  gini?: Record<string, number>,
+): number | undefined => {
+  if (!gini) return undefined;
 
   const key = Object.keys(gini)[0];
-  if (!key) return 0;
-  return gini[key] as number;
+  if (!key) return undefined;
+  return gini[key];
 };

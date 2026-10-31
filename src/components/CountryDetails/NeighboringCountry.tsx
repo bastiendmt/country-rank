@@ -11,7 +11,12 @@ const NeighboringCountry = ({ country }: { country: CountryV5 }) => {
     <Link href={`/${lang}/country/${codes.alpha_3}`} key={names.common}>
       <div className={styles.details_panel_borders_country}>
         <div className={styles.details_panel_image_container}>
-          <Image src={flag.url_svg} alt={names.common} fill />
+          <Image
+            src={flag.url_svg}
+            alt={names.common}
+            width={120}
+            height={80}
+          />
         </div>
         <div className={styles.details_panel_name}>
           {names.translations[countryTranslationKey]?.common ?? names.common}

@@ -10,17 +10,36 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { ViewTransition } from 'react';
-import { useState } from 'react';
 import SearchInput from '../SearchInput/SearchInput';
 import styles from './CountriesTable.module.css';
 
-type DirectionType = 'asc' | 'desc' | '';
-type SortKeys = 'name' | 'population' | 'area' | 'gini' | '';
+type DirectionType = 'asc' | 'desc';
+type SortKeys = 'name' | 'population' | 'area' | 'gini';
 
-const getNewDirection = (direction: DirectionType): DirectionType => {
-  if (!direction) return 'desc';
-  if (direction === 'desc') return 'asc';
-  return '';
+const SORT_KEYS: SortKeys[] = ['name', 'population', 'area', 'gini'];
+
+const isSortKey = (value: string | null): value is SortKeys =>
+  SORT_KEYS.includes(value as SortKeys);
+
+const isDirection = (value: string | null): value is DirectionType =>
+  value === 'asc' || value === 'desc';
+
+/** Names start A to Z, numbers start with the biggest */
+const firstDirection = (key: SortKeys): DirectionType =>
+  key === 'name' ? 'asc' : 'desc';
+
+/** Click cycle: first direction, opposite direction, then back to default order */
+const nextSort = (
+  key: SortKeys,
+  current: { key?: SortKeys; direction?: DirectionType },
+): { key: SortKeys; direction: DirectionType } | null => {
+  if (current.key !== key || !current.direction) {
+    return { key, direction: firstDirection(key) };
+  }
+  if (current.direction === firstDirection(key)) {
+    return { key, direction: current.direction === 'asc' ? 'desc' : 'asc' };
+  }
+  return null;
 };
 
 const filterCountries = (countries: Countries, keyword: string): Countries =>
@@ -31,40 +50,47 @@ const filterCountries = (countries: Countries, keyword: string): Countries =>
       country.subregion?.toLowerCase().includes(keyword),
   );
 
+const byName = (a: Countries[number], b: Countries[number]) =>
+  a.names.common.localeCompare(b.names.common);
+
+const sortValue = (
+  country: Countries[number],
+  key: Exclude<SortKeys, 'name'>,
+): number | undefined => {
+  switch (key) {
+    case 'population':
+      return country.population;
+    case 'area':
+      return country.area.kilometers;
+    case 'gini':
+      return formatGini(country.economy?.gini_coefficient);
+  }
+};
+
+/**
+ * Sorts a copy of the countries. Ties fall back to the name so the order is stable,
+ * and countries without a value (e.g. no Gini) always end up last.
+ */
 const orderBy = (
   countries: Countries,
-  value: string,
-  direction: DirectionType,
+  key: SortKeys | undefined,
+  direction: DirectionType | undefined,
 ) => {
-  // Sort nested name
-  let sortDirection = 1;
-  if (direction === 'desc') {
-    sortDirection = -1;
+  if (!key || !direction) return countries;
+  const factor = direction === 'desc' ? -1 : 1;
+
+  if (key === 'name') {
+    return [...countries].sort((a, b) => factor * byName(a, b));
   }
 
-  switch (value) {
-    case 'name':
-      return [...countries].sort((a, b) =>
-        a.names.common > b.names.common ? sortDirection : -sortDirection,
-      );
-    case 'population':
-      return [...countries].sort((a, b) =>
-        a.population > b.population ? sortDirection : -sortDirection,
-      );
-    case 'gini':
-      return [...countries].sort((a, b) =>
-        formatGini(a.economy?.gini_coefficient) >
-        formatGini(b.economy?.gini_coefficient)
-          ? sortDirection
-          : -sortDirection,
-      );
-    case 'area':
-      return [...countries].sort((a, b) =>
-        a.area.kilometers > b.area.kilometers ? sortDirection : -sortDirection,
-      );
-    default:
-      return countries;
-  }
+  return [...countries].sort((a, b) => {
+    const valueA = sortValue(a, key);
+    const valueB = sortValue(b, key);
+    if (valueA === undefined && valueB === undefined) return byName(a, b);
+    if (valueA === undefined) return 1;
+    if (valueB === undefined) return -1;
+    return factor * (valueA - valueB) || byName(a, b);
+  });
 };
 
 const SortArrow = ({ direction }: { direction: string }) => {
@@ -95,16 +121,25 @@ const CountriesTable = ({
   const pathname = usePathname();
   const { countryTranslationKey } = useLocale();
   const searchParams = useSearchParams();
-  const [direction, setDirection] = useState<DirectionType>('');
-  const [sortKey, setSortKey] = useState<SortKeys>('');
+  const sortParam = searchParams.get('sort');
+  const directionParam = searchParams.get('dir');
+  const sortKey = isSortKey(sortParam) ? sortParam : undefined;
+  const direction = isDirection(directionParam) ? directionParam : undefined;
   const search = searchParams.get('search')?.toString() ?? '';
   const filteredCountry = filterCountries(countries, search);
   const orderedCountry = orderBy(filteredCountry, sortKey, direction);
 
   const setValueAndDirection = (key: SortKeys) => {
-    // Only change direction if the key is different
-    if (key === sortKey) setDirection(getNewDirection(direction));
-    setSortKey(key);
+    const params = new URLSearchParams(searchParams);
+    const next = nextSort(key, { key: sortKey, direction });
+    if (next) {
+      params.set('sort', next.key);
+      params.set('dir', next.direction);
+    } else {
+      params.delete('sort');
+      params.delete('dir');
+    }
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
   const onInputChange = (term: string) => {
@@ -114,7 +149,7 @@ const CountriesTable = ({
     } else {
       params.delete('search');
     }
-    router.replace(`${pathname}?${params.toString()}`);
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
   /**
@@ -164,7 +199,7 @@ const CountriesTable = ({
             aria-label={`Sort by ${dictionary.sort.name}`}
           >
             <div>{dictionary.sort.name}</div>
-            {sortKey === 'name' && <SortArrow direction={direction} />}
+            {sortKey === 'name' && <SortArrow direction={direction ?? ''} />}
           </button>
 
           <button
@@ -174,7 +209,9 @@ const CountriesTable = ({
             aria-label={`Sort by ${dictionary.sort.population}`}
           >
             <div>{dictionary.sort.population}</div>
-            {sortKey === 'population' && <SortArrow direction={direction} />}
+            {sortKey === 'population' && (
+              <SortArrow direction={direction ?? ''} />
+            )}
           </button>
 
           <button
@@ -187,7 +224,7 @@ const CountriesTable = ({
               {dictionary.sort.area} (km
               <sup style={{ fontSize: '0.5rem' }}>2</sup>)
             </div>
-            {sortKey === 'area' && <SortArrow direction={direction} />}
+            {sortKey === 'area' && <SortArrow direction={direction ?? ''} />}
           </button>
 
           <button
@@ -195,9 +232,10 @@ const CountriesTable = ({
             className={styles.heading_gini}
             onClick={() => setValueAndDirection('gini')}
             aria-label={`Sort by ${dictionary.sort.gini}`}
+            title={dictionary.giniDefinition}
           >
             <div>{dictionary.sort.gini}</div>
-            {sortKey === 'gini' && <SortArrow direction={direction} />}
+            {sortKey === 'gini' && <SortArrow direction={direction ?? ''} />}
           </button>
         </div>
         {orderedCountry.map((country) => (
@@ -228,15 +266,23 @@ const CountriesTable = ({
                   </ViewTransition>
                 </div>
                 <div className={styles.mobileFlag}>{country.flag.emoji}</div>
-                <ViewTransition
-                  name={`country-name-${country.codes.alpha_3}`}
-                  share="text-morph"
-                >
-                  <div className={styles.name}>
-                    {country.names.translations[countryTranslationKey]
-                      ?.common ?? country.names.common}
+                <div className={styles.nameCell}>
+                  <ViewTransition
+                    name={`country-name-${country.codes.alpha_3}`}
+                    share="text-morph"
+                  >
+                    <div className={styles.name}>
+                      {country.names.translations[countryTranslationKey]
+                        ?.common ?? country.names.common}
+                    </div>
+                  </ViewTransition>
+                  <div className={styles.subline}>
+                    <span>
+                      {formatNumber(country.area.kilometers) || 0} km
+                      <sup style={{ fontSize: '0.5rem' }}>2</sup>
+                    </span>
                   </div>
-                </ViewTransition>
+                </div>
                 <ViewTransition
                   name={`country-population-${country.codes.alpha_3}`}
                   share="text-morph"
