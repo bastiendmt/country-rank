@@ -16,10 +16,10 @@ import styles from './CountriesTable.module.css';
 type DirectionType = 'asc' | 'desc';
 type SortKeys = 'name' | 'population' | 'area' | 'gini';
 
-const SORT_KEYS: SortKeys[] = ['name', 'population', 'area', 'gini'];
+const SORT_KEYS = new Set<SortKeys>(['name', 'population', 'area', 'gini']);
 
 const isSortKey = (value: string | null): value is SortKeys =>
-  SORT_KEYS.includes(value as SortKeys);
+  SORT_KEYS.has(value as SortKeys);
 
 const isDirection = (value: string | null): value is DirectionType =>
   value === 'asc' || value === 'desc';
