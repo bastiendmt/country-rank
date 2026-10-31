@@ -105,7 +105,9 @@
   background-color: var(--background-color-light);
   border-radius: 8px;
   box-shadow: var(--box-shadow);
-  transition: box-shadow 200ms ease-in-out;
+  transition:
+    box-shadow 200ms ease-out,
+    background-color 200ms ease-out;
 }
 
 .row {
@@ -116,22 +118,57 @@
   text-align: center;
   border-radius: 8px;
   font-weight: 500;
-  transition: transform 200ms ease-in-out;
-}
-
-.row:hover {
   cursor: pointer;
-  transform: translateY(-4px);
 }
 
-.row:hover ~ .rowBg,
-.rowWrapper:has(.row:hover) .rowBg {
-  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+@media (hover: hover) {
+  .rowWrapper {
+    transition: transform 200ms ease-out;
+  }
+
+  /* Lift the whole row (background and content) so they move together */
+  .rowWrapper:hover {
+    transform: translateY(-2px);
+  }
+
+  .rowWrapper:hover .rowBg {
+    background-color: var(--background-color-dark);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rowWrapper {
+    transition: none;
+  }
+
+  .rowWrapper:hover {
+    transform: none;
+  }
+}
+
+a:focus-visible .rowBg {
+  background-color: var(--background-color-dark);
+  outline: 2px solid var(--primary-color);
+}
+
+.nameCell {
+  flex: 4;
+  align-self: center;
+  text-align: left;
 }
 
 .name {
-  flex: 4;
   text-align: left;
+}
+
+.subline {
+  display: none;
+  gap: 12px;
+  margin-top: 2px;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-color-secondary);
 }
 
 .population {
@@ -162,7 +199,13 @@
 }
 
 .mobileFlag {
-  flex: 1;
+  /* Scales with the screen width, between 28px and 44px */
+  font-size: clamp(1.75rem, 9vw, 2.75rem);
+  line-height: 1;
+  flex: 0 0 1.25em;
+  align-self: center;
+  text-align: center;
+  margin-right: 12px;
 }
 
 .name,
@@ -179,6 +222,10 @@
 }
 
 @media screen and (max-width: 720px) {
+  .subline {
+    display: flex;
+  }
+
   .area,
   .heading_area {
     display: none;

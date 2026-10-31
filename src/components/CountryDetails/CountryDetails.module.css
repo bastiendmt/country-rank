@@ -49,8 +49,10 @@
 }
 
 .details_panel_image_container {
-  position: relative;
-  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 84px;
 }
 
 .map_heading_container {
@@ -93,7 +95,7 @@
   justify-content: space-between;
 
   padding: 20px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .details_panel_label {
@@ -128,6 +130,21 @@
 
 .details_panel_borders_country {
   text-align: center;
+}
+
+/* Keep each flag's own ratio (e.g. Switzerland is square) and its rounded corners */
+.details_panel_image_container img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px rgba(128, 128, 128, 0.25);
+}
+
+.details_panel_name {
+  margin-top: 8px;
+  font-size: 14px;
 }
 
 .details_panel_borders_country:hover {
