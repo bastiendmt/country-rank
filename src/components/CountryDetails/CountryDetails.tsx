@@ -175,7 +175,10 @@ const CountryDetails = ({
           </div>
 
           <div className={styles.details_panel_row}>
-            <div className={styles.details_panel_label} title="FIXME">
+            <div
+              className={styles.details_panel_label}
+              title={dictionary.giniDefinition}
+            >
               {dictionary.country.gini}
             </div>
             <div className={styles.details_panel_value}>

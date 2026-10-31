@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "bun lint && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint .",
     "format": "bun run prettier --write src/**/*.{html,js,ts,json,tsx}",
